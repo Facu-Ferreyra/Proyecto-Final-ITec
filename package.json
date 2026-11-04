@@ -1,7 +1,10 @@
 {
   "name": "easybot",
   "private": true,
-  "workspaces": ["client", "server"],
+  "workspaces": [
+    "client",
+    "server"
+  ],
   "scripts": {
     "dev": "concurrently -n server,client \"npm run dev -w server\" \"npm run dev -w client\"",
     "build": "npm run build -w client && npm run prisma:generate -w server",
@@ -11,5 +14,10 @@
     "db:migrate": "npm run migrate -w server",
     "lint": "npm run lint --workspaces --if-present"
   },
-  "devDependencies": { "concurrently": "^9.0.0" }
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
 }

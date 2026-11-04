@@ -1,0 +1,129 @@
+// Convención: modelos en PascalCase y campos en camelCase (inglés) dentro de Prisma;
+// tablas y columnas en snake_case en la base, con @@map y @map.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL") // conexión con pooler (la usa la app)
+  directUrl = env("DIRECT_URL") // conexión directa (la usan las migraciones)
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum BotStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum MessageSender {
+  VISITOR
+  BOT
+}
+
+enum LeadType {
+  CONTACT
+  APPOINTMENT
+  ORDER
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  name         String
+  role         Role     @default(USER)
+  isActive     Boolean  @default(true) @map("is_active")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  bots Bot[]
+
+  @@map("users")
+}
+
+model Template {
+  id          String   @id @default(cuid())
+  key         String   @unique // "faq", "turnos", "pedidos"
+  name        String
+  description String
+  config      Json // estructura base de la plantilla (la define Santiago)
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  bots Bot[]
+
+  @@map("templates")
+}
+
+model Bot {
+  id          String    @id @default(cuid())
+  ownerId     String    @map("owner_id")
+  templateId  String    @map("template_id")
+  name        String
+  slug        String    @unique // identifica al bot en la URL pública
+  config      Json // datos del negocio completados en el asistente
+  status      BotStatus @default(DRAFT)
+  publishedAt DateTime? @map("published_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  owner         User           @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  template      Template       @relation(fields: [templateId], references: [id], onDelete: Restrict)
+  conversations Conversation[]
+  leads         Lead[]
+
+  @@index([ownerId])
+  @@map("bots")
+}
+
+model Conversation {
+  id        String   @id @default(cuid())
+  botId     String   @map("bot_id")
+  visitorId String   @map("visitor_id") // id anónimo del visitante del chat público
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  bot      Bot       @relation(fields: [botId], references: [id], onDelete: Cascade)
+  messages Message[]
+  leads    Lead[]
+
+  @@index([botId])
+  @@map("conversations")
+}
+
+model Message {
+  id             String        @id @default(cuid())
+  conversationId String        @map("conversation_id")
+  sender         MessageSender
+  content        String
+  createdAt      DateTime      @default(now()) @map("created_at")
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId])
+  @@map("messages")
+}
+
+model Lead {
+  id             String   @id @default(cuid())
+  botId          String   @map("bot_id")
+  conversationId String?  @map("conversation_id")
+  type           LeadType
+  contactName    String   @map("contact_name")
+  contactPhone   String?  @map("contact_phone")
+  data           Json // datos propios del tipo (fecha del turno, items del pedido...)
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  bot          Bot           @relation(fields: [botId], references: [id], onDelete: Cascade)
+  conversation Conversation? @relation(fields: [conversationId], references: [id], onDelete: SetNull)
+
+  @@index([botId])
+  @@map("leads")
+}

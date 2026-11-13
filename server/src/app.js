@@ -10,6 +10,7 @@ import { templatesRouter, adminTemplatesRouter } from './modules/templates/templ
 import { botsRouter } from './modules/bots/bots.routes.js';
 import { conversationsRouter } from './modules/conversations/conversations.routes.js';
 import { publicRouter } from './modules/public/public.routes.js';
+import { authRouter } from './modules/auth/auth.routes.js';
 
 export const app = express();
 
@@ -27,8 +28,8 @@ app.get('/api/health', async (req, res) => {
   }
 });
 
-// Acá se montan las rutas de cada módulo, por ejemplo:
-// app.use('/api/auth', authRoutes);
+// Acá se montan las rutas de cada módulo.
+app.use('/api/auth', authRouter);
 app.use('/api/templates', templatesRouter);
 app.use('/api/admin/templates', adminTemplatesRouter);
 app.use('/api/bots', botsRouter);

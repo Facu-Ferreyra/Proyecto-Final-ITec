@@ -43,7 +43,9 @@ export async function register({ name, email, password }) {
 
 /** Valida email y contraseña. Devuelve el usuario (sin hash) o lanza 401/403. */
 export async function login({ email, password }) {
-  const user = await prisma.user.findUnique({ where: { email } });
+  // db/prisma.js oculta passwordHash en TODAS las consultas (omit global). El login
+  // es el único lugar que lo necesita, así que lo pide explícitamente.
+  const user = await prisma.user.findUnique({ where: { email }, omit: { passwordHash: false } });
 
   // Mismo mensaje y mismo tiempo si el email no existe o si la contraseña está mal.
   const ok = await bcrypt.compare(password, user?.passwordHash ?? DUMMY_HASH);

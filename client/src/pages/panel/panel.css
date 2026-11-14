@@ -1,0 +1,71 @@
+/* Panel del dueño. Las variables salen de pages/bots/theme.css (.bots-area)
+   y las listas, pestañas y etiquetas de components/common/common.css. */
+
+.panel-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+/* Colores de cada estado de un lead. */
+.lead-status-confirmed,
+.lead-status-delivered,
+.lead-status-contacted {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.lead-status-cancelled {
+  background: var(--color-error-bg);
+  color: var(--color-error);
+}
+
+.lead-status-in_progress {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.lead-details {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0 0;
+}
+
+.lead-details div {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 8px;
+}
+
+.lead-details dt {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.lead-details dd {
+  margin: 0;
+  white-space: pre-line; /* los productos de un pedido van uno por línea */
+}
+
+/* Último mensaje de la conversación: máximo 2 líneas. */
+.conversation-preview {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 8px 0 0;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  white-space: pre-line;
+}
+
+.conversation {
+  margin-top: 16px;
+}
+
+.conversation-log {
+  margin-top: 16px;
+}
+
+.conversation-log .chat-body {
+  max-height: 60svh;
+}

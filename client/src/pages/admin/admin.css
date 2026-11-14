@@ -1,0 +1,15 @@
+/* Administración. Reutiliza encabezado, listas y pestañas de components/common/common.css. */
+
+.admin-description {
+  margin: 8px 0 0;
+}
+
+/* Botón de acción que borra o desactiva algo: borde y texto en rojo. */
+.bots-area .btn-danger {
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+.bots-area .btn-danger:hover:not(:disabled) {
+  background: var(--color-error-bg);
+}

@@ -1,69 +1,18 @@
-// Vista previa del bot (prototipo, pantalla 6, panel derecho).
-// PROVISORIO: cuando Nicole tenga el chat en components/chat/, se reemplaza
-// por ese componente y se le pasan messages, options y los manejadores.
+// Vista previa del bot en el paso 2 del asistente. Usa el mismo chat que la
+// página pública (components/chat), pero con los endpoints de vista previa,
+// que funcionan con borradores y no guardan nada.
 
-import { useState } from 'react'
-import { usePreviewChat } from './usePreviewChat.js'
-import './PreviewChat.css'
+import { useCallback } from 'react'
+import { sendPreviewMessage, startPreview } from '../../api/bots.js'
+import ChatWindow from '../chat/ChatWindow.jsx'
+import { useChat } from '../chat/useChat.js'
 
+// reloadKey cambia cada vez que se guarda el formulario: el chat vuelve a
+// empezar con los datos nuevos.
 export default function PreviewChat({ botId, reloadKey }) {
-  const { messages, options, input, status, error, chooseOption, sendText } = usePreviewChat(botId, reloadKey)
-  const [text, setText] = useState('')
-  const busy = status === 'sending'
+  const start = useCallback(() => startPreview(botId), [botId])
+  const send = useCallback((message) => sendPreviewMessage(botId, message), [botId])
+  const chat = useChat({ start, send, resetKey: reloadKey })
 
-  function handleSubmit(event) {
-    event.preventDefault()
-    if (!text.trim()) return
-    sendText(text.trim())
-    setText('')
-  }
-
-  return (
-    <aside className="preview" aria-label="Vista previa del bot">
-      <h2 className="preview-header">Vista previa</h2>
-
-      {/* aria-live: el lector de pantalla anuncia los mensajes nuevos del bot. */}
-      <div className="preview-body" aria-live="polite">
-        {status === 'loading' && <p className="preview-status">Cargando vista previa…</p>}
-
-        {messages.map((message, index) => (
-          <p key={index} className={`bubble bubble-${message.from}`}>
-            {message.text}
-          </p>
-        ))}
-
-        {status === 'error' && (
-          <p className="preview-status preview-error" role="alert">
-            {error}
-          </p>
-        )}
-
-        {status !== 'loading' && options.length > 0 && (
-          <div className="preview-options">
-            {options.map((option) => (
-              <button key={option.id} type="button" className="btn btn-secondary btn-small" disabled={busy} onClick={() => chooseOption(option)}>
-                {option.label}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {input && (
-        <form className="preview-input" onSubmit={handleSubmit}>
-          <input
-            type={input.type === 'phone' ? 'tel' : 'text'}
-            value={text}
-            maxLength={input.maxLength ?? 500}
-            placeholder={input.placeholder ?? 'Escribí tu respuesta'}
-            aria-label="Tu respuesta"
-            onChange={(e) => setText(e.target.value)}
-          />
-          <button type="submit" className="btn btn-primary btn-small" disabled={busy}>
-            Enviar
-          </button>
-        </form>
-      )}
-    </aside>
-  )
+  return <ChatWindow {...chat} title="Vista previa" subtitle="Así lo van a ver tus clientes" />
 }

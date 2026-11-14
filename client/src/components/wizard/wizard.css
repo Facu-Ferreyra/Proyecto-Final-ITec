@@ -1,0 +1,137 @@
+/* Estilos del asistente (prototipo, pantallas 5 a 8). Usa las variables de
+   pages/bots/theme.css. Primero celular; desde 768px, dos columnas. */
+
+/* ---- Stepper ---- */
+.stepper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.stepper-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+.stepper-number {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-primary);
+  border-radius: 50%;
+  color: var(--color-label);
+}
+
+.stepper-current .stepper-number {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+.stepper-done .stepper-number {
+  background: var(--color-badge-published);
+}
+
+/* En celular solo se ve el número del paso; el nombre sigue para lectores de pantalla. */
+@media (max-width: 600px) {
+  .stepper-item:not(.stepper-current) .stepper-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+}
+
+/* ---- Textos y botones de cada paso ---- */
+.step-title {
+  margin: 0 0 16px;
+  font-size: 1.5rem;
+}
+
+/* El título recibe el foco por código (no con Tab): no hace falta el recuadro. */
+.step-title:focus {
+  outline: none;
+}
+
+.unsaved-changes {
+  margin: 8px 0 0;
+  color: var(--color-label);
+  font-weight: 600;
+}
+
+.step-hint {
+  margin: -8px 0 16px;
+  color: var(--color-muted);
+}
+
+.step-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.step-actions-end {
+  justify-content: flex-end;
+}
+
+.step-actions-start {
+  justify-content: flex-start;
+}
+
+/* ---- Paso 1: plantillas ---- */
+.template-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.template-card {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.template-card h3 {
+  margin: 0 0 8px;
+}
+
+.template-card p {
+  margin: 0 0 12px;
+  color: var(--color-muted);
+}
+
+.template-card .btn {
+  margin-top: auto;
+}
+
+.template-card-selected {
+  border: 2px solid var(--color-primary);
+}
+
+.template-ideal {
+  font-size: 0.9rem;
+}
+
+/* ---- Paso 2: formulario + vista previa ---- */
+.details-layout {
+  display: grid;
+  gap: 24px;
+}
+
+@media (min-width: 900px) {
+  .details-layout {
+    grid-template-columns: minmax(0, 3fr) minmax(280px, 2fr);
+    align-items: start;
+  }
+}

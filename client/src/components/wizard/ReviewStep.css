@@ -1,0 +1,66 @@
+/* Paso 3: resumen (prototipo, pantalla 7). */
+
+.review {
+  max-width: 820px;
+}
+
+.review-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+/* En celular: etiqueta arriba y valor abajo. Desde 600px: en dos columnas. */
+.review-row {
+  display: grid;
+  gap: 2px;
+}
+
+@media (min-width: 600px) {
+  .review-row {
+    grid-template-columns: 200px 1fr;
+    gap: 16px;
+  }
+}
+
+.review-row dt {
+  font-weight: 600;
+  color: var(--color-label);
+}
+
+.review-row dd {
+  margin: 0;
+  white-space: pre-line; /* los ítems se muestran uno por línea */
+}
+
+.review-empty {
+  color: var(--color-muted);
+}
+
+.review-missing {
+  color: var(--color-error);
+  font-weight: 600;
+}
+
+.review-subtitle {
+  margin: 20px 0 10px;
+  font-size: 1rem;
+  color: var(--color-label);
+}
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+}
+
+.chip {
+  padding: 6px 14px;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-small);
+  color: var(--color-primary);
+  font-weight: 600;
+}

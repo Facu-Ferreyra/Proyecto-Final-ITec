@@ -1,0 +1,194 @@
+/* Home: variables, base, botones, barra superior y portada.
+   Todo empieza con "home-" y las variables viven en .home para no pisar
+   estilos de otras pantallas. Los colores son los mismos de pages/bots/theme.css. */
+
+.home {
+  --home-navy: #0b1f4b;
+  --home-navy-dark: #081633;
+  --home-primary: #1d4ed8;
+  --home-bg: #f3f8ff;
+  --home-tint: #dbeafe;
+  --home-border: #bfdbfe;
+  --home-muted: #475569;
+  --home-on-dark: #c7d7f5;
+  --home-radius: 12px;
+
+  min-height: 100svh;
+  background: var(--home-bg);
+  color: var(--home-navy);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  text-align: left;
+  color-scheme: light;
+}
+
+/* Se sacan los márgenes que pone el navegador. :where() hace que esta regla
+   no tenga peso: así los márgenes de cada clase (ej. .home-title) sí se aplican. */
+:where(.home) :where(h1, h2, h3, h4, p, ul, ol, figure) {
+  margin: 0;
+}
+
+:where(.home) :where(ul, ol) {
+  padding: 0;
+  list-style: none;
+}
+
+/* Los links de la barra bajan suave a cada sección (salvo que el usuario
+   prefiera menos movimiento). */
+@media (prefers-reduced-motion: no-preference) {
+  html:has(.home) {
+    scroll-behavior: smooth;
+  }
+}
+
+.home-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.home-dark {
+  background: var(--home-navy);
+  color: #ffffff;
+}
+
+.home-dark h1,
+.home-dark h2 {
+  color: #ffffff;
+}
+
+/* Botones */
+.home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.home-btn:focus-visible,
+.home-nav a:focus-visible {
+  outline: 3px solid var(--home-border);
+  outline-offset: 2px;
+}
+
+.home-btn-light {
+  background: #ffffff;
+  color: var(--home-navy);
+}
+
+.home-btn-light:hover {
+  background: var(--home-tint);
+}
+
+.home-btn-outline {
+  background: transparent;
+  color: #ffffff;
+  border-color: var(--home-border);
+}
+
+.home-btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.home-btn-small {
+  padding: 8px 14px;
+  font-size: 0.9rem;
+}
+
+.home-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* Barra superior: queda fija arriba al bajar por la página. */
+.home-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.home-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.home-logo {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.home-nav {
+  display: none; /* en celular se ocultan: la página se recorre bajando */
+  gap: 24px;
+}
+
+.home-nav a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.home-nav a:hover {
+  text-decoration: underline;
+}
+
+.home-header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Portada */
+.home-hero {
+  padding: 48px 0 64px;
+}
+
+.home-hero-inner {
+  display: grid;
+  gap: 40px;
+  align-items: center;
+}
+
+.home-badge {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 4px 12px;
+  border: 1px solid var(--home-border);
+  border-radius: 999px;
+  font-size: 0.8rem;
+}
+
+.home-hero-title {
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+.home-hero-text {
+  margin: 20px 0 28px;
+  color: var(--home-on-dark);
+  font-size: 1.1rem;
+  max-width: 34rem;
+}
+
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.home-hero-note {
+  margin-top: 20px;
+  color: var(--home-on-dark);
+  font-size: 0.85rem;
+}

@@ -1,0 +1,175 @@
+/* Home: chat de ejemplo, chips, secciones y tarjetas.
+   Base y variables en home.css; plantillas, pie y escritorio en home-layout.css. */
+
+/* Chat de ejemplo de la portada */
+.home-chat {
+  overflow: hidden;
+  background: var(--home-bg);
+  border-radius: var(--home-radius);
+  color: var(--home-navy);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.home-chat-header {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 16px;
+  background: var(--home-primary);
+  color: #ffffff;
+}
+
+.home-chat-header span {
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+
+.home-chat-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+}
+
+.home-chat-bubble {
+  max-width: 85%;
+  padding: 8px 12px;
+  background: var(--home-tint);
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+.home-chat-bubble-user {
+  align-self: flex-end;
+  background: var(--home-primary);
+  color: #ffffff;
+}
+
+/* Chips (opciones del bot y tipos de negocio) */
+.home-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.home-chip {
+  padding: 4px 12px;
+  border: 1px solid var(--home-primary);
+  border-radius: 999px;
+  color: var(--home-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: #ffffff;
+}
+
+.home-chip-soft {
+  border-color: var(--home-border);
+  background: var(--home-bg);
+  color: var(--home-navy);
+  padding: 8px 16px;
+}
+
+/* Secciones */
+.home-section {
+  padding: 64px 0;
+}
+
+.home-section-white {
+  background: #ffffff;
+}
+
+.home-eyebrow {
+  margin-bottom: 8px;
+  color: var(--home-primary);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.home-title {
+  margin-bottom: 32px;
+  font-size: clamp(1.7rem, 4vw, 2.2rem);
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.home-title-narrow {
+  max-width: 34rem;
+}
+
+.home-subtitle {
+  margin-bottom: 24px;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.home-text,
+.home-card-text {
+  color: var(--home-muted);
+}
+
+.home-two-columns {
+  display: grid;
+  gap: 32px;
+  align-items: center;
+}
+
+.home-two-columns .home-title {
+  margin-bottom: 16px;
+}
+
+.home-question-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.home-question {
+  padding: 10px 16px;
+  border: 1px solid var(--home-border);
+  border-radius: 8px;
+  background: var(--home-bg);
+  font-weight: 600;
+}
+
+/* Tarjetas */
+.home-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.home-card {
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid var(--home-border);
+  border-radius: var(--home-radius);
+}
+
+.home-card-tinted {
+  background: var(--home-bg);
+}
+
+.home-card-title {
+  margin: 12px 0 8px;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.home-step-number,
+.home-icon-box {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: var(--home-primary);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.home-icon-box {
+  border-radius: 8px;
+  background: var(--home-tint);
+  color: var(--home-primary);
+}

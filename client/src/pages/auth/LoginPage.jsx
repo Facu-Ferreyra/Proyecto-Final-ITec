@@ -25,7 +25,7 @@ export default function LoginPage() {
       subtitle="Entrá para administrar tus bots."
       footer={
         <>
-          ¿No tenés cuenta? <Link to="/register" state={location.state}>Registrate gratis</Link>
+          ¿No tenés cuenta? <Link to="/register" state={location.state}>Crear cuenta</Link>
         </>
       }
     >

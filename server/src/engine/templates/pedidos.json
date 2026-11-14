@@ -1,0 +1,71 @@
+{
+  "key": "pedidos",
+  "name": "Toma de pedidos",
+  "description": "Muestra tu catálogo, arma el pedido y pide los datos de entrega.",
+  "config": {
+    "idealFor": "Gastronomía y venta de productos",
+    "fields": [
+      { "key": "businessName", "label": "Nombre del negocio", "type": "text", "required": true, "maxLength": 80, "placeholder": "Viandas Don Pepe" },
+      { "key": "hours", "label": "Horarios de atención", "type": "text", "required": true, "maxLength": 200, "placeholder": "Lunes a viernes, 11 a 21 h" },
+      { "key": "address", "label": "Dirección", "type": "text", "maxLength": 200, "placeholder": "Calle y número" },
+      {
+        "key": "catalog",
+        "label": "Productos",
+        "type": "items",
+        "required": true,
+        "maxItems": 30,
+        "itemFields": [
+          { "key": "name", "label": "Producto", "type": "text", "required": true, "maxLength": 40 },
+          { "key": "price", "label": "Precio", "type": "price", "required": true },
+          { "key": "description", "label": "Descripción", "type": "text", "maxLength": 120 }
+        ]
+      },
+      { "key": "offersDelivery", "label": "¿Hacés envíos a domicilio?", "type": "boolean" },
+      { "key": "deliveryInfo", "label": "Información de envíos", "type": "text", "maxLength": 200, "placeholder": "Envío sin cargo en zona centro" },
+      { "key": "paymentMethods", "label": "Formas de pago", "type": "list", "maxItems": 10, "itemMaxLength": 50, "placeholder": "Efectivo" },
+      { "key": "businessPhone", "label": "Teléfono o WhatsApp del negocio", "type": "phone", "placeholder": "11 5555 0000" }
+    ],
+    "messages": {
+      "welcome": "¡Hola! Soy el asistente de {{businessName}}. ¿Qué querés hacer?",
+      "fallback": "No entendí tu mensaje. Elegí una de las opciones 👇",
+      "backToMenu": "¿Te ayudo con algo más?"
+    },
+    "menu": [
+      { "id": "order", "label": "Hacer un pedido", "type": "flow", "flow": "order" },
+      { "id": "catalog", "label": "Ver productos y precios", "type": "answer", "requires": ["catalog"], "answer": "Esto es lo que tenemos:\n{{catalog}}" },
+      { "id": "delivery", "label": "Envíos", "type": "answer", "requires": ["offersDelivery", "deliveryInfo"], "answer": "{{deliveryInfo}}" },
+      { "id": "hours", "label": "Horarios", "type": "answer", "requires": ["hours"], "answer": "Atendemos {{hours}}." },
+      { "id": "location", "label": "Ubicación", "type": "answer", "requires": ["address"], "answer": "Estamos en {{address}}." },
+      { "id": "payment", "label": "Formas de pago", "type": "answer", "requires": ["paymentMethods"], "answer": "Aceptamos: {{paymentMethods}}." }
+    ],
+    "flows": {
+      "order": {
+        "leadType": "ORDER",
+        "steps": [
+          {
+            "key": "items",
+            "prompt": "¿Qué querés pedir? Tocá un producto para sumarlo.",
+            "input": "cart",
+            "source": { "field": "catalog", "labelKey": "name", "priceKey": "price" },
+            "addedPrompt": "Anotado: {{item}}. Llevás:\n{{cart}}\n¿Querés agregar algo más?"
+          },
+          {
+            "key": "delivery",
+            "prompt": "¿Cómo lo querés recibir?",
+            "input": "choice",
+            "autoSelectSingle": true,
+            "choices": [
+              { "id": "pickup", "label": "Retiro en el local" },
+              { "id": "delivery", "label": "Envío a domicilio", "requires": "offersDelivery" }
+            ]
+          },
+          { "key": "deliveryAddress", "prompt": "¿A qué dirección lo enviamos?", "input": "text", "maxLength": 150, "when": { "step": "delivery", "equals": "delivery" } },
+          { "key": "name", "prompt": "¿A nombre de quién hacemos el pedido?", "input": "text", "maxLength": 60, "saveAs": "contactName" },
+          { "key": "phone", "prompt": "¿A qué teléfono te escribimos para coordinar?", "input": "phone", "saveAs": "contactPhone" },
+          { "key": "notes", "prompt": "¿Alguna aclaración? Por ejemplo, el horario de retiro. Si no, tocá «Omitir».", "input": "text", "maxLength": 200, "optional": true }
+        ],
+        "success": "¡Pedido recibido, {{name}}! 🧾\n{{items}}\nTotal: {{total}}.\n{{businessName}} te va a escribir para confirmarlo."
+      }
+    }
+  }
+}

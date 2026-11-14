@@ -1,0 +1,51 @@
+{
+  "key": "turnos",
+  "name": "Turnos simples",
+  "description": "Guía al visitante para pedir servicio, día, horario y contacto.",
+  "config": {
+    "idealFor": "Peluquerías, consultorios y talleres",
+    "fields": [
+      { "key": "businessName", "label": "Nombre del negocio", "type": "text", "required": true, "maxLength": 80, "placeholder": "Peluquería Lola" },
+      { "key": "hours", "label": "Horarios de atención", "type": "text", "required": true, "maxLength": 200, "placeholder": "Martes a sábado, 9 a 19 h" },
+      { "key": "address", "label": "Dirección", "type": "text", "maxLength": 200, "placeholder": "Calle y número" },
+      {
+        "key": "services",
+        "label": "Servicios",
+        "type": "items",
+        "required": true,
+        "maxItems": 15,
+        "itemFields": [
+          { "key": "name", "label": "Servicio", "type": "text", "required": true, "maxLength": 40 },
+          { "key": "price", "label": "Precio", "type": "price" }
+        ]
+      },
+      { "key": "workingDays", "label": "Días que das turnos", "type": "weekdays", "required": true },
+      { "key": "timeSlots", "label": "Horarios de los turnos", "type": "list", "required": true, "maxItems": 24, "itemMaxLength": 20, "placeholder": "10:00" },
+      { "key": "businessPhone", "label": "Teléfono o WhatsApp del negocio", "type": "phone", "placeholder": "11 5555 0000" }
+    ],
+    "messages": {
+      "welcome": "¡Hola! Soy el asistente de {{businessName}}. ¿En qué te puedo ayudar?",
+      "fallback": "No entendí tu mensaje. Elegí una de las opciones 👇",
+      "backToMenu": "¿Te ayudo con algo más?"
+    },
+    "menu": [
+      { "id": "hours", "label": "Horarios", "type": "answer", "requires": ["hours"], "answer": "Atendemos {{hours}}." },
+      { "id": "prices", "label": "Precios", "type": "answer", "requires": ["services"], "answer": "Estos son nuestros servicios:\n{{services}}" },
+      { "id": "location", "label": "Ubicación", "type": "answer", "requires": ["address"], "answer": "Estamos en {{address}}." },
+      { "id": "book", "label": "Sacar un turno", "type": "flow", "flow": "appointment" }
+    ],
+    "flows": {
+      "appointment": {
+        "leadType": "APPOINTMENT",
+        "steps": [
+          { "key": "service", "prompt": "¿Qué servicio querés?", "input": "choice", "source": { "field": "services", "labelKey": "name" } },
+          { "key": "date", "prompt": "¿Qué día te queda bien?", "input": "choice", "source": { "type": "nextDates", "field": "workingDays", "count": 6 } },
+          { "key": "time", "prompt": "¿En qué horario?", "input": "choice", "source": { "field": "timeSlots" } },
+          { "key": "name", "prompt": "¿A nombre de quién sacamos el turno?", "input": "text", "maxLength": 60, "saveAs": "contactName" },
+          { "key": "phone", "prompt": "¿A qué teléfono te confirmamos?", "input": "phone", "saveAs": "contactPhone" }
+        ],
+        "success": "¡Listo, {{name}}! Tu solicitud de turno para {{service}} el {{date}} a las {{time}} quedó registrada. {{businessName}} te va a confirmar."
+      }
+    }
+  }
+}

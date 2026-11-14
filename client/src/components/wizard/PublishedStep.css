@@ -1,0 +1,17 @@
+/* Paso 4: link público (prototipo, pantalla 8). */
+
+.link-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.link-row input {
+  flex: 1 1 240px;
+}
+
+.copy-message {
+  min-height: 1.5em; /* reserva el lugar del aviso para que la pantalla no salte */
+  margin: 8px 0 0;
+  color: var(--color-success);
+}

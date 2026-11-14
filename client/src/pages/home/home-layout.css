@@ -1,0 +1,135 @@
+/* Home: tarjetas de plantillas, llamado final, pie de página y la versión
+   para pantallas más grandes (por defecto todo está pensado para celular). */
+
+/* Plantillas */
+.home-template {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.home-template-title {
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+
+.home-template-featured {
+  border: 2px solid var(--home-primary);
+}
+
+.home-ideal {
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--home-tint);
+  font-size: 0.9rem;
+}
+
+.home-label {
+  margin-top: 6px;
+  color: var(--home-navy);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.home-template-panel {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--home-border);
+  color: var(--home-muted);
+  font-size: 0.9rem;
+}
+
+.home-note {
+  margin-top: 24px;
+  color: var(--home-muted);
+  font-size: 0.9rem;
+}
+
+/* Llamado final y pie */
+.home-cta {
+  padding: 64px 0;
+}
+
+.home-cta .home-title {
+  margin-bottom: 0;
+}
+
+.home-footer {
+  padding: 20px 0;
+  background: var(--home-navy-dark);
+  color: var(--home-on-dark);
+  font-size: 0.85rem;
+}
+
+.home-footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.home-footer .home-logo {
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+/* Al bajar con los links de la barra, el título no queda tapado por la barra fija. */
+.home-section[id] {
+  scroll-margin-top: 72px;
+}
+
+/* Celular chico: el logo y los dos botones entran en una sola línea. */
+@media (max-width: 479px) {
+  .home-header .home-btn-small {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+
+  .home-header .home-icon {
+    display: none;
+  }
+}
+
+/* Tablet */
+@media (min-width: 640px) {
+  .home-steps,
+  .home-benefits {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Escritorio */
+@media (min-width: 960px) {
+  .home-container {
+    padding: 0 32px;
+  }
+
+  .home-nav {
+    display: flex;
+  }
+
+  .home-hero {
+    padding: 72px 0 96px;
+  }
+
+  .home-hero-inner,
+  .home-two-columns {
+    grid-template-columns: 1.1fr 1fr;
+  }
+
+  .home-section {
+    padding: 88px 0;
+  }
+
+  .home-steps,
+  .home-templates {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* El paso 4 ocupa todo el ancho, como en el diseño. */
+  .home-steps li:last-child {
+    grid-column: 1 / -1;
+  }
+}

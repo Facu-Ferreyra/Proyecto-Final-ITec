@@ -59,7 +59,8 @@ describe('config del bot', () => {
     const config = buildConfigSchema(def).parse({ businessName: 'Lola', address: '   ' });
     assert.equal(config.address, undefined);
     const missing = getMissingFields(def, config).map((f) => f.key);
-    assert.deepEqual(missing, ['hours', 'services', 'workingDays', 'timeSlots']);
+    // address y businessPhone también son obligatorios: una dirección con solo espacios cuenta como vacía.
+    assert.deepEqual(missing, ['hours', 'address', 'services', 'workingDays', 'timeSlots', 'businessPhone']);
   });
 
   it('rechaza tipos incorrectos', () => {

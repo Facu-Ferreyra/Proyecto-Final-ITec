@@ -103,6 +103,12 @@
   padding-right: 84px; /* lugar para el botón Ver/Ocultar */
 }
 
+/* Ejemplo en gris dentro del campo (placeholder). */
+.auth-field input::placeholder {
+  color: #94a3b8;
+  opacity: 1; /* Firefox lo aclara de más por defecto */
+}
+
 .auth-field input:focus-visible {
   outline: 3px solid var(--color-border);
   outline-offset: 1px;

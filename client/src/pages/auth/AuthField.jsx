@@ -3,7 +3,8 @@
 
 import { useId, useState } from 'react'
 
-export default function AuthField({ label, name, type = 'text', value, onChange, error, hint, autoComplete, autoFocus }) {
+// placeholder: ejemplo en gris dentro del campo. No reemplaza a la etiqueta (label).
+export default function AuthField({ label, name, type = 'text', value, onChange, error, hint, placeholder, autoComplete, autoFocus }) {
   const id = useId()
   const [showPassword, setShowPassword] = useState(false)
   const isPassword = type === 'password'
@@ -19,6 +20,7 @@ export default function AuthField({ label, name, type = 'text', value, onChange,
           type={isPassword && showPassword ? 'text' : type}
           value={value}
           onChange={(event) => onChange(name, event.target.value)}
+          placeholder={placeholder}
           autoComplete={autoComplete}
           autoFocus={autoFocus}
           aria-invalid={Boolean(error)}

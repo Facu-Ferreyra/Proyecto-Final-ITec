@@ -41,6 +41,7 @@ export default function RegisterPage() {
         <AuthField
           label="Nombre"
           name="name"
+          placeholder="Ana Pérez"
           autoComplete="name"
           autoFocus
           value={form.values.name}
@@ -51,6 +52,7 @@ export default function RegisterPage() {
           label="Email"
           name="email"
           type="email"
+          placeholder="tu@email.com"
           autoComplete="email"
           value={form.values.email}
           onChange={form.setField}
@@ -60,6 +62,7 @@ export default function RegisterPage() {
           label="Contraseña"
           name="password"
           type="password"
+          placeholder="••••••••"
           autoComplete="new-password"
           hint={PASSWORD_HINT}
           value={form.values.password}
@@ -70,6 +73,7 @@ export default function RegisterPage() {
           label="Repetí la contraseña"
           name="confirmPassword"
           type="password"
+          placeholder="••••••••"
           autoComplete="new-password"
           value={form.values.confirmPassword}
           onChange={form.setField}

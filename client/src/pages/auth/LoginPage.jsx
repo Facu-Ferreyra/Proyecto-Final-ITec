@@ -39,6 +39,7 @@ export default function LoginPage() {
           label="Email"
           name="email"
           type="email"
+          placeholder="tu@email.com"
           autoComplete="email"
           autoFocus
           value={form.values.email}
@@ -49,6 +50,7 @@ export default function LoginPage() {
           label="Contraseña"
           name="password"
           type="password"
+          placeholder="••••••••"
           autoComplete="current-password"
           value={form.values.password}
           onChange={form.setField}

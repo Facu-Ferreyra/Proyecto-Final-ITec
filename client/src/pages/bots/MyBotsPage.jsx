@@ -1,5 +1,5 @@
 // Pantalla "Mis bots": lista de bots del dueño con sus acciones.
-// No incluye la barra superior ni las rutas (son de Nicole y Brandon): quien la
+// No incluye la barra superior ni las rutas (están en App.jsx y AppLayout): quien la
 // monte en su ruta le pasa onCreate y onEdit para navegar al asistente.
 
 import BotCard from './BotCard.jsx'

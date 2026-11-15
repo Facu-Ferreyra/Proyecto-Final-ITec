@@ -100,7 +100,7 @@
 .auth-field input[type='password'],
 .auth-field input[name='password'],
 .auth-field input[name='confirmPassword'] {
-  padding-right: 84px; /* lugar para el botón Ver/Ocultar */
+  padding-right: 52px; /* lugar para el botón del ojo */
 }
 
 /* Ejemplo en gris dentro del campo (placeholder). */
@@ -124,7 +124,9 @@
   top: 50%;
   right: 6px;
   transform: translateY(-50%);
-  padding: 4px 10px;
+  display: grid;
+  place-items: center;
+  padding: 6px;
   border: none;
   border-radius: 6px;
   background: transparent;
@@ -137,6 +139,16 @@
 
 .auth-toggle:hover {
   background: var(--color-bg);
+}
+
+.auth-toggle:focus-visible {
+  outline: 3px solid var(--color-border);
+  outline-offset: 1px;
+}
+
+.auth-eye {
+  width: 20px;
+  height: 20px;
 }
 
 .auth-hint,

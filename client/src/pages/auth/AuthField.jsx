@@ -2,6 +2,7 @@
 // Accesible: el error se asocia al input con aria-describedby y aria-invalid.
 
 import { useId, useState } from 'react'
+import { EyeIcon, EyeOffIcon } from './EyeIcons.jsx'
 
 // placeholder: ejemplo en gris dentro del campo. No reemplaza a la etiqueta (label).
 export default function AuthField({ label, name, type = 'text', value, onChange, error, hint, placeholder, autoComplete, autoFocus }) {
@@ -34,7 +35,8 @@ export default function AuthField({ label, name, type = 'text', value, onChange,
             aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
             aria-pressed={showPassword}
           >
-            {showPassword ? 'Ocultar' : 'Ver'}
+            {/* Ojo abierto si se ve la contraseña; tachado si está oculta. */}
+            {showPassword ? <EyeIcon /> : <EyeOffIcon />}
           </button>
         )}
       </div>

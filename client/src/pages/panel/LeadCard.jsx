@@ -11,7 +11,7 @@ export default function LeadCard({ lead, busy, onStatusChange }) {
   return (
     <li className="data-item">
       <div className="data-item-head">
-        <h3 className="data-item-title">{lead.contactName || 'Sin nombre'}</h3>
+        <h4 className="data-item-title">{lead.contactName || 'Sin nombre'}</h4>
         <span className={`badge lead-status lead-status-${lead.status.toLowerCase()}`}>{statusLabel(lead)}</span>
       </div>
       <p className="data-item-meta">
@@ -19,7 +19,10 @@ export default function LeadCard({ lead, busy, onStatusChange }) {
         {lead.contactPhone && (
           <>
             {' · '}
-            <a href={`tel:${lead.contactPhone.replace(/\s/g, '')}`}>{lead.contactPhone}</a>
+            {/* tel: en el celular, tocarlo abre la llamada. */}
+            <a className="phone-link" href={`tel:${lead.contactPhone.replace(/\s/g, '')}`} aria-label={`Llamar a ${lead.contactPhone}`}>
+              {lead.contactPhone}
+            </a>
           </>
         )}
       </p>

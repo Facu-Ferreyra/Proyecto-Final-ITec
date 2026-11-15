@@ -1,7 +1,7 @@
 // Textos en español de los leads (contactos, turnos y pedidos) y cómo mostrar
 // sus datos. Los estados válidos son los de docs/endpoints.md (PATCH /api/leads/:id).
 
-import { formatPrice } from '../../components/common/format.js'
+import { formatPrice, formatTime } from '../../components/common/format.js'
 
 export const LEAD_TYPES = {
   CONTACT: { tab: 'Contactos', name: 'Contacto', statuses: { NEW: 'Nuevo', CONTACTED: 'Contactado' } },
@@ -24,6 +24,25 @@ export const leadTypesFor = (templateKey) => TEMPLATE_LEADS[templateKey] ?? Obje
 
 export const statusLabel = (lead) => LEAD_TYPES[lead.type]?.statuses[lead.status] ?? lead.status
 
+// Títulos de las secciones del panel (en plural), una por estado.
+export const SECTION_TITLES = {
+  NEW: 'Nuevos',
+  CONTACTED: 'Contactados',
+  PENDING: 'Pendientes',
+  CONFIRMED: 'Confirmados',
+  IN_PROGRESS: 'En preparación',
+  DELIVERED: 'Entregados',
+  CANCELLED: 'Cancelados',
+}
+
+// Agrupa los leads por estado, en el orden de LEAD_TYPES (ej.: Pendientes,
+// Confirmados, Cancelados). Las secciones vacías no se devuelven.
+export function groupByStatus(leads, type) {
+  return Object.keys(LEAD_TYPES[type].statuses)
+    .map((status) => ({ status, title: SECTION_TITLES[status] ?? status, leads: leads.filter((l) => l.status === status) }))
+    .filter((section) => section.leads.length > 0)
+}
+
 // Datos del lead en filas [etiqueta, valor], sin las que están vacías.
 export function leadDetails(lead) {
   const data = lead.data ?? {}
@@ -33,7 +52,7 @@ export function leadDetails(lead) {
     rows = [
       ['Servicio', data.service],
       ['Día', data.date],
-      ['Horario', data.time],
+      ['Horario', formatTime(data.time)],
     ]
   } else if (lead.type === 'ORDER') {
     const items = (data.items ?? []).map((item) => `${item.quantity} × ${item.name} (${formatPrice(item.subtotal)})`)

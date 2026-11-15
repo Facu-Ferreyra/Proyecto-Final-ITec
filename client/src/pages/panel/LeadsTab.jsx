@@ -7,7 +7,7 @@ import Pagination from '../../components/common/Pagination.jsx'
 import { useApiData } from '../../components/common/useApiData.js'
 import PageState from '../bots/PageState.jsx'
 import LeadCard from './LeadCard.jsx'
-import { LEAD_TYPES, statusLabel } from './leadInfo.js'
+import { groupByStatus, LEAD_TYPES, statusLabel } from './leadInfo.js'
 
 export default function LeadsTab({ botId, type }) {
   const info = LEAD_TYPES[type]
@@ -74,11 +74,19 @@ export default function LeadsTab({ botId, type }) {
 
       {status === 'ready' && data.items.length > 0 && (
         <>
-          <ul className="data-list">
-            {data.items.map((lead) => (
-              <LeadCard key={lead.id} lead={lead} busy={busyId === lead.id} onStatusChange={changeStatus} />
-            ))}
-          </ul>
+          {/* Una sección por estado. Al cambiar el estado, el registro pasa solo a su sección. */}
+          {groupByStatus(data.items, type).map((section) => (
+            <section key={section.status} className="lead-section" aria-labelledby={`section-${section.status}`}>
+              <h3 id={`section-${section.status}`} className="lead-section-title">
+                {section.title} <span className="badge badge-muted">{section.leads.length}</span>
+              </h3>
+              <ul className="data-list">
+                {section.leads.map((lead) => (
+                  <LeadCard key={lead.id} lead={lead} busy={busyId === lead.id} onStatusChange={changeStatus} />
+                ))}
+              </ul>
+            </section>
+          ))}
           <Pagination page={data.page} totalPages={data.totalPages} onChange={setPage} />
         </>
       )}

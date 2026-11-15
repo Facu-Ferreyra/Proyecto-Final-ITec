@@ -7,6 +7,31 @@
   margin-bottom: 16px;
 }
 
+/* Secciones por estado (Pendientes, Confirmados, Cancelados…). */
+.lead-section + .lead-section {
+  margin-top: 28px;
+}
+
+.lead-section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+}
+
+/* Teléfono: se puede tocar para llamar, pero con el estilo de la app. */
+.phone-link {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.phone-link:hover,
+.phone-link:focus-visible {
+  text-decoration: underline;
+}
+
 /* Colores de cada estado de un lead. */
 .lead-status-confirmed,
 .lead-status-delivered,

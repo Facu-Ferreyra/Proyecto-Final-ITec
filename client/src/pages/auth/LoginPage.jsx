@@ -33,6 +33,17 @@ export default function LoginPage() {
         {form.formError && (
           <p className="notice notice-error" role="alert">
             {form.formError}
+            {/* No se dice si el email existe (así nadie puede averiguar quién tiene
+                cuenta), pero se guía a quien todavía no se registró. */}
+            {form.formErrorCode === 'INVALID_CREDENTIALS' && (
+              <>
+                {' '}
+                ¿No tenés cuenta?{' '}
+                <Link to="/register" state={location.state}>
+                  Creá una
+                </Link>
+              </>
+            )}
           </p>
         )}
         <AuthField

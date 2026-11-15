@@ -76,6 +76,13 @@
   margin: 0;
 }
 
+/* Link "Creá una" dentro del aviso de error del login. */
+.auth-form .notice a {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
 .auth-field label {
   display: block;
   margin-bottom: 6px;

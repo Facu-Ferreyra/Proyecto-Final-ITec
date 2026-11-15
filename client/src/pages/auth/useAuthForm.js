@@ -9,6 +9,7 @@ export function useAuthForm({ initialValues, schema, onSubmit }) {
   const [values, setValues] = useState(initialValues)
   const [fieldErrors, setFieldErrors] = useState({})
   const [formError, setFormError] = useState('')
+  const [formErrorCode, setFormErrorCode] = useState('') // ej.: 'INVALID_CREDENTIALS'
   const [submitting, setSubmitting] = useState(false)
 
   // Al escribir en un campo se borra su error (el resto queda hasta el próximo envío).
@@ -16,6 +17,7 @@ export function useAuthForm({ initialValues, schema, onSubmit }) {
     setValues((current) => ({ ...current, [name]: value }))
     setFieldErrors((current) => (current[name] ? { ...current, [name]: undefined } : current))
     setFormError('')
+    setFormErrorCode('')
   }
 
   async function handleSubmit(event) {
@@ -37,9 +39,10 @@ export function useAuthForm({ initialValues, schema, onSubmit }) {
       const { form, fields } = authErrorToFormErrors(error)
       setFieldErrors(fields ?? {})
       setFormError(form ?? '')
+      setFormErrorCode(error?.code ?? '')
       setSubmitting(false)
     }
   }
 
-  return { values, fieldErrors, formError, submitting, setField, handleSubmit }
+  return { values, fieldErrors, formError, formErrorCode, submitting, setField, handleSubmit }
 }

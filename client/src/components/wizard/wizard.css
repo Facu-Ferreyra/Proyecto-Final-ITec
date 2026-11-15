@@ -78,6 +78,13 @@
   margin-top: 24px;
 }
 
+/* Botones que van juntos (ej.: "Guardar" al lado de "Siguiente"). */
+.step-actions-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
 .step-actions-end {
   justify-content: flex-end;
 }

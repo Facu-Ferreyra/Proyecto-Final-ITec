@@ -1,5 +1,5 @@
 // Administración simulada: plantillas y usuarios. Devuelve null si la ruta no es de admin.
-// El usuario de ejemplo logueado es "demo" (ver api/auth.js): no se puede modificar a sí mismo.
+// El admin de prueba es admin@easybot.com, id "demo" (ver api/auth.js): no se puede modificar a sí mismo.
 
 import { bots } from './botsData.js'
 import { fail, ok } from './helpers.js'
@@ -8,7 +8,8 @@ import { templates } from './templates.js'
 const inactive = new Set() // ids de plantillas desactivadas
 
 const users = [
-  { id: 'demo', email: 'demo@easybot.com', name: 'Usuario demo', role: 'ADMIN', isActive: true, createdAt: '2026-11-01T12:00:00.000Z' },
+  { id: 'demo', email: 'admin@easybot.com', name: 'Admin EasyBot', role: 'ADMIN', isActive: true, createdAt: '2026-11-01T12:00:00.000Z' },
+  { id: 'demo-user', email: 'usuario@easybot.com', name: 'Usuario de prueba', role: 'USER', isActive: true, createdAt: '2026-11-02T09:00:00.000Z' },
   { id: 'user-2', email: 'lola@peluqueria.com', name: 'Lola Fernández', role: 'USER', isActive: true, createdAt: '2026-11-05T15:30:00.000Z' },
   { id: 'user-3', email: 'pepe@viandas.com', name: 'José Pérez', role: 'USER', isActive: false, createdAt: '2026-11-08T10:15:00.000Z' },
 ]

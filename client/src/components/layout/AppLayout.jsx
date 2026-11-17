@@ -1,5 +1,5 @@
 // Barra superior de las pantallas privadas (Brandon): navegación, usuario y "Salir".
-// Nicole puede cambiarle el diseño; lo importante es que use useAuth() para el usuario y el logout.
+// Usa useAuth() para mostrar el usuario y cerrar la sesión.
 
 import { useState } from 'react'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'

@@ -12,7 +12,8 @@ export const bots = [
     templateId: 'tpl-turnos',
     config: {
       businessName: 'Peluquería Lola',
-      hours: 'Martes a sábado, 9 a 19 h',
+      address: 'Av. Rivadavia 4500, Caballito',
+      hours: 'martes a sábado de 9:00 AM a 7:00 PM', // formato del selector (el de Don Pepe quedó escrito a mano)
       services: [
         { name: 'Corte de pelo', price: 8000 },
         { name: 'Color', price: 20000 },
@@ -34,6 +35,8 @@ export const bots = [
     templateId: 'tpl-pedidos',
     config: {
       businessName: 'Viandas Don Pepe',
+      address: 'Palermo, CABA (sin local, solo envíos y retiro)',
+      businessPhone: '11 4444 7777',
       hours: 'Lunes a viernes, 11 a 21 h',
       catalog: [
         { name: 'Vianda de pollo', price: 6500 },

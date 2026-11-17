@@ -1,0 +1,135 @@
+/* Campos con opciones predefinidas: horarios de atención, formas de pago y
+   horarios de los turnos. Variables de pages/bots/theme.css (.bots-area). */
+
+.field-hint {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+/* Horarios de atención: "De [día] a [día] de [hora] a [hora]" */
+.hours-field,
+.payment-field,
+.hours-legacy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.hours-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.hours-row span {
+  color: var(--color-muted);
+}
+
+.hours-row select {
+  padding: 8px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+}
+
+/* Precio: "$" a la izquierda del número. */
+.price-input {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.price-input span {
+  color: var(--color-muted);
+  font-weight: 600;
+}
+
+.price-input input {
+  min-width: 0;
+}
+
+/* Precios (preguntas frecuentes): producto + precio en una fila. */
+.price-row {
+  display: grid;
+  grid-template-columns: 1fr minmax(120px, 180px) 5.5rem;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.price-row input:not([type='number']) {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  font: inherit;
+}
+
+/* Celular: el nombre arriba y el precio (y "Quitar") abajo. */
+@media (max-width: 479px) {
+  .price-row {
+    grid-template-columns: 1fr auto;
+  }
+
+  .price-row > input {
+    grid-column: 1 / -1;
+  }
+}
+
+.prices-legacy {
+  white-space: pre-line;
+}
+
+/* "Otras formas de pago" va dentro del campo: sin el marco de un campo aparte. */
+.payment-field .field {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+/* Horarios de los turnos: botones que se marcan al tocarlos. */
+.time-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.time-slot {
+  position: relative;
+  padding: 6px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+/* La casilla queda invisible pero sigue funcionando con teclado y lector de pantalla. */
+.time-slot input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.time-slot-checked {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+.time-slot:has(input:focus-visible) {
+  outline: 3px solid var(--color-border);
+  outline-offset: 2px;
+}
+
+.time-slot:has(input:disabled) {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

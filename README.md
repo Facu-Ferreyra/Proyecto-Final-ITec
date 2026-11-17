@@ -18,7 +18,13 @@ Plataforma para que pequeños negocios creen, sin programar, un chatbot con resp
 
 ## Funcionalidades
 
-- _pendiente_
+- **Cuentas y roles:** registro, inicio y cierre de sesión. Dos roles: usuario (dueño de un negocio) y administrador.
+- **Mis bots:** lista de bots del usuario con estado (borrador o publicado), editar, eliminar, publicar y despublicar.
+- **Asistente de creación en 4 pasos:** elegir plantilla, cargar los datos del negocio con vista previa del chat, revisar y publicar. Valida los datos antes de guardar.
+- **Plantillas:** preguntas frecuentes, turnos y toma de pedidos.
+- **Chat público:** cada bot publicado tiene un link (`/chat/:slug`) que los clientes usan sin registrarse.
+- **Panel del dueño:** conversaciones con sus mensajes, y contactos, turnos o pedidos con cambio de estado (pendiente, confirmado, entregado, etc.).
+- **Administración (solo admin):** activar, desactivar o eliminar plantillas, y cambiar el rol o desactivar cuentas de usuarios.
 
 ## Stack
 
@@ -44,10 +50,9 @@ Requisitos: Node 22 o superior.
 ## Equipo
 
 - Facundo Ferreyra: base de datos, deploy y entorno
-- Ayelen Ortega: frontend, asistente y vista previa
+- Ayelen Ortega: frontend: asistente de creación, vista previa, Mis bots, home, chat público, panel y administración
 - Brandon Velazquez: autenticación, roles y seguridad
 - Santiago Silva: API de bots y motor de conversación
-- Nicole Rodriguez: frontend, chat público y panel
 
 ## Uso de IA
 

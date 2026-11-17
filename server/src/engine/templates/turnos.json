@@ -7,7 +7,7 @@
     "fields": [
       { "key": "businessName", "label": "Nombre del negocio", "type": "text", "required": true, "maxLength": 80, "placeholder": "Peluquería Lola" },
       { "key": "hours", "label": "Horarios de atención", "type": "text", "required": true, "maxLength": 200, "placeholder": "Martes a sábado, 9 a 19 h" },
-      { "key": "address", "label": "Dirección", "type": "text", "maxLength": 200, "placeholder": "Calle y número" },
+      { "key": "address", "label": "Dirección", "type": "text", "required": true, "maxLength": 200, "placeholder": "Calle y número, o tu zona si no tenés local" },
       {
         "key": "services",
         "label": "Servicios",
@@ -21,7 +21,7 @@
       },
       { "key": "workingDays", "label": "Días que das turnos", "type": "weekdays", "required": true },
       { "key": "timeSlots", "label": "Horarios de los turnos", "type": "list", "required": true, "maxItems": 24, "itemMaxLength": 20, "placeholder": "10:00" },
-      { "key": "businessPhone", "label": "Teléfono o WhatsApp del negocio", "type": "phone", "placeholder": "11 5555 0000" }
+      { "key": "businessPhone", "label": "Teléfono o WhatsApp del negocio", "type": "phone", "required": true, "placeholder": "11 5555 0000" }
     ],
     "messages": {
       "welcome": "¡Hola! Soy el asistente de {{businessName}}. ¿En qué te puedo ayudar?",

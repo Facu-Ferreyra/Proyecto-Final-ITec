@@ -7,6 +7,9 @@
 import { bots } from './botsData.js'
 import { fail, makeSlug, missingFieldsOf, nameError, ok, toBotResponse, wait } from './helpers.js'
 import { previewMessage, previewStart } from './preview.js'
+import { handleAdmin } from './admin.js'
+import { handlePanel } from './panel.js'
+import { handlePublic } from './publicChat.js'
 import { findTemplate, templates } from './templates.js'
 
 let nextId = bots.length + 1
@@ -112,5 +115,11 @@ function handleBot(path, method, body) {
 
 export async function mockServer(path, { method = 'GET', body } = {}) {
   await wait(400)
-  return handleCollection(path, method, body) ?? handleBot(path, method, body)
+  return (
+    handlePublic(path, method, body) ??
+    handlePanel(path, method, body) ??
+    handleAdmin(path, method, body) ??
+    handleCollection(path, method, body) ??
+    handleBot(path, method, body)
+  )
 }

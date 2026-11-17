@@ -1,5 +1,5 @@
 // Página provisoria (Brandon) para rutas cuya pantalla todavía no existe
-// (chat público, panel y admin de Nicole) y para el 404.
+// y para el 404.
 // Cuando esté la pantalla real, se reemplaza en App.jsx.
 
 import { useNavigate } from 'react-router-dom'

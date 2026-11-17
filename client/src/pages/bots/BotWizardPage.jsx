@@ -1,7 +1,7 @@
 // Pantalla del asistente para crear o editar un bot.
 // Sin botId: crea un bot nuevo (arranca en el paso 1).
 // Con botId: edita ese bot (arranca en el paso 2).
-// No incluye la barra superior ni las rutas (son de Nicole y Brandon): quien la
+// No incluye la barra superior ni las rutas (están en App.jsx y AppLayout): quien la
 // monte en su ruta le pasa botId y onExit (volver a "Mis bots").
 
 import BotWizardSteps from './BotWizardSteps.jsx'

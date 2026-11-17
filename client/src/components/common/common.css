@@ -1,0 +1,148 @@
+/* Piezas compartidas del panel y admin: pestañas, paginación, etiquetas y listas.
+   Se usan dentro de .bots-area (pages/bots/theme.css), de donde salen las variables. */
+
+/* Encabezado de pantalla: título a la izquierda y controles a la derecha. */
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.page-header h1 {
+  margin: 0;
+}
+
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  width: fit-content;
+  max-width: 100%;
+  margin-bottom: 20px;
+  padding: 4px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
+.tab {
+  flex: 1 1 auto;
+  padding: 8px 14px;
+  border: none;
+  border-radius: var(--radius-small);
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tab:hover {
+  background: var(--color-bg);
+}
+
+.tab[aria-pressed='true'] {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+.tab:focus-visible {
+  outline: 3px solid var(--color-border);
+  outline-offset: 2px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+  color: var(--color-muted);
+}
+
+/* Etiqueta chica de estado o tipo (ej.: "Pendiente", "Turno"). */
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--color-badge-published);
+  color: var(--color-label);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.badge-muted {
+  background: var(--color-badge-draft);
+  color: var(--color-muted);
+}
+
+/* Lista de tarjetas (conversaciones, pedidos, plantillas, usuarios). */
+.data-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.data-item {
+  padding: 16px 20px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.data-item-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.data-item-title {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.data-item-meta {
+  margin: 4px 0 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.data-item-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* Etiqueta + select en línea (filtros y cambio de estado). */
+.inline-select {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-label);
+  font-weight: 600;
+}
+
+.inline-select select {
+  padding: 6px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+}

@@ -3,17 +3,17 @@
 // ve ni guarda el token, solo los datos del usuario que devuelve la API.
 
 import { ApiError, request } from './http.js'
+import { mockGetCurrentUser, mockLogin, mockLogout, mockRegister } from './mocks/auth.js'
 
 export { ApiError }
 
-// Con VITE_USE_MOCKS=true no hay backend: se simula una sesión de ejemplo para
-// que se puedan seguir usando las pantallas con datos de prueba.
+// Con VITE_USE_MOCKS=true no hay backend: la sesión se simula en mocks/auth.js,
+// con las mismas reglas que la API real.
 const USE_MOCKS = import.meta.env.VITE_USE_MOCKS === 'true'
-let mockUser = { id: 'demo', email: 'demo@easybot.com', name: 'Usuario demo', role: 'ADMIN', createdAt: new Date().toISOString() }
 
 /** Usuario logueado, o null si no hay sesión. */
 export async function getCurrentUser() {
-  if (USE_MOCKS) return mockUser
+  if (USE_MOCKS) return mockGetCurrentUser()
   try {
     const data = await request('/auth/me')
     return data.user
@@ -25,18 +25,18 @@ export async function getCurrentUser() {
 }
 
 export async function login({ email, password }) {
-  if (USE_MOCKS) return (mockUser = { ...mockUser, email })
+  if (USE_MOCKS) return mockLogin({ email })
   const data = await request('/auth/login', { method: 'POST', body: { email, password } })
   return data.user
 }
 
 export async function register({ name, email, password }) {
-  if (USE_MOCKS) return (mockUser = { ...mockUser, name, email })
+  if (USE_MOCKS) return mockRegister({ name, email })
   const data = await request('/auth/register', { method: 'POST', body: { name, email, password } })
   return data.user
 }
 
 export async function logout() {
-  if (USE_MOCKS) return
+  if (USE_MOCKS) return mockLogout()
   await request('/auth/logout', { method: 'POST' })
 }

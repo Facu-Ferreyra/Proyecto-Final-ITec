@@ -25,7 +25,7 @@ export default function LoginPage() {
       subtitle="Entrá para administrar tus bots."
       footer={
         <>
-          ¿No tenés cuenta? <Link to="/register" state={location.state}>Registrate gratis</Link>
+          ¿No tenés cuenta? <Link to="/register" state={location.state}>Crear cuenta</Link>
         </>
       }
     >
@@ -33,12 +33,24 @@ export default function LoginPage() {
         {form.formError && (
           <p className="notice notice-error" role="alert">
             {form.formError}
+            {/* No se dice si el email existe (así nadie puede averiguar quién tiene
+                cuenta), pero se guía a quien todavía no se registró. */}
+            {form.formErrorCode === 'INVALID_CREDENTIALS' && (
+              <>
+                {' '}
+                ¿No tenés cuenta?{' '}
+                <Link to="/register" state={location.state}>
+                  Creá una
+                </Link>
+              </>
+            )}
           </p>
         )}
         <AuthField
           label="Email"
           name="email"
           type="email"
+          placeholder="tu@email.com"
           autoComplete="email"
           autoFocus
           value={form.values.email}
@@ -49,6 +61,7 @@ export default function LoginPage() {
           label="Contraseña"
           name="password"
           type="password"
+          placeholder="••••••••"
           autoComplete="current-password"
           value={form.values.password}
           onChange={form.setField}

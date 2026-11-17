@@ -36,12 +36,15 @@ export default function DetailsStep({
           <button type="button" className="btn btn-secondary" disabled={saving} onClick={onBack}>
             Atrás
           </button>
-          <button type="button" className="btn btn-secondary" disabled={saving} onClick={onSave}>
-            {saving ? 'Guardando…' : 'Guardar y actualizar vista previa'}
-          </button>
-          <button type="button" className="btn btn-primary" disabled={saving} onClick={onNext}>
-            Siguiente
-          </button>
+          {/* Guardar y Siguiente juntos a la derecha; Atrás queda solo a la izquierda. */}
+          <div className="step-actions-group">
+            <button type="button" className="btn btn-secondary" disabled={saving} onClick={onSave}>
+              {saving ? 'Guardando…' : 'Guardar y actualizar vista previa'}
+            </button>
+            <button type="button" className="btn btn-primary" disabled={saving} onClick={onNext}>
+              Siguiente
+            </button>
+          </div>
         </div>
       </section>
 

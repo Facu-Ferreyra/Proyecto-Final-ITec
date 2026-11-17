@@ -78,8 +78,31 @@
   cursor: not-allowed;
 }
 
+/* Celular: solo logo + hamburguesa; los links y el usuario van en el menú lateral. */
+.app-bar-menu-toggle {
+  margin-left: auto;
+  margin-right: -8px;
+}
+
+@media (max-width: 767px) {
+  .app-bar {
+    flex-wrap: nowrap;
+    min-height: 60px;
+    padding-block: 8px;
+  }
+
+  .app-bar-nav,
+  .app-bar-user {
+    display: none;
+  }
+}
+
 @media (min-width: 768px) {
   .app-bar {
     padding: 12px 48px;
+  }
+
+  .app-bar .app-bar-menu-toggle {
+    display: none;
   }
 }

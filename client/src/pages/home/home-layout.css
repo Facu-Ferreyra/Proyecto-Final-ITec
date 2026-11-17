@@ -90,6 +90,21 @@
   .home-header .home-icon {
     display: none;
   }
+
+  /* En celular chico "Iniciar sesión" queda dentro del menú lateral. */
+  .home-header .home-header-login {
+    display: none;
+  }
+}
+
+/* Hamburguesa: se ve mientras los links de secciones están ocultos (< 960px). */
+.home-header .home-menu-toggle {
+  margin-right: -8px;
+  color: #ffffff;
+}
+
+.home-header .home-menu-toggle:hover {
+  background: rgb(255 255 255 / 0.1);
 }
 
 /* Tablet */
@@ -108,6 +123,10 @@
 
   .home-nav {
     display: flex;
+  }
+
+  .home-header .home-menu-toggle {
+    display: none;
   }
 
   .home-hero {

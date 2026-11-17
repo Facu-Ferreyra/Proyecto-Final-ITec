@@ -4,6 +4,7 @@
 import { useState } from 'react'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/useAuth.js'
+import MobileMenu from './MobileMenu.jsx'
 import './app-layout.css'
 
 export default function AppLayout() {
@@ -17,17 +18,23 @@ export default function AppLayout() {
     navigate('/login', { replace: true })
   }
 
+  // Los mismos links para la barra de escritorio y el menú de celular.
+  const links = [
+    <NavLink key="bots" to="/bots">Mis bots</NavLink>,
+    <NavLink key="panel" to="/panel">Panel</NavLink>,
+    // El link de admin solo se muestra a admins; igual la ruta y la API están protegidas.
+    isAdmin && <NavLink key="admin" to="/admin">Admin</NavLink>,
+  ].filter(Boolean)
+
   return (
     <div className="app-shell">
       <header className="app-bar">
         <NavLink to="/bots" className="app-bar-brand">
           EasyBot
         </NavLink>
+        {/* Escritorio: links y usuario en la barra. */}
         <nav aria-label="Principal" className="app-bar-nav">
-          <NavLink to="/bots">Mis bots</NavLink>
-          <NavLink to="/panel">Panel</NavLink>
-          {/* El link de admin solo se muestra a admins; igual la ruta y la API están protegidas. */}
-          {isAdmin && <NavLink to="/admin">Admin</NavLink>}
+          {links}
         </nav>
         <div className="app-bar-user">
           <span title={user?.email}>{user?.name}</span>
@@ -35,6 +42,26 @@ export default function AppLayout() {
             {leaving ? 'Saliendo…' : 'Salir'}
           </button>
         </div>
+
+        {/* Celular: todo eso adentro del menú lateral. */}
+        <MobileMenu title="EasyBot" buttonClassName="app-bar-menu-toggle">
+          <nav aria-label="Principal">
+            <ul className="mobile-menu-links">
+              {links.map((link) => (
+                <li key={link.key}>{link}</li>
+              ))}
+            </ul>
+          </nav>
+          <div className="mobile-menu-footer">
+            <div className="mobile-menu-user">
+              <strong>{user?.name}</strong>
+              <span>{user?.email}</span>
+            </div>
+            <button type="button" className="mobile-menu-btn" data-close-menu onClick={handleLogout} disabled={leaving}>
+              {leaving ? 'Saliendo…' : 'Salir'}
+            </button>
+          </div>
+        </MobileMenu>
       </header>
       <Outlet />
     </div>

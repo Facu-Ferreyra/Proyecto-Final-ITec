@@ -99,6 +99,8 @@ describe('API de bots, panel y chat público', { skip: !hasDb && 'Sin DATABASE_U
         config: {
           businessName: 'Peluquería Lola',
           hours: 'martes a sábado de 9 a 19 h',
+          address: 'Av. Rivadavia 4500',
+          businessPhone: '11 5555 0101',
           services: [{ name: 'Corte de pelo', price: 8000 }],
           workingDays: [1, 2, 3, 4, 5, 6],
           timeSlots: ['10:00', '15:00'],

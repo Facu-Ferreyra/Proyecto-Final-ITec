@@ -12,6 +12,7 @@
     "test": "npm test -w server",
     "seed": "npm run seed -w server",
     "db:migrate": "npm run migrate -w server",
+    "db:deploy": "npm run migrate:deploy -w server",
     "lint": "npm run lint --workspaces --if-present"
   },
   "devDependencies": {

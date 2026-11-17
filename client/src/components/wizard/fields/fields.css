@@ -22,8 +22,7 @@
 
 .field input:not([type='checkbox']),
 .field textarea,
-.link-row input,
-.preview-input input {
+.link-row input {
   box-sizing: border-box;
   width: 100%;
   padding: 10px 14px;
@@ -93,6 +92,24 @@
 
 .items-cell {
   flex: 1 1 160px;
+}
+
+/* Filas con texto largo (pregunta + respuesta): un cuadro debajo del otro. */
+.items-row-stacked {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.items-row-stacked .items-cell {
+  flex: none;
+}
+
+.items-row-stacked > .btn {
+  align-self: flex-end;
+}
+
+.items-row textarea {
+  resize: vertical;
 }
 
 .items-cell-label {

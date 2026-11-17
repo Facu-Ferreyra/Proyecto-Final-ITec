@@ -4,9 +4,9 @@
 
 const businessName = { key: 'businessName', label: 'Nombre del negocio', type: 'text', required: true, maxLength: 80, placeholder: 'Peluquería Lola' }
 const hours = { key: 'hours', label: 'Horarios de atención', type: 'text', required: true, maxLength: 200, placeholder: 'Martes a sábado, 9 a 19 h' }
-const address = { key: 'address', label: 'Dirección', type: 'text', maxLength: 200, placeholder: 'Calle y número' }
+const address = { key: 'address', label: 'Dirección', type: 'text', required: true, maxLength: 200, placeholder: 'Calle y número, o tu zona si no tenés local' }
 const paymentMethods = { key: 'paymentMethods', label: 'Formas de pago', type: 'list', maxItems: 10, itemMaxLength: 50, placeholder: 'Efectivo' }
-const businessPhone = { key: 'businessPhone', label: 'Teléfono o WhatsApp del negocio', type: 'phone', placeholder: '11 5555 0000' }
+const businessPhone = { key: 'businessPhone', label: 'Teléfono o WhatsApp del negocio', type: 'phone', required: true, placeholder: '11 5555 0000' }
 
 const faq = {
   id: 'tpl-faq',
@@ -19,7 +19,7 @@ const faq = {
       businessName,
       hours,
       address,
-      { key: 'prices', label: 'Precios', type: 'textarea', maxLength: 1000, placeholder: 'Corte: $ 8.000 · Color: $ 20.000' },
+      { key: 'prices', label: 'Productos', type: 'textarea', required: true, maxLength: 1000, placeholder: 'Corte: $ 8.000 · Color: $ 20.000' },
       paymentMethods,
       businessPhone,
       {

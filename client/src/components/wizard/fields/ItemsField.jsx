@@ -3,9 +3,7 @@
 
 import { useId } from 'react'
 import FieldWrapper from './FieldWrapper.jsx'
-
-// Los precios se guardan como número; un input vacío queda como '' (no cargado).
-const toValue = (itemField, text) => (itemField.type === 'price' && text !== '' ? Number(text) : text)
+import PriceInput from './PriceInput.jsx'
 
 export default function ItemsField({ field, value = [], errors, onChange }) {
   const id = useId()
@@ -14,6 +12,7 @@ export default function ItemsField({ field, value = [], errors, onChange }) {
   // no se puede quitar (sin ella el bot no tendría ese dato).
   const rows = field.required && value.length === 0 ? [{}] : value
   const canRemove = (index) => !field.required || index > 0
+  const hasLongText = field.itemFields.some((itemField) => itemField.type === 'textarea')
 
   const update = (index, key, newValue) =>
     onChange(rows.map((item, i) => (i === index ? { ...item, [key]: newValue } : item)))
@@ -25,14 +24,16 @@ export default function ItemsField({ field, value = [], errors, onChange }) {
       {() => (
         <div className="items-field">
           {rows.map((item, index) => (
-            <div key={index} className="items-row">
+            // Si la fila tiene un texto largo (ej.: la respuesta de una pregunta),
+            // los cuadros van uno debajo del otro, a todo el ancho.
+            <div key={index} className={hasLongText ? 'items-row items-row-stacked' : 'items-row'}>
               {field.itemFields.map((itemField) => {
                 const error = errors[`${field.key}.${index}.${itemField.key}`]
                 const inputProps = {
                   value: item[itemField.key] ?? '',
                   'aria-label': `${itemField.label} ${index + 1}`,
                   'aria-invalid': Boolean(error),
-                  onChange: (e) => update(index, itemField.key, toValue(itemField, e.target.value)),
+                  onChange: (e) => update(index, itemField.key, e.target.value),
                 }
                 return (
                   <div key={itemField.key} className="items-cell">
@@ -40,9 +41,10 @@ export default function ItemsField({ field, value = [], errors, onChange }) {
                       {itemField.label}
                     </span>
                     {itemField.type === 'textarea' ? (
-                      <textarea {...inputProps} rows={2} maxLength={itemField.maxLength} />
+                      <textarea {...inputProps} rows={3} maxLength={itemField.maxLength} />
                     ) : itemField.type === 'price' ? (
-                      <input {...inputProps} type="number" min="0" max="100000000" step="1" inputMode="numeric" />
+                      // Precio: número (o '' si está vacío), con flechas de a 1.000.
+                      <PriceInput {...inputProps} onChange={(price) => update(index, itemField.key, price)} />
                     ) : (
                       <input {...inputProps} maxLength={itemField.maxLength} />
                     )}

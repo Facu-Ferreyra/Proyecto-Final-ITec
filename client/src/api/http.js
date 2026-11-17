@@ -41,9 +41,15 @@ async function httpRequest(path, { method = 'GET', body } = {}) {
   return { status: response.status, data }
 }
 
+// Evento que se dispara cuando el backend responde 401 (sin sesión o sesión vencida).
+// Lo escucha AuthProvider para borrar el usuario y mandar al login (Brandon).
+export const UNAUTHORIZED_EVENT = 'easybot:unauthorized'
+
 // Hace el pedido (real o de ejemplo) y, si salió mal, lanza un ApiError.
 export async function request(path, options) {
   const { status, data } = USE_MOCKS ? await mockServer(path, options) : await httpRequest(path, options)
+
+  if (status === 401) window.dispatchEvent(new Event(UNAUTHORIZED_EVENT))
 
   if (status === 0 || status >= 400) {
     const error = data?.error

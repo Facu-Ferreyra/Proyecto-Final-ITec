@@ -33,6 +33,11 @@
   font-size: 0.8rem;
 }
 
+.public-chat-footer a {
+  color: inherit;
+  text-underline-offset: 2px;
+}
+
 .public-chat-missing {
   max-width: 480px;
   margin: auto;

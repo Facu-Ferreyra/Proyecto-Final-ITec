@@ -1,6 +1,6 @@
 // Rutas de la app (Brandon).
 //
-//   Públicas ............ /  /login  /register  /chat/:slug
+//   Públicas ............ /  /login  /register  /chat/:slug  /privacidad
 //   Con sesión .......... /bots  /bots/new  /bots/:id/edit  /panel
 //   Con sesión + ADMIN .. /admin
 //
@@ -19,6 +19,7 @@ import RegisterPage from './pages/auth/RegisterPage.jsx'
 import BotWizardPage from './pages/bots/BotWizardPage.jsx'
 import MyBotsPage from './pages/bots/MyBotsPage.jsx'
 import HomePage from './pages/home/HomePage.jsx'
+import PrivacyPage from './pages/legal/PrivacyPage.jsx'
 import PanelPage from './pages/panel/PanelPage.jsx'
 import PublicChatPage from './pages/public/PublicChatPage.jsx'
 
@@ -61,6 +62,7 @@ export default function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/chat/:slug" element={<PublicChatRoute />} />
+      <Route path="/privacidad" element={<PrivacyPage />} />
 
       {/* Requieren sesión */}
       <Route element={<ProtectedRoute />}>

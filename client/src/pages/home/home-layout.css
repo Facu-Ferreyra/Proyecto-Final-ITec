@@ -70,6 +70,16 @@
   gap: 8px;
 }
 
+.home-footer-link {
+  color: #ffffff;
+  text-underline-offset: 2px;
+}
+
+.home-footer-link:focus-visible {
+  outline: 3px solid var(--home-border);
+  outline-offset: 2px;
+}
+
 .home-footer .home-logo {
   color: #ffffff;
   font-size: 1rem;

@@ -1,0 +1,67 @@
+/* Estilos de "Mis bots" (prototipo, pantalla 4). */
+
+.my-bots-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.my-bots-header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+/* Grilla: 1 columna en celular, las que entren en pantallas más grandes. */
+.bot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.bot-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 24px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.bot-card-title {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.bot-card-template {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.badge {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.badge-published {
+  background: var(--color-badge-published);
+  color: var(--color-label);
+}
+
+.badge-draft {
+  background: var(--color-badge-draft);
+  color: var(--color-muted);
+}
+
+.bot-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}

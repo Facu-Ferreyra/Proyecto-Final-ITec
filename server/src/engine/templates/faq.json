@@ -1,0 +1,51 @@
+{
+  "key": "faq",
+  "name": "Preguntas frecuentes",
+  "description": "Menú con preguntas predefinidas: horarios, precios, ubicación y formas de pago.",
+  "config": {
+    "idealFor": "Casi cualquier comercio",
+    "fields": [
+      { "key": "businessName", "label": "Nombre del negocio", "type": "text", "required": true, "maxLength": 80, "placeholder": "Peluquería Lola" },
+      { "key": "hours", "label": "Horarios de atención", "type": "text", "required": true, "maxLength": 200, "placeholder": "Martes a sábado, 9 a 19 h" },
+      { "key": "address", "label": "Dirección", "type": "text", "maxLength": 200, "placeholder": "Calle y número" },
+      { "key": "prices", "label": "Precios", "type": "textarea", "maxLength": 1000, "placeholder": "Corte: $ 8.000 · Color: $ 20.000" },
+      { "key": "paymentMethods", "label": "Formas de pago", "type": "list", "maxItems": 10, "itemMaxLength": 50, "placeholder": "Efectivo" },
+      { "key": "businessPhone", "label": "Teléfono o WhatsApp del negocio", "type": "phone", "placeholder": "11 5555 0000" },
+      {
+        "key": "faqs",
+        "label": "Otras preguntas",
+        "type": "items",
+        "maxItems": 10,
+        "itemFields": [
+          { "key": "question", "label": "Pregunta", "type": "text", "required": true, "maxLength": 60 },
+          { "key": "answer", "label": "Respuesta", "type": "textarea", "required": true, "maxLength": 500 }
+        ]
+      }
+    ],
+    "messages": {
+      "welcome": "¡Hola! Soy el asistente de {{businessName}}. ¿En qué te puedo ayudar?",
+      "fallback": "No entendí tu mensaje. Elegí una de las opciones 👇",
+      "backToMenu": "¿Te ayudo con algo más?"
+    },
+    "menu": [
+      { "id": "hours", "label": "Horarios", "type": "answer", "requires": ["hours"], "answer": "Atendemos {{hours}}." },
+      { "id": "prices", "label": "Precios", "type": "answer", "requires": ["prices"], "answer": "{{prices}}" },
+      { "id": "location", "label": "Ubicación", "type": "answer", "requires": ["address"], "answer": "Estamos en {{address}}." },
+      { "id": "payment", "label": "Formas de pago", "type": "answer", "requires": ["paymentMethods"], "answer": "Aceptamos: {{paymentMethods}}." },
+      { "id": "faq", "type": "answerList", "source": "faqs", "labelKey": "question", "answerKey": "answer" },
+      { "id": "phone", "label": "Teléfono", "type": "answer", "requires": ["businessPhone"], "answer": "Podés escribirnos o llamarnos al {{businessPhone}}." },
+      { "id": "contact", "label": "Dejar mis datos", "type": "flow", "flow": "contact" }
+    ],
+    "flows": {
+      "contact": {
+        "leadType": "CONTACT",
+        "steps": [
+          { "key": "name", "prompt": "¿Cómo te llamás?", "input": "text", "maxLength": 60, "saveAs": "contactName" },
+          { "key": "phone", "prompt": "¿A qué teléfono te podemos escribir?", "input": "phone", "saveAs": "contactPhone" },
+          { "key": "message", "prompt": "¿Sobre qué querés consultar?", "input": "text", "maxLength": 300 }
+        ],
+        "success": "¡Gracias, {{name}}! {{businessName}} te va a escribir pronto."
+      }
+    }
+  }
+}

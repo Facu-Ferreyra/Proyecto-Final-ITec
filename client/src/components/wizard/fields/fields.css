@@ -1,0 +1,102 @@
+/* Campos del formulario del paso 2 (texto, listas, ítems, días). */
+
+.field {
+  margin: 0 0 16px;
+  padding: 0;
+  border: 0;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 6px;
+  padding: 0;
+  font-weight: 600;
+  color: var(--color-label);
+}
+
+.field-required {
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+.field input:not([type='checkbox']),
+.field textarea,
+.link-row input,
+.preview-input input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  font: inherit;
+}
+
+.field [aria-invalid='true'] {
+  border-color: var(--color-error);
+}
+
+.field-error {
+  margin: 4px 0 0;
+  color: var(--color-error);
+  font-size: 0.9rem;
+}
+
+.field-checkbox {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.weekdays {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+.weekday {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.list-field,
+.items-field {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+
+.list-row,
+.items-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: end;
+  width: 100%;
+}
+
+.list-row input {
+  flex: 1 1 200px;
+}
+
+.list-row .field-error {
+  flex-basis: 100%;
+}
+
+.items-row {
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  box-sizing: border-box;
+}
+
+.items-cell {
+  flex: 1 1 160px;
+}
+
+.items-cell-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}

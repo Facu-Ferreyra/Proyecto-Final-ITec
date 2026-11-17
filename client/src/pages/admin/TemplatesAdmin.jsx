@@ -1,7 +1,9 @@
 // Admin → Plantillas: ver todas, activar/desactivar y eliminar las que no usa ningún bot.
 // Una plantilla inactiva no aparece en el paso 1 del asistente.
 
+import { useState } from 'react'
 import { deleteTemplate, listAdminTemplates, updateTemplate } from '../../api/admin.js'
+import ConfirmDialog from '../../components/common/ConfirmDialog.jsx'
 import Notice from '../../components/common/Notice.jsx'
 import { useApiData } from '../../components/common/useApiData.js'
 import { useItemActions } from '../../components/common/useItemActions.js'
@@ -22,8 +24,12 @@ export default function TemplatesAdmin() {
     )
   }
 
-  function remove(template) {
-    if (!window.confirm(`¿Eliminar la plantilla "${template.name}"? No se puede deshacer.`)) return
+  // Eliminar: primero se confirma en el diálogo (pendingDelete), después se borra.
+  const [pendingDelete, setPendingDelete] = useState(null)
+
+  function confirmDelete() {
+    const template = pendingDelete
+    setPendingDelete(null)
     return run(
       template.id,
       async () => {
@@ -61,7 +67,7 @@ export default function TemplatesAdmin() {
                   {template.isActive ? 'Desactivar' : 'Activar'}
                 </button>
                 {template.botCount === 0 ? (
-                  <button type="button" className="btn btn-secondary btn-small btn-danger" disabled={busy} onClick={() => remove(template)}>
+                  <button type="button" className="btn btn-secondary btn-small btn-danger" disabled={busy} onClick={() => setPendingDelete(template)}>
                     Eliminar
                   </button>
                 ) : (
@@ -72,6 +78,16 @@ export default function TemplatesAdmin() {
           )
         })}
       </ul>
+
+      <ConfirmDialog
+        open={Boolean(pendingDelete)}
+        title={`¿Eliminar la plantilla "${pendingDelete?.name}"?`}
+        confirmLabel="Eliminar plantilla"
+        onConfirm={confirmDelete}
+        onCancel={() => setPendingDelete(null)}
+      >
+        <p>Deja de aparecer en el asistente para crear bots. Esta acción no se puede deshacer.</p>
+      </ConfirmDialog>
     </section>
   )
 }

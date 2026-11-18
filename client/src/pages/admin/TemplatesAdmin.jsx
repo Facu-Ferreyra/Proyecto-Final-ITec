@@ -8,6 +8,7 @@ import Notice from '../../components/common/Notice.jsx'
 import { useApiData } from '../../components/common/useApiData.js'
 import { useItemActions } from '../../components/common/useItemActions.js'
 import PageState from '../bots/PageState.jsx'
+import { ListSkeleton } from '../../components/common/Skeleton.jsx'
 
 export default function TemplatesAdmin() {
   const { data: templates, setData, status, error, retry } = useApiData(listAdminTemplates)
@@ -40,7 +41,7 @@ export default function TemplatesAdmin() {
     )
   }
 
-  if (status === 'loading') return <PageState isLoading title="Cargando plantillas…" />
+  if (status === 'loading') return <ListSkeleton label="Cargando plantillas…" />
   if (status === 'error') {
     return <PageState isError title="No pudimos cargar las plantillas" text={error?.message} actionLabel="Reintentar" onAction={retry} />
   }

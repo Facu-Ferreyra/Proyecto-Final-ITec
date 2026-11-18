@@ -8,6 +8,7 @@ import Notice from '../../components/common/Notice.jsx'
 import { useApiData } from '../../components/common/useApiData.js'
 import { useItemActions } from '../../components/common/useItemActions.js'
 import PageState from '../bots/PageState.jsx'
+import { ListSkeleton } from '../../components/common/Skeleton.jsx'
 
 const ROLE_LABELS = { USER: 'Usuario', ADMIN: 'Administrador' }
 
@@ -26,7 +27,7 @@ export default function UsersAdmin({ currentUserId }) {
     )
   }
 
-  if (status === 'loading') return <PageState isLoading title="Cargando usuarios…" />
+  if (status === 'loading') return <ListSkeleton label="Cargando usuarios…" />
   if (status === 'error') {
     return <PageState isError title="No pudimos cargar los usuarios" text={error?.message} actionLabel="Reintentar" onAction={retry} />
   }

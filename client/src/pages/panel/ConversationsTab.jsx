@@ -9,6 +9,7 @@ import { useApiData } from '../../components/common/useApiData.js'
 import PageState from '../bots/PageState.jsx'
 import ConversationDetail from './ConversationDetail.jsx'
 import { LEAD_TYPES } from './leadInfo.js'
+import { ListSkeleton } from '../../components/common/Skeleton.jsx'
 
 export default function ConversationsTab({ botId }) {
   const [page, setPage] = useState(1)
@@ -21,7 +22,7 @@ export default function ConversationsTab({ botId }) {
 
   return (
     <section aria-label="Conversaciones">
-      {status === 'loading' && <PageState isLoading title="Cargando conversaciones…" />}
+      {status === 'loading' && <ListSkeleton label="Cargando conversaciones…" />}
       {status === 'error' && (
         <PageState isError title="No pudimos cargar las conversaciones" text={error?.message} actionLabel="Reintentar" onAction={retry} />
       )}

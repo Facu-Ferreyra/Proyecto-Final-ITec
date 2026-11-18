@@ -9,6 +9,7 @@ import PageState from './PageState.jsx'
 import { useMyBots } from './useMyBots.js'
 import './theme.css'
 import './MyBotsPage.css'
+import { BotCardsSkeleton } from '../../components/common/Skeleton.jsx'
 
 const plural = (count, one, many) => `${count} ${count === 1 ? one : many}`
 
@@ -46,7 +47,7 @@ export default function MyBotsPage({ onCreate, onEdit }) {
         )}
       </header>
 
-      {status === 'loading' && <PageState isLoading title="Cargando tus bots…" />}
+      {status === 'loading' && <BotCardsSkeleton />}
 
       {status === 'error' && (
         <PageState

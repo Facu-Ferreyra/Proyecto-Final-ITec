@@ -8,6 +8,7 @@ import { useApiData } from '../../components/common/useApiData.js'
 import PageState from '../bots/PageState.jsx'
 import LeadCard from './LeadCard.jsx'
 import { groupByStatus, LEAD_TYPES, statusLabel } from './leadInfo.js'
+import { ListSkeleton } from '../../components/common/Skeleton.jsx'
 
 export default function LeadsTab({ botId, type }) {
   const info = LEAD_TYPES[type]
@@ -61,7 +62,7 @@ export default function LeadsTab({ botId, type }) {
         </p>
       )}
 
-      {status === 'loading' && <PageState isLoading title={`Cargando ${info.tab.toLowerCase()}…`} />}
+      {status === 'loading' && <ListSkeleton label={`Cargando ${info.tab.toLowerCase()}…`} />}
       {status === 'error' && (
         <PageState isError title={`No pudimos cargar ${info.tab.toLowerCase()}`} text={error?.message} actionLabel="Reintentar" onAction={retry} />
       )}

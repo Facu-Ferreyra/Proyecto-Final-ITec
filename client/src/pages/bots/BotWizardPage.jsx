@@ -9,6 +9,7 @@ import PageState from './PageState.jsx'
 import { useWizardData } from './useWizardData.js'
 import './theme.css'
 import '../../components/wizard/wizard.css'
+import { WizardSkeleton } from '../../components/common/Skeleton.jsx'
 
 export default function BotWizardPage({ botId, onExit }) {
   const { templates, initialBot, status, error, retry } = useWizardData(botId)
@@ -17,7 +18,7 @@ export default function BotWizardPage({ botId, onExit }) {
     <main className="bots-area">
       <h1 className="visually-hidden">{botId ? 'Editar bot' : 'Crear bot'}</h1>
 
-      {status === 'loading' && <PageState isLoading title="Cargando…" />}
+      {status === 'loading' && <WizardSkeleton />}
 
       {status === 'error' && (
         <PageState isError title="No pudimos abrir el asistente" text={error} actionLabel="Reintentar" onAction={retry} />

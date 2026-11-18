@@ -1,0 +1,58 @@
+/* Logo de bot (BotAvatar.jsx): cuadrado de esquinas suaves con las iniciales en
+   Archivo ancha, como el resto de los títulos de la marca. */
+
+.bot-avatar {
+  position: relative;
+  display: inline-grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  border-radius: calc(var(--avatar-size) * 0.28);
+  background: var(--avatar-bg);
+  color: #ffffff;
+  font-family: var(--eb-font);
+  font-size: calc(var(--avatar-size) * 0.4);
+  font-stretch: var(--eb-wide);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  user-select: none;
+}
+
+/* Una sola letra: un poco más grande, para que no quede perdida. */
+.bot-avatar[data-letters='1'] {
+  font-size: calc(var(--avatar-size) * 0.48);
+}
+
+/* Insignia de la plantilla, abajo a la derecha. */
+.bot-avatar-badge {
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--eb-white);
+  border-radius: 50%;
+  background: var(--eb-white);
+  color: var(--avatar-bg);
+  box-shadow: 0 1px 3px rgb(11 31 75 / 0.18);
+}
+
+.bot-avatar-badge svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Borrador: el mismo logo, apagado (todavía no atiende a nadie). */
+.bot-avatar-draft {
+  filter: saturate(0.25);
+  opacity: 0.75;
+}
+
+/* En el encabezado azul del chat: un borde claro lo separa si el color coincide. */
+.chat-header .bot-avatar {
+  box-shadow: 0 0 0 2px rgb(255 255 255 / 0.55);
+}

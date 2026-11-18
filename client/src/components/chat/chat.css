@@ -26,9 +26,16 @@
 }
 
 .chat-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   padding: 14px 20px;
   background: var(--chat-primary);
   color: var(--eb-white);
+}
+
+.chat-header-text {
+  min-width: 0;
 }
 
 /* .chat .chat-title (dos clases): le gana a reglas de títulos de otras pantallas,

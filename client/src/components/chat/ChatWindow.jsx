@@ -3,11 +3,13 @@
 // (se puede pasar con {...chat}) más un título y un subtítulo.
 
 import { useEffect, useRef } from 'react'
+import BotAvatar from '../common/BotAvatar.jsx'
 import ChatInput from './ChatInput.jsx'
 import './chat.css'
 
 export default function ChatWindow({
   title,
+  avatarName,
   subtitle,
   className = '',
   headingLevel = 'h2', // 'h1' cuando el chat es toda la página (chat público)
@@ -33,8 +35,13 @@ export default function ChatWindow({
   return (
     <section className={`chat ${className}`} aria-label={title || 'Chat'}>
       <header className="chat-header">
-        <Heading className="chat-title">{title || 'Chat'}</Heading>
-        {subtitle && <p className="chat-subtitle">{subtitle}</p>}
+        {/* El logo del bot (iniciales) le da identidad al chat de cada negocio.
+            avatarName: si el título no es el nombre del bot (ej. "Vista previa"). */}
+        {(avatarName ?? title) && <BotAvatar name={avatarName ?? title} size={40} />}
+        <div className="chat-header-text">
+          <Heading className="chat-title">{title || 'Chat'}</Heading>
+          {subtitle && <p className="chat-subtitle">{subtitle}</p>}
+        </div>
       </header>
 
       {/* aria-live: el lector de pantalla anuncia los mensajes nuevos. */}

@@ -14,5 +14,6 @@ export default function PreviewChat({ botId, reloadKey }) {
   const send = useCallback((message) => sendPreviewMessage(botId, message), [botId])
   const chat = useChat({ start, send, resetKey: reloadKey })
 
-  return <ChatWindow {...chat} title="Vista previa" subtitle="Así lo van a ver tus clientes" />
+  // chat.title es el nombre del bot: el logo de la vista previa usa ese, no "Vista previa".
+  return <ChatWindow {...chat} title="Vista previa" avatarName={chat.title} subtitle="Así lo van a ver tus clientes" />
 }

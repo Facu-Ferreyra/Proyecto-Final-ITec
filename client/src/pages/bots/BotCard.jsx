@@ -1,7 +1,8 @@
 // Tarjeta de un bot en "Mis bots": ícono, nombre, plantilla, estado, un resumen
 // (estadísticas si está publicado, qué falta si es borrador) y las acciones.
 
-import TemplateIcon, { TrashIcon } from './TemplateIcon.jsx'
+import BotAvatar from '../../components/common/BotAvatar.jsx'
+import { TrashIcon } from './TemplateIcon.jsx'
 
 const plural = (count, one, many) => `${count} ${count === 1 ? one : many}`
 
@@ -29,7 +30,12 @@ export default function BotCard({ bot, busy, onEdit, onDelete, onPublish, onUnpu
   return (
     <article className={`bot-card ${isPublished ? 'bot-card-published' : 'bot-card-draft'}`}>
       <header className="bot-card-header">
-        <TemplateIcon templateKey={bot.template.key} />
+        {/* Logo del bot: iniciales + insignia de la plantilla. Un borrador se ve apagado. */}
+        <BotAvatar
+          name={bot.name}
+          templateKey={bot.template.key}
+          className={isPublished ? '' : 'bot-avatar-draft'}
+        />
         <div className="bot-card-heading">
           <h2 className="bot-card-title">{bot.name}</h2>
           <p className="bot-card-template">{bot.template.name}</p>

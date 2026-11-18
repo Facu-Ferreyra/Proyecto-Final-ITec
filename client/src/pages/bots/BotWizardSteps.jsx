@@ -33,6 +33,8 @@ export default function BotWizardSteps({ initialBot, templates, onExit }) {
         </p>
       )}
 
+      {/* key={step}: cada paso nuevo se monta de cero y entra con la animación de .wizard-step. */}
+      <div key={step} className="wizard-step">
       {step === 1 && (
         <TemplateStep
           titleRef={titleRef}
@@ -74,6 +76,7 @@ export default function BotWizardSteps({ initialBot, templates, onExit }) {
       )}
 
       {step === 4 && <PublishedStep titleRef={titleRef} bot={bot} onExit={() => onExit?.()} />}
+      </div>
     </>
   )
 }

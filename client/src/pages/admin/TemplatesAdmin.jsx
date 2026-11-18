@@ -40,7 +40,7 @@ export default function TemplatesAdmin() {
     )
   }
 
-  if (status === 'loading') return <PageState title="Cargando plantillas…" />
+  if (status === 'loading') return <PageState isLoading title="Cargando plantillas…" />
   if (status === 'error') {
     return <PageState isError title="No pudimos cargar las plantillas" text={error?.message} actionLabel="Reintentar" onAction={retry} />
   }

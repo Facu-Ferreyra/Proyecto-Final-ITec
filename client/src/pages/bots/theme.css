@@ -71,7 +71,7 @@
   font: inherit;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 120ms ease;
+  /* transición y respuesta al presionar: styles/tokens.css */
 }
 
 .btn:disabled {
@@ -161,6 +161,30 @@ a.btn {
   padding: 12px 16px;
   border-radius: var(--radius);
   margin-bottom: 16px;
+  /* Entra con un leve movimiento: un aviso que aparece de golpe se ve como un error de la página. */
+  transition:
+    opacity var(--eb-enter) var(--eb-ease-out),
+    transform var(--eb-enter) var(--eb-ease-out);
+}
+
+@starting-style {
+  .notice {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+/* Estado de carga: spinner + texto. */
+.page-state .eb-spinner {
+  margin-bottom: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @starting-style {
+    .notice {
+      transform: none;
+    }
+  }
 }
 
 .notice-error {

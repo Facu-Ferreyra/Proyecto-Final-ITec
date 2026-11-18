@@ -57,7 +57,15 @@ export default function ChatWindow({
           </p>
         ))}
 
-        {busy && <p className="chat-status">Escribiendo…</p>}
+        {/* Tres puntos, como en cualquier chat; el texto queda para lectores de pantalla. */}
+        {busy && (
+          <p className="chat-typing">
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+            <span className="visually-hidden">Escribiendo…</span>
+          </p>
+        )}
 
         {status === 'ready' && error && (
           <p className="chat-status chat-error" role="alert">

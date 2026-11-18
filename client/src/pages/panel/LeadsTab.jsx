@@ -61,7 +61,7 @@ export default function LeadsTab({ botId, type }) {
         </p>
       )}
 
-      {status === 'loading' && <PageState title={`Cargando ${info.tab.toLowerCase()}…`} />}
+      {status === 'loading' && <PageState isLoading title={`Cargando ${info.tab.toLowerCase()}…`} />}
       {status === 'error' && (
         <PageState isError title={`No pudimos cargar ${info.tab.toLowerCase()}`} text={error?.message} actionLabel="Reintentar" onAction={retry} />
       )}

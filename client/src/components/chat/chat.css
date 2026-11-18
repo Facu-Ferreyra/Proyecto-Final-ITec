@@ -87,6 +87,104 @@
   gap: 8px;
 }
 
+/* Mensajes nuevos: suben 6px desde abajo, cada uno desde su lado (el bot desde la
+   izquierda, el visitante desde la derecha). Se ve qué es nuevo y quién lo mandó. */
+.chat-bubble,
+.chat-options,
+.chat-typing {
+  transition:
+    opacity var(--eb-enter) var(--eb-ease-out),
+    transform var(--eb-enter) var(--eb-ease-out);
+}
+
+.chat-bubble-bot,
+.chat-typing {
+  transform-origin: bottom left;
+}
+
+.chat-bubble-visitor {
+  transform-origin: bottom right;
+}
+
+@starting-style {
+  .chat-bubble,
+  .chat-typing {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+
+  .chat-options {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+/* "Escribiendo…": tres puntos que laten en ola. */
+.chat-typing {
+  display: inline-flex;
+  align-self: flex-start;
+  gap: 5px;
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: var(--chat-radius);
+  border-bottom-left-radius: 4px;
+  background: var(--chat-tint);
+}
+
+.chat-typing span[aria-hidden] {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--chat-muted);
+  animation: chat-typing 1s ease-in-out infinite;
+}
+
+.chat-typing span[aria-hidden]:nth-child(2) {
+  animation-delay: 150ms;
+}
+
+.chat-typing span[aria-hidden]:nth-child(3) {
+  animation-delay: 300ms;
+}
+
+@keyframes chat-typing {
+  0%,
+  60%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+.chat .visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @starting-style {
+    .chat-bubble,
+    .chat-typing,
+    .chat-options {
+      transform: none;
+    }
+  }
+
+  .chat-typing span[aria-hidden] {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+
 .chat-option,
 .chat-send {
   padding: 8px 14px;
@@ -122,7 +220,7 @@
 .chat-option:focus-visible,
 .chat-send:focus-visible,
 .chat-input input:focus-visible {
-  outline: 3px solid var(--chat-border);
+  outline: 3px solid var(--eb-focus);
   outline-offset: 2px;
 }
 

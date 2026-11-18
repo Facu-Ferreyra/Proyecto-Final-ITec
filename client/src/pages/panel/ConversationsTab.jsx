@@ -21,7 +21,7 @@ export default function ConversationsTab({ botId }) {
 
   return (
     <section aria-label="Conversaciones">
-      {status === 'loading' && <PageState title="Cargando conversaciones…" />}
+      {status === 'loading' && <PageState isLoading title="Cargando conversaciones…" />}
       {status === 'error' && (
         <PageState isError title="No pudimos cargar las conversaciones" text={error?.message} actionLabel="Reintentar" onAction={retry} />
       )}

@@ -96,7 +96,7 @@
 }
 
 .confirm-dialog-field input:focus-visible {
-  outline: 3px solid var(--color-border, var(--eb-line));
+  outline: 3px solid var(--eb-focus);
   outline-offset: 1px;
   border-color: var(--color-primary, var(--eb-blue));
 }

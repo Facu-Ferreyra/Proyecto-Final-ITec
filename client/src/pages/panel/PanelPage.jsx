@@ -52,7 +52,7 @@ export default function PanelPage({ onCreateBot }) {
         )}
       </header>
 
-      {status === 'loading' && <PageState title="Cargando tus bots…" />}
+      {status === 'loading' && <PageState isLoading title="Cargando tus bots…" />}
       {status === 'error' && (
         <PageState isError title="No pudimos cargar tus bots" text={error?.message} actionLabel="Reintentar" onAction={retry} />
       )}

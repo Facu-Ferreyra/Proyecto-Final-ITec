@@ -26,7 +26,7 @@ export default function UsersAdmin({ currentUserId }) {
     )
   }
 
-  if (status === 'loading') return <PageState title="Cargando usuarios…" />
+  if (status === 'loading') return <PageState isLoading title="Cargando usuarios…" />
   if (status === 'error') {
     return <PageState isError title="No pudimos cargar los usuarios" text={error?.message} actionLabel="Reintentar" onAction={retry} />
   }

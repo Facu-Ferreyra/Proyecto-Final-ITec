@@ -48,6 +48,36 @@
   }
 }
 
+/* ---- Cambio de paso ----
+   El paso nuevo entra 8px desde la derecha: se lee como "avanzar", sin saltos bruscos. */
+.wizard-step {
+  transition:
+    opacity 240ms var(--eb-ease-out),
+    transform 240ms var(--eb-ease-out);
+}
+
+@starting-style {
+  .wizard-step {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @starting-style {
+    .wizard-step {
+      transform: none;
+    }
+  }
+}
+
+/* El número del paso actual cambia de color suave, no de golpe. */
+.stepper-number {
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
 /* ---- Textos y botones de cada paso ---- */
 .step-title {
   margin: 0 0 16px;

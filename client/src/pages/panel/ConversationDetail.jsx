@@ -23,7 +23,7 @@ export default function ConversationDetail({ conversationId, onBack }) {
         ← Volver a la lista
       </button>
 
-      {status === 'loading' && <PageState title="Cargando la conversación…" />}
+      {status === 'loading' && <PageState isLoading title="Cargando la conversación…" />}
       {status === 'error' && (
         <PageState isError title="No pudimos cargar la conversación" text={error?.message} actionLabel="Reintentar" onAction={retry} />
       )}

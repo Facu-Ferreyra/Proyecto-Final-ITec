@@ -42,7 +42,7 @@
 
 .auth-brand:focus-visible,
 .auth-back:focus-visible {
-  outline: 3px solid var(--color-border);
+  outline: 3px solid var(--eb-focus);
   outline-offset: 2px;
 }
 
@@ -117,7 +117,7 @@
 }
 
 .auth-field input:focus-visible {
-  outline: 3px solid var(--color-border);
+  outline: 3px solid var(--eb-focus);
   outline-offset: 1px;
   border-color: var(--color-primary);
 }
@@ -149,7 +149,7 @@
 }
 
 .auth-toggle:focus-visible {
-  outline: 3px solid var(--color-border);
+  outline: 3px solid var(--eb-focus);
   outline-offset: 1px;
 }
 

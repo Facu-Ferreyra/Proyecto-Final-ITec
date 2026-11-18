@@ -74,7 +74,7 @@
 }
 
 .home-footer-link:focus-visible {
-  outline: 3px solid var(--home-border);
+  outline: 3px solid var(--eb-focus);
   outline-offset: 2px;
 }
 

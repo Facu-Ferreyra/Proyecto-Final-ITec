@@ -45,7 +45,7 @@ export default function MyBotsPage({ onCreate, onEdit }) {
         )}
       </header>
 
-      {status === 'loading' && <PageState title="Cargando tus bots…" />}
+      {status === 'loading' && <PageState isLoading title="Cargando tus bots…" />}
 
       {status === 'error' && (
         <PageState

@@ -69,7 +69,7 @@
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 120ms ease;
+  /* transición y respuesta al presionar: styles/tokens.css */
 }
 
 .home-btn:focus-visible,

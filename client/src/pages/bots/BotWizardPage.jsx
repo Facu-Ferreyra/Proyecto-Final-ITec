@@ -17,7 +17,7 @@ export default function BotWizardPage({ botId, onExit }) {
     <main className="bots-area">
       <h1 className="visually-hidden">{botId ? 'Editar bot' : 'Crear bot'}</h1>
 
-      {status === 'loading' && <PageState title="Cargando…" />}
+      {status === 'loading' && <PageState isLoading title="Cargando…" />}
 
       {status === 'error' && (
         <PageState isError title="No pudimos abrir el asistente" text={error} actionLabel="Reintentar" onAction={retry} />

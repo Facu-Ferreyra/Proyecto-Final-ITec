@@ -39,6 +39,19 @@
   border-left-color: var(--eb-sun);
 }
 
+/* Hover solo con mouse: en celular el hover queda "pegado" después de tocar. */
+@media (hover: hover) and (pointer: fine) {
+  .bot-card {
+    transition: border-color 150ms ease;
+  }
+
+  .bot-card:hover {
+    border-top-color: var(--eb-line-strong);
+    border-right-color: var(--eb-line-strong);
+    border-bottom-color: var(--eb-line-strong);
+  }
+}
+
 .bot-card-header {
   display: flex;
   align-items: flex-start;

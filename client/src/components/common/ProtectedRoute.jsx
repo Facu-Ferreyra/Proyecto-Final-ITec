@@ -18,7 +18,7 @@ export default function ProtectedRoute({ children }) {
   if (status === 'loading') {
     return (
       <main className="bots-area">
-        <PageState title="Cargando…" />
+        <PageState isLoading title="Cargando…" />
       </main>
     )
   }

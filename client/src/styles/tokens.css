@@ -41,7 +41,8 @@
   --eb-success: #166534;
   --eb-success-soft: #ecfdf3;
   --eb-warning-ink: #92400e;
-  --eb-focus: #93c5fd;
+  /* Anillo de foco: tiene que verse (contraste ≥ 3:1). Sobre azul oscuro, blanco. */
+  --eb-focus: #2563eb;
 
   /* Tipografía: una sola familia; los títulos se distinguen por el ancho. */
   --eb-font: 'Archivo Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -55,6 +56,105 @@
   --eb-radius-pill: 999px; /* botones, chips, estados */
 
   --eb-shadow-pop: 0 16px 40px rgb(11 31 75 / 0.14); /* solo lo que flota: menús, diálogos */
+
+  /* Movimiento. Curvas fuertes (las de CSS por defecto son flojas) y duraciones
+     cortas: nada de interfaz pasa de 300 ms. */
+  --eb-ease-out: cubic-bezier(0.23, 1, 0.32, 1); /* entradas y respuestas a una acción */
+  --eb-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* algo que se mueve en pantalla */
+  --eb-ease-drawer: cubic-bezier(0.32, 0.72, 0, 1); /* paneles laterales (curva tipo iOS) */
+  --eb-press: 160ms; /* respuesta al presionar */
+  --eb-enter: 220ms; /* algo que aparece */
+}
+
+/* Sobre fondos azul oscuro el anillo de foco azul no se ve: va en blanco. */
+.home-dark,
+.home-footer,
+.auth-bar,
+.chat-header {
+  --eb-focus: #ffffff;
+}
+
+/* ---------- Respuesta al presionar ----------
+   Todo lo que se toca se achica apenas (0.97) mientras se presiona: confirma que
+   la interfaz escuchó. Solo transform (no mueve el layout, lo hace la GPU). */
+.btn,
+.home-btn,
+.chat-option,
+.chat-send,
+.tab,
+.time-slot,
+.time-select-button,
+.bot-card-delete,
+.mobile-menu-toggle,
+.mobile-menu-close,
+.mobile-menu-btn,
+.app-bar-logout,
+.template-card .btn {
+  transition:
+    transform var(--eb-press) var(--eb-ease-out),
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
+}
+
+:is(
+    .btn,
+    .home-btn,
+    .chat-option,
+    .chat-send,
+    .tab,
+    .time-slot,
+    .time-select-button,
+    .bot-card-delete,
+    .mobile-menu-toggle,
+    .mobile-menu-close,
+    .mobile-menu-btn,
+    .app-bar-logout
+  ):active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* ---------- Spinner de carga ----------
+   Rápido a propósito: un spinner que gira rápido hace que la espera se sienta más corta. */
+.eb-spinner {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--eb-blue-soft);
+  border-top-color: var(--eb-blue);
+  border-radius: 50%;
+  animation: eb-spin 700ms linear infinite;
+}
+
+@keyframes eb-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Menos movimiento: sin desplazamientos ni escalas; el spinner gira más lento
+   (sigue indicando que algo pasa, sin marear). */
+@media (prefers-reduced-motion: reduce) {
+  :is(
+      .btn,
+      .home-btn,
+      .chat-option,
+      .chat-send,
+      .tab,
+      .time-slot,
+      .time-select-button,
+      .bot-card-delete,
+      .mobile-menu-toggle,
+      .mobile-menu-close,
+      .mobile-menu-btn,
+      .app-bar-logout
+    ):active:not(:disabled) {
+    transform: none;
+  }
+
+  .eb-spinner {
+    animation-duration: 1.6s;
+  }
 }
 
 /* Logo: ícono (favicon) + "EasyBot" en Archivo ancha. Lo usan la barra de la app,

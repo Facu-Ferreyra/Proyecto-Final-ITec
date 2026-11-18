@@ -29,7 +29,7 @@ export default function HeroSection({ onRegister }) {
   return (
     <section className="home-hero home-dark" aria-labelledby="home-hero-title">
       <div className="home-container home-hero-inner">
-        <div>
+        <div className="home-hero-copy">
           <p className="home-badge">Para microemprendimientos y pequeños comercios</p>
           <h1 id="home-hero-title" className="home-hero-title">
             Tu chatbot en minutos, sin programar
@@ -48,7 +48,11 @@ export default function HeroSection({ onRegister }) {
           </div>
           <p className="home-hero-note">Se usa desde la web. Tus clientes no se registran ni instalan nada.</p>
         </div>
-        <ExampleChat />
+        {/* Detrás del chat, el dial de 24 h (ilustración decorativa, en CSS):
+            el negocio contesta a cualquier hora, aunque esté cerrado. */}
+        <div className="home-hero-art">
+          <ExampleChat />
+        </div>
       </div>
     </section>
   )

@@ -2,6 +2,7 @@
 // No incluye la barra superior ni las rutas (están en App.jsx y AppLayout): quien la
 // monte en su ruta le pasa onCreate y onEdit para navegar al asistente.
 
+import emptyBotsArt from '../../assets/illustrations/empty-bots.svg'
 import ConfirmDialog from '../../components/common/ConfirmDialog.jsx'
 import BotCard from './BotCard.jsx'
 import PageState from './PageState.jsx'
@@ -59,6 +60,7 @@ export default function MyBotsPage({ onCreate, onEdit }) {
 
       {status === 'ready' && bots.length === 0 && (
         <PageState
+          illustration={emptyBotsArt}
           title="Todavía no creaste ningún bot"
           text="Elegí una plantilla, cargá los datos de tu negocio y publicá el link."
           actionLabel="Crear mi primer bot"

@@ -1,6 +1,40 @@
 /* Home: chat de ejemplo, chips, secciones y tarjetas.
    Base y variables en home.css; plantillas, pie y escritorio en home-layout.css. */
 
+/* Ilustración de la portada: dial de 24 h con conversación alrededor
+   (assets/illustrations/hero-dial.svg). La aguja naranja marca las 22:30:
+   el negocio ya cerró y el bot sigue atendiendo. Es decorativa. */
+.home-hero {
+  overflow: hidden; /* el dial es más grande que su columna: no genera scroll lateral */
+}
+
+.home-hero-copy {
+  position: relative;
+  z-index: 1; /* el texto siempre por encima de la ilustración */
+}
+
+.home-hero-art {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Solo en escritorio: en celular el chat tapa casi todo el dial y lo que asoma
+   en los bordes parece un error. Tamaño tope para que entre entero en la portada. */
+@media (min-width: 960px) {
+  .home-hero-art::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    width: min(150%, 640px);
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    background: url('../../assets/illustrations/hero-dial.svg') center / contain no-repeat;
+    pointer-events: none;
+  }
+}
+
 /* Chat de ejemplo de la portada */
 .home-chat {
   overflow: hidden;

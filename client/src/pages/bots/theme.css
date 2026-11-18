@@ -149,6 +149,7 @@ a.btn {
 .page-state-title {
   margin: 0 0 8px;
   font-size: 1.25rem;
+  text-wrap: balance;
 }
 
 .page-state-text {
@@ -172,6 +173,15 @@ a.btn {
     opacity: 0;
     transform: translateY(-4px);
   }
+}
+
+/* Ilustración del estado vacío: ocupa el ancho de la tarjeta sin agrandarse de más. */
+.page-state-art {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  margin: -8px auto 8px;
 }
 
 /* Estado de carga: spinner + texto. */

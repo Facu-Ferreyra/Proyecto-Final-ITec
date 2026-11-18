@@ -1,4 +1,5 @@
-/* Barra superior de las pantallas privadas (Brandon). Mismos colores que theme.css. */
+/* Barra superior de las pantallas privadas (Brandon). Mismos colores que theme.css.
+   El menú del usuario (círculo + desplegable) tiene sus estilos en user-menu.css. */
 
 .app-bar {
   display: flex;
@@ -48,34 +49,6 @@
   gap: 12px;
   margin-left: auto;
   min-width: 0;
-}
-
-.app-bar-user span {
-  overflow: hidden;
-  max-width: 160px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: var(--eb-muted);
-}
-
-.app-bar-logout {
-  padding: 6px 14px;
-  border: 1px solid var(--eb-blue);
-  border-radius: 8px;
-  background: var(--eb-white);
-  color: var(--eb-blue);
-  font: inherit;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.app-bar-logout:hover:not(:disabled) {
-  background: var(--eb-sky);
-}
-
-.app-bar-logout:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
 }
 
 /* Celular: solo logo + hamburguesa; los links y el usuario van en el menú lateral. */

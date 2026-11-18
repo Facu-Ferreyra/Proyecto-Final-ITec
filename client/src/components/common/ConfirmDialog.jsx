@@ -12,7 +12,8 @@ import { useEffect, useId, useRef, useState } from 'react'
 import './confirm-dialog.css'
 
 // El contenido se monta recién al abrir: así el texto escrito arranca vacío cada vez.
-function ConfirmBody({ titleId, title, children, confirmLabel, requireText, onConfirm, onCancel }) {
+// tone: 'danger' (rojo, por defecto: borrar) o 'primary' (azul: acciones que no destruyen nada, como cerrar sesión).
+function ConfirmBody({ titleId, title, children, confirmLabel, requireText, tone = 'danger', onConfirm, onCancel }) {
   const [typed, setTyped] = useState('')
   const inputId = useId()
   const canConfirm = !requireText || typed.trim() === requireText.trim()
@@ -52,7 +53,7 @@ function ConfirmBody({ titleId, title, children, confirmLabel, requireText, onCo
         <button type="button" className="btn btn-secondary" onClick={onCancel} data-autofocus={requireText ? undefined : true}>
           Cancelar
         </button>
-        <button type="submit" className="btn confirm-dialog-danger" disabled={!canConfirm}>
+        <button type="submit" className={tone === 'primary' ? 'btn confirm-dialog-primary' : 'btn confirm-dialog-danger'} disabled={!canConfirm}>
           {confirmLabel}
         </button>
       </div>

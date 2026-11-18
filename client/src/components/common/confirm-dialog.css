@@ -119,6 +119,26 @@
   background: var(--eb-error-dark);
 }
 
+/* Confirmar en azul (tone="primary"), para acciones que no borran nada, como cerrar
+   sesión. Con colores de respaldo de tokens.css: el diálogo de cerrar sesión vive en
+   la barra, afuera de .bots-area, donde no existen las variables --color-*. */
+.confirm-dialog .confirm-dialog-primary {
+  border-color: var(--color-primary, var(--eb-blue));
+  background: var(--color-primary, var(--eb-blue));
+  color: var(--eb-white);
+}
+
+.confirm-dialog .confirm-dialog-primary:hover:not(:disabled) {
+  background: var(--eb-blue-dark);
+}
+
+/* "Cancelar" (btn-secondary) también con respaldo, por la misma razón. */
+.confirm-dialog .btn-secondary {
+  border-color: var(--color-primary, var(--eb-blue));
+  background: var(--color-surface, var(--eb-white));
+  color: var(--color-primary, var(--eb-blue));
+}
+
 /* Celular: botones a lo ancho, el de borrar arriba (más cerca del pulgar). */
 @media (max-width: 479px) {
   .confirm-dialog-actions {

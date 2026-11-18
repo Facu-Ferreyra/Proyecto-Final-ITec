@@ -3,7 +3,7 @@
 // ve ni guarda el token, solo los datos del usuario que devuelve la API.
 
 import { ApiError, request } from './http.js'
-import { mockGetCurrentUser, mockLogin, mockLogout, mockRegister } from './mocks/auth.js'
+import { mockForgotPassword, mockGetCurrentUser, mockLogin, mockLogout, mockRegister, mockResetPassword } from './mocks/auth.js'
 
 export { ApiError }
 
@@ -39,4 +39,17 @@ export async function register({ name, email, password }) {
 export async function logout() {
   if (USE_MOCKS) return mockLogout()
   await request('/auth/logout', { method: 'POST' })
+}
+
+// "Olvidé mi contraseña": responde siempre igual, exista o no el email.
+export async function forgotPassword({ email }) {
+  if (USE_MOCKS) return mockForgotPassword({ email })
+  const data = await request('/auth/forgot-password', { method: 'POST', body: { email } })
+  return data.message
+}
+
+// "Nueva contraseña" con el token del link. No inicia sesión.
+export async function resetPassword({ token, password }) {
+  if (USE_MOCKS) return mockResetPassword({ token })
+  await request('/auth/reset-password', { method: 'POST', body: { token, password } })
 }

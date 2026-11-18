@@ -6,6 +6,7 @@ import AuthField from './AuthField.jsx'
 import AuthLayout from './AuthLayout.jsx'
 import { loginSchema } from './authSchemas.js'
 import { useAuthForm } from './useAuthForm.js'
+import './password-reset.css'
 
 export default function LoginPage() {
   const { isAuthenticated, login } = useAuth()
@@ -67,6 +68,9 @@ export default function LoginPage() {
           onChange={form.setField}
           error={form.fieldErrors.password}
         />
+        <p className="auth-forgot">
+          <Link to="/forgot-password">¿Olvidaste tu contraseña?</Link>
+        </p>
         <button type="submit" className="btn btn-primary btn-block" disabled={form.submitting}>
           {form.submitting ? 'Entrando…' : 'Entrar'}
         </button>

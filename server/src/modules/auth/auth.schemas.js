@@ -32,3 +32,13 @@ export const loginSchema = z.object({
   email,
   password: z.string().min(1).max(200),
 });
+
+// "Olvidé mi contraseña": solo el email.
+export const forgotPasswordSchema = z.object({ email });
+
+// "Nueva contraseña": el token del link (43 caracteres en base64url) y la contraseña
+// nueva, con la misma política que el registro.
+export const resetPasswordSchema = z.object({
+  token: z.string().min(20).max(200),
+  password: newPassword,
+});

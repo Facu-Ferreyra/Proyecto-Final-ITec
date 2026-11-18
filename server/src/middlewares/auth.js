@@ -81,11 +81,18 @@ export async function requireAuth(req, res, next) {
 
   const user = await prisma.user.findUnique({
     where: { id: payload.sub },
-    select: { id: true, role: true, isActive: true },
+    select: { id: true, role: true, isActive: true, passwordChangedAt: true },
   });
   if (!user || !user.isActive) {
     clearSessionCookie(res);
     throw unauthorized('Tu cuenta no está disponible. Volvé a iniciar sesión.');
+  }
+
+  // Si la contraseña se cambió después de iniciar esta sesión, la sesión deja de valer
+  // (por ejemplo, alguien que tenía la cuenta abierta en otro lado). iat está en segundos.
+  if (user.passwordChangedAt && payload.iat < Math.floor(user.passwordChangedAt.getTime() / 1000)) {
+    clearSessionCookie(res);
+    throw unauthorized('Tu contraseña cambió. Volvé a iniciar sesión.');
   }
 
   req.user = { id: user.id, role: user.role };

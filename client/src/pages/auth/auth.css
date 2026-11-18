@@ -23,20 +23,20 @@
 }
 
 .auth-brand {
-  color: #ffffff;
+  color: var(--eb-white);
   font-size: 1.25rem;
   font-weight: 700;
   text-decoration: none;
 }
 
 .auth-back {
-  color: #c7d7f5;
+  color: var(--eb-on-dark);
   font-size: 0.95rem;
   text-decoration: none;
 }
 
 .auth-back:hover {
-  color: #ffffff;
+  color: var(--eb-white);
   text-decoration: underline;
 }
 

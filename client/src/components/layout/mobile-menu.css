@@ -22,7 +22,7 @@
 .mobile-menu-close:focus-visible,
 .mobile-menu a:focus-visible,
 .mobile-menu button:focus-visible {
-  outline: 3px solid #93c5fd;
+  outline: 3px solid var(--eb-focus);
   outline-offset: 2px;
 }
 
@@ -37,10 +37,10 @@
   margin: 0;
   padding: 0;
   border: 0;
-  background: #ffffff;
-  color: #0b1f4b;
+  background: var(--eb-white);
+  color: var(--eb-navy);
   box-shadow: -16px 0 40px rgb(8 22 51 / 0.25);
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--eb-font);
   text-align: left;
   color-scheme: light;
 }
@@ -109,7 +109,7 @@ html:has(.mobile-menu[open]) {
   justify-content: space-between;
   margin-bottom: 8px;
   padding-bottom: 12px;
-  border-bottom: 1px solid #dbeafe;
+  border-bottom: 1px solid var(--eb-blue-soft);
 }
 
 .mobile-menu-title {
@@ -132,7 +132,7 @@ html:has(.mobile-menu[open]) {
 }
 
 .mobile-menu-close:hover {
-  background: #f3f8ff;
+  background: var(--eb-sky);
 }
 
 /* Links: una fila grande por opción, fácil de tocar con el dedo. */
@@ -151,19 +151,19 @@ html:has(.mobile-menu[open]) {
   min-height: 48px;
   padding: 0 14px;
   border-radius: 10px;
-  color: #0b1f4b;
+  color: var(--eb-navy);
   font-size: 1.05rem;
   font-weight: 600;
   text-decoration: none;
 }
 
 .mobile-menu-links a:hover {
-  background: #f3f8ff;
+  background: var(--eb-sky);
 }
 
 .mobile-menu-links a.active {
-  background: #dbeafe;
-  color: #1d4ed8;
+  background: var(--eb-blue-soft);
+  color: var(--eb-blue);
 }
 
 /* Pie del panel: usuario y acciones, siempre abajo. */
@@ -173,7 +173,7 @@ html:has(.mobile-menu[open]) {
   gap: 10px;
   margin-top: auto;
   padding-top: 16px;
-  border-top: 1px solid #dbeafe;
+  border-top: 1px solid var(--eb-blue-soft);
 }
 
 .mobile-menu-user {
@@ -190,7 +190,7 @@ html:has(.mobile-menu[open]) {
 }
 
 .mobile-menu-user span {
-  color: #475569;
+  color: var(--eb-muted);
   font-size: 0.9rem;
 }
 
@@ -199,10 +199,10 @@ html:has(.mobile-menu[open]) {
   align-items: center;
   justify-content: center;
   min-height: 48px;
-  border: 1px solid #1d4ed8;
+  border: 1px solid var(--eb-blue);
   border-radius: 10px;
-  background: #ffffff;
-  color: #1d4ed8;
+  background: var(--eb-white);
+  color: var(--eb-blue);
   font: inherit;
   font-weight: 600;
   text-decoration: none;
@@ -215,6 +215,6 @@ html:has(.mobile-menu[open]) {
 }
 
 .mobile-menu-btn-primary {
-  background: #1d4ed8;
-  color: #ffffff;
+  background: var(--eb-blue);
+  color: var(--eb-white);
 }

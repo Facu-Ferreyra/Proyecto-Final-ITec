@@ -13,7 +13,10 @@ export default function HomeHeader({ onLogin, onRegister }) {
   return (
     <header className="home-header home-dark">
       <div className="home-container home-header-inner">
-        <span className="home-logo">EasyBot</span>
+        <span className="home-logo">
+          <img src="/favicon.svg" alt="" width="28" height="28" className="brand-mark" />
+          EasyBot
+        </span>
         <nav className="home-nav" aria-label="Secciones de la página">
           {LINKS.map((link) => (
             <a key={link.href} href={link.href}>

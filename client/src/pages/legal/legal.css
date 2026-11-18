@@ -2,18 +2,18 @@
    cómodo (~70 caracteres), buen interlineado y un índice para saltar. */
 
 .legal {
-  --legal-navy: #0b1f4b;
-  --legal-primary: #1d4ed8;
-  --legal-muted: #475569;
-  --legal-border: #dbeafe;
-  --legal-tint: #f3f8ff;
+  --legal-navy: var(--eb-navy);
+  --legal-primary: var(--eb-blue);
+  --legal-muted: var(--eb-muted);
+  --legal-border: var(--eb-blue-soft);
+  --legal-tint: var(--eb-sky);
 
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  background: #ffffff;
+  background: var(--eb-white);
   color: var(--legal-navy);
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--eb-font);
   line-height: 1.65;
   text-align: left;
   color-scheme: light;
@@ -25,7 +25,7 @@
 }
 
 .legal a:focus-visible {
-  outline: 3px solid #93c5fd;
+  outline: 3px solid var(--eb-focus);
   outline-offset: 2px;
   border-radius: 4px;
 }

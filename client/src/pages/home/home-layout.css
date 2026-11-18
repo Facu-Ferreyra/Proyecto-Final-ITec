@@ -27,10 +27,8 @@
 .home-label {
   margin-top: 6px;
   color: var(--home-navy);
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 .home-template-panel {
@@ -71,7 +69,7 @@
 }
 
 .home-footer-link {
-  color: #ffffff;
+  color: var(--eb-white);
   text-underline-offset: 2px;
 }
 
@@ -81,7 +79,7 @@
 }
 
 .home-footer .home-logo {
-  color: #ffffff;
+  color: var(--eb-white);
   font-size: 1rem;
 }
 
@@ -110,7 +108,7 @@
 /* Hamburguesa: se ve mientras los links de secciones están ocultos (< 960px). */
 .home-header .home-menu-toggle {
   margin-right: -8px;
-  color: #ffffff;
+  color: var(--eb-white);
 }
 
 .home-header .home-menu-toggle:hover {

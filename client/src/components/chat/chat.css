@@ -1,26 +1,26 @@
 /* Chat compartido (chat público y vista previa del asistente).
    Las variables viven en .chat para no depender de otras pantallas.
-   Mismos colores que pages/bots/theme.css y la home. */
+   Valores de styles/tokens.css. */
 
 .chat {
-  --chat-navy: #0b1f4b;
-  --chat-primary: #1d4ed8;
-  --chat-primary-dark: #1e40af;
-  --chat-bg: #f3f8ff;
-  --chat-tint: #dbeafe;
-  --chat-border: #bfdbfe;
-  --chat-muted: #475569;
-  --chat-error: #b91c1c;
-  --chat-radius: 12px;
+  --chat-navy: var(--eb-navy);
+  --chat-primary: var(--eb-blue);
+  --chat-primary-dark: var(--eb-blue-dark);
+  --chat-bg: var(--eb-white);
+  --chat-tint: var(--eb-sky);
+  --chat-border: var(--eb-line);
+  --chat-muted: var(--eb-muted);
+  --chat-error: var(--eb-error);
+  --chat-radius: 14px;
 
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: #ffffff;
+  background: var(--eb-white);
   border: 1px solid var(--chat-border);
-  border-radius: var(--chat-radius);
+  border-radius: var(--eb-radius-lg);
   color: var(--chat-navy);
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--eb-font);
   line-height: 1.5;
   text-align: left;
 }
@@ -28,16 +28,17 @@
 .chat-header {
   padding: 14px 20px;
   background: var(--chat-primary);
-  color: #ffffff;
+  color: var(--eb-white);
 }
 
 /* .chat .chat-title (dos clases): le gana a reglas de títulos de otras pantallas,
    como ".bots-area h2" en el asistente. */
 .chat .chat-title {
   margin: 0;
-  color: #ffffff;
-  font-size: 1.05rem;
-  font-weight: 700;
+  color: var(--eb-white);
+  font-size: 1.1rem;
+  font-weight: 800;
+  font-stretch: var(--eb-semi-wide);
 }
 
 .chat-subtitle {
@@ -66,15 +67,18 @@
   overflow-wrap: anywhere;
 }
 
+/* La esquina "pegada" indica quién habla, como en los chats que ya usan los clientes. */
 .chat-bubble-bot {
   align-self: flex-start;
   background: var(--chat-tint);
+  border-bottom-left-radius: 4px;
 }
 
 .chat-bubble-visitor {
   align-self: flex-end;
   background: var(--chat-primary);
-  color: #ffffff;
+  color: var(--eb-white);
+  border-bottom-right-radius: 4px;
 }
 
 .chat-options {
@@ -86,9 +90,9 @@
 .chat-option,
 .chat-send {
   padding: 8px 14px;
-  border: 1px solid var(--chat-primary);
-  border-radius: 999px;
-  background: #ffffff;
+  border: 1.5px solid var(--chat-primary);
+  border-radius: var(--eb-radius-pill);
+  background: var(--eb-white);
   color: var(--chat-primary);
   font: inherit;
   font-size: 0.9rem;
@@ -101,9 +105,8 @@
 }
 
 .chat-send {
-  border-radius: 8px;
   background: var(--chat-primary);
-  color: #ffffff;
+  color: var(--eb-white);
 }
 
 .chat-send:hover:not(:disabled) {

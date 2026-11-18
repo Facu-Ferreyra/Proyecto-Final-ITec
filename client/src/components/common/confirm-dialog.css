@@ -7,10 +7,10 @@
   padding: 0;
   border: 0;
   border-radius: 16px;
-  background: var(--color-surface, #ffffff);
-  color: var(--color-text, #0b1f4b);
+  background: var(--color-surface, var(--eb-white));
+  color: var(--color-text, var(--eb-navy));
   box-shadow: 0 24px 60px rgb(8 22 51 / 0.3);
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--eb-font);
   text-align: left;
   color-scheme: light;
 }
@@ -56,7 +56,7 @@
 }
 
 .confirm-dialog-text {
-  color: var(--color-muted, #475569);
+  color: var(--color-muted, var(--eb-muted));
   line-height: 1.5;
 }
 
@@ -82,23 +82,23 @@
 .confirm-dialog-name {
   padding: 1px 6px;
   border-radius: 4px;
-  background: var(--color-error-bg, #fef2f2);
-  color: var(--color-error, #b91c1c);
+  background: var(--color-error-bg, var(--eb-error-soft));
+  color: var(--color-error, var(--eb-error));
   font-weight: 700;
   word-break: break-word;
 }
 
 .confirm-dialog-field input {
   padding: 10px 12px;
-  border: 1px solid var(--color-border, #bfdbfe);
+  border: 1px solid var(--color-border, var(--eb-line));
   border-radius: var(--radius-small, 8px);
   font: inherit;
 }
 
 .confirm-dialog-field input:focus-visible {
-  outline: 3px solid var(--color-border, #bfdbfe);
+  outline: 3px solid var(--color-border, var(--eb-line));
   outline-offset: 1px;
-  border-color: var(--color-primary, #1d4ed8);
+  border-color: var(--color-primary, var(--eb-blue));
 }
 
 .confirm-dialog-actions {
@@ -110,13 +110,13 @@
 }
 
 .confirm-dialog .confirm-dialog-danger {
-  border-color: var(--color-error, #b91c1c);
-  background: var(--color-error, #b91c1c);
-  color: #ffffff;
+  border-color: var(--color-error, var(--eb-error));
+  background: var(--color-error, var(--eb-error));
+  color: var(--eb-white);
 }
 
 .confirm-dialog .confirm-dialog-danger:hover:not(:disabled) {
-  background: #991b1b;
+  background: var(--eb-error-dark);
 }
 
 /* Celular: botones a lo ancho, el de borrar arriba (más cerca del pulgar). */

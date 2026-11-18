@@ -4,10 +4,9 @@
 /* Chat de ejemplo de la portada */
 .home-chat {
   overflow: hidden;
-  background: var(--home-bg);
-  border-radius: var(--home-radius);
+  background: var(--eb-white);
+  border-radius: var(--eb-radius-lg);
   color: var(--home-navy);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
 }
 
 .home-chat-header {
@@ -35,14 +34,15 @@
   max-width: 85%;
   padding: 8px 12px;
   background: var(--home-tint);
-  border-radius: 10px;
+  border-radius: 14px 14px 14px 4px;
   font-size: 0.9rem;
 }
 
 .home-chat-bubble-user {
   align-self: flex-end;
   background: var(--home-primary);
-  color: #ffffff;
+  color: var(--eb-white);
+  border-radius: 14px 14px 4px 14px;
 }
 
 /* Chips (opciones del bot y tipos de negocio) */
@@ -54,12 +54,12 @@
 
 .home-chip {
   padding: 4px 12px;
-  border: 1px solid var(--home-primary);
-  border-radius: 999px;
+  border: 1.5px solid var(--home-primary);
+  border-radius: var(--eb-radius-pill);
   color: var(--home-primary);
   font-size: 0.85rem;
   font-weight: 600;
-  background: #ffffff;
+  background: var(--eb-white);
 }
 
 .home-chip-soft {
@@ -75,23 +75,25 @@
 }
 
 .home-section-white {
-  background: #ffffff;
+  background: var(--eb-white);
 }
 
+/* Nombre de la sección, en minúscula normal (no ALL CAPS): orienta sin gritar. */
 .home-eyebrow {
   margin-bottom: 8px;
   color: var(--home-primary);
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 .home-title {
   margin-bottom: 32px;
-  font-size: clamp(1.7rem, 4vw, 2.2rem);
-  line-height: 1.2;
-  font-weight: 700;
+  font-size: clamp(1.8rem, 4.4vw, 2.6rem);
+  line-height: 1.05;
+  font-weight: 800;
+  font-stretch: var(--eb-wide);
+  letter-spacing: -0.015em;
+  text-wrap: balance;
 }
 
 .home-title-narrow {
@@ -101,7 +103,8 @@
 .home-subtitle {
   margin-bottom: 24px;
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 800;
+  font-stretch: var(--eb-semi-wide);
 }
 
 .home-text,
@@ -125,11 +128,11 @@
   gap: 12px;
 }
 
+/* Las preguntas repetidas se ven como mensajes entrantes de un cliente. */
 .home-question {
   padding: 10px 16px;
-  border: 1px solid var(--home-border);
-  border-radius: 8px;
-  background: var(--home-bg);
+  border-radius: 14px 14px 14px 4px;
+  background: var(--eb-sky);
   font-weight: 600;
 }
 
@@ -141,7 +144,7 @@
 
 .home-card {
   padding: 20px;
-  background: #ffffff;
+  background: var(--eb-white);
   border: 1px solid var(--home-border);
   border-radius: var(--home-radius);
 }
@@ -152,8 +155,9 @@
 
 .home-card-title {
   margin: 12px 0 8px;
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 700;
+  font-stretch: var(--eb-semi-wide);
 }
 
 .home-step-number,
@@ -162,10 +166,11 @@
   place-items: center;
   width: 32px;
   height: 32px;
-  border-radius: 999px;
+  border-radius: var(--eb-radius-pill);
   background: var(--home-primary);
-  color: #ffffff;
-  font-weight: 700;
+  color: var(--eb-white);
+  font-weight: 800;
+  font-stretch: var(--eb-wide);
 }
 
 .home-icon-box {

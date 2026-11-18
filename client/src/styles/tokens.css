@@ -1,0 +1,84 @@
+/* Tokens de diseño de EasyBot: la ÚNICA fuente de colores, tipografía y radios.
+   Dirección "Azul afinado": el azul de siempre, títulos anchos (Archivo expandida)
+   y un naranja reservado para lo importante (bot publicado, pedidos nuevos).
+
+   Las variables de cada pantalla (--color-* en .bots-area, --home-* en .home,
+   --chat-* en .chat) apuntan a estas. Para cambiar un color, cambialo acá. */
+
+/* Fuente autoalojada (sale del propio servidor, no de Google): eje de ancho
+   62–125 % y de peso 100–900 en un solo archivo. */
+@import '@fontsource-variable/archivo/wdth.css';
+
+:root {
+  /* Azules */
+  --eb-navy: #0b1f4b;
+  --eb-navy-deep: #081633;
+  --eb-blue: #1d4ed8;
+  --eb-blue-dark: #1e40af;
+  --eb-blue-soft: #dbe5fb;
+
+  /* Superficies y líneas */
+  --eb-white: #ffffff;
+  --eb-canvas: #f5f7fb; /* fondo de las pantallas: gris azulado, no celeste */
+  --eb-sky: #eef2fb; /* globos del bot, zonas destacadas */
+  --eb-line: #d6deee;
+  --eb-line-strong: #b8c5e0;
+
+  /* Texto */
+  --eb-text: #0b1f4b;
+  --eb-muted: #55607a;
+  --eb-on-dark: #b9c6e6; /* texto secundario sobre azul oscuro */
+
+  /* Naranja: solo para lo importante */
+  --eb-sun: #ff8a1f;
+  --eb-sun-soft: #fff1e3;
+  --eb-sun-ink: #a14b00; /* texto naranja legible sobre fondo claro */
+
+  /* Estados */
+  --eb-error: #b91c1c;
+  --eb-error-dark: #991b1b;
+  --eb-error-soft: #fef2f2;
+  --eb-success: #166534;
+  --eb-success-soft: #ecfdf3;
+  --eb-warning-ink: #92400e;
+  --eb-focus: #93c5fd;
+
+  /* Tipografía: una sola familia; los títulos se distinguen por el ancho. */
+  --eb-font: 'Archivo Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --eb-wide: 125%; /* font-stretch de títulos y logo */
+  --eb-semi-wide: 112%; /* títulos chicos (tarjetas) */
+
+  /* Radios: jerarquía, no uno solo para todo */
+  --eb-radius-lg: 16px; /* contenedores grandes: chat, diálogos */
+  --eb-radius: 12px; /* tarjetas */
+  --eb-radius-sm: 8px; /* campos de formulario */
+  --eb-radius-pill: 999px; /* botones, chips, estados */
+
+  --eb-shadow-pop: 0 16px 40px rgb(11 31 75 / 0.14); /* solo lo que flota: menús, diálogos */
+}
+
+/* Logo: ícono (favicon) + "EasyBot" en Archivo ancha. Lo usan la barra de la app,
+   el inicio, login/registro y la página legal. */
+.brand-mark {
+  flex-shrink: 0;
+  display: block;
+}
+
+.app-bar-brand,
+.auth-brand,
+.legal-brand,
+.mobile-menu-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-stretch: var(--eb-wide);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+/* Títulos anchos: el rasgo tipográfico de la marca. */
+.eb-wide {
+  font-stretch: var(--eb-wide);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}

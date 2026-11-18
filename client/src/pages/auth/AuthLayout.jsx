@@ -10,6 +10,7 @@ export default function AuthLayout({ title, subtitle, children, footer }) {
     <main className="bots-area auth-page">
       <header className="auth-bar">
         <Link to="/" className="auth-brand">
+          <img src="/favicon.svg" alt="" width="28" height="28" className="brand-mark" />
           EasyBot
         </Link>
         <Link to="/" className="auth-back">

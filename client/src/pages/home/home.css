@@ -1,22 +1,22 @@
 /* Home: variables, base, botones, barra superior y portada.
    Todo empieza con "home-" y las variables viven en .home para no pisar
-   estilos de otras pantallas. Los colores son los mismos de pages/bots/theme.css. */
+   estilos de otras pantallas. Los valores salen de styles/tokens.css. */
 
 .home {
-  --home-navy: #0b1f4b;
-  --home-navy-dark: #081633;
-  --home-primary: #1d4ed8;
-  --home-bg: #f3f8ff;
-  --home-tint: #dbeafe;
-  --home-border: #bfdbfe;
-  --home-muted: #475569;
-  --home-on-dark: #c7d7f5;
-  --home-radius: 12px;
+  --home-navy: var(--eb-navy);
+  --home-navy-dark: var(--eb-navy-deep);
+  --home-primary: var(--eb-blue);
+  --home-bg: var(--eb-canvas);
+  --home-tint: var(--eb-sky);
+  --home-border: var(--eb-line);
+  --home-muted: var(--eb-muted);
+  --home-on-dark: var(--eb-on-dark);
+  --home-radius: var(--eb-radius);
 
   min-height: 100svh;
   background: var(--home-bg);
   color: var(--home-navy);
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--eb-font);
   line-height: 1.5;
   text-align: left;
   color-scheme: light;
@@ -63,33 +63,34 @@
   align-items: center;
   gap: 8px;
   padding: 12px 22px;
-  border: 1px solid transparent;
-  border-radius: 8px;
+  border: 1.5px solid transparent;
+  border-radius: var(--eb-radius-pill);
   font: inherit;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
+  transition: background-color 120ms ease;
 }
 
 .home-btn:focus-visible,
 .home-nav a:focus-visible {
-  outline: 3px solid var(--home-border);
+  outline: 3px solid var(--eb-focus);
   outline-offset: 2px;
 }
 
 .home-btn-light {
-  background: #ffffff;
+  background: var(--eb-white);
   color: var(--home-navy);
 }
 
 .home-btn-light:hover {
-  background: var(--home-tint);
+  background: var(--eb-blue-soft);
 }
 
 .home-btn-outline {
   background: transparent;
-  color: #ffffff;
-  border-color: var(--home-border);
+  color: var(--eb-white);
+  border-color: rgb(255 255 255 / 0.45);
 }
 
 .home-btn-outline:hover {
@@ -124,8 +125,13 @@
 }
 
 .home-logo {
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
   font-size: 1.25rem;
+  font-stretch: var(--eb-wide);
+  letter-spacing: -0.01em;
 }
 
 .home-nav {
@@ -163,15 +169,19 @@
   display: inline-block;
   margin-bottom: 20px;
   padding: 4px 12px;
-  border: 1px solid var(--home-border);
+  border: 1px solid rgb(255 255 255 / 0.35);
   border-radius: 999px;
   font-size: 0.8rem;
 }
 
+/* El título de la portada es lo memorable: Archivo a todo lo ancho, grande y apretado. */
 .home-hero-title {
-  font-size: clamp(2.2rem, 6vw, 3.4rem);
-  line-height: 1.15;
-  font-weight: 700;
+  font-size: clamp(2.4rem, 7vw, 3.6rem);
+  line-height: 0.98;
+  font-weight: 800;
+  font-stretch: var(--eb-wide);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
 }
 
 .home-hero-text {

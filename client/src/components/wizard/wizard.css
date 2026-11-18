@@ -30,7 +30,7 @@
 
 .stepper-current .stepper-number {
   background: var(--color-primary);
-  color: #ffffff;
+  color: var(--eb-white);
 }
 
 .stepper-done .stepper-number {

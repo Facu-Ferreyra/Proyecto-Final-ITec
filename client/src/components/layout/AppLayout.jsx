@@ -30,6 +30,7 @@ export default function AppLayout() {
     <div className="app-shell">
       <header className="app-bar">
         <NavLink to="/bots" className="app-bar-brand">
+          <img src="/favicon.svg" alt="" width="28" height="28" className="brand-mark" />
           EasyBot
         </NavLink>
         {/* Escritorio: links y usuario en la barra. */}

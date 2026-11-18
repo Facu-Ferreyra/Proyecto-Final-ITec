@@ -11,7 +11,7 @@
 
 .my-bots-header h1 {
   margin: 0;
-  font-size: 2rem;
+  font-size: clamp(1.9rem, 5vw, 2.4rem);
 }
 
 /* Grilla: 1 columna en celular, las que entren en pantallas más grandes.
@@ -22,7 +22,8 @@
   gap: 20px;
 }
 
-/* Tarjeta: franja de color arriba (azul si está publicado, gris si es borrador). */
+/* Tarjeta: franja a la izquierda. Naranja = publicado (está atendiendo clientes);
+   gris = borrador. Es el único lugar fijo de la pantalla donde aparece el naranja. */
 .bot-card {
   display: flex;
   flex-direction: column;
@@ -30,23 +31,12 @@
   padding: 20px;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-top: 4px solid var(--color-badge-draft);
+  border-left: 5px solid var(--color-badge-draft);
   border-radius: var(--radius);
-  transition: box-shadow 0.15s ease, transform 0.15s ease;
 }
 
 .bot-card-published {
-  border-top-color: var(--color-primary);
-}
-
-.bot-card:hover {
-  box-shadow: 0 8px 24px rgba(11, 31, 75, 0.08);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .bot-card:hover {
-    transform: translateY(-2px);
-  }
+  border-left-color: var(--eb-sun);
 }
 
 .bot-card-header {
@@ -116,8 +106,8 @@
 }
 
 .status-published {
-  background: var(--color-success-bg);
-  color: var(--color-success);
+  background: var(--eb-sun-soft);
+  color: var(--eb-sun-ink);
 }
 
 .status-draft {
@@ -132,7 +122,7 @@
 }
 
 .bots-area .bot-card-warning {
-  color: #92400e;
+  color: var(--eb-warning-ink);
 }
 
 .bots-area .bot-card-ready {
@@ -160,7 +150,7 @@
   gap: 8px;
   margin-top: auto;
   padding-top: 12px;
-  border-top: 1px solid var(--color-bg);
+  border-top: 1px solid var(--color-border);
 }
 
 /* Eliminar: ícono de tacho, discreto y separado a la derecha, para no tocarlo por error. */
@@ -187,7 +177,7 @@
 }
 
 .bot-card-delete:focus-visible {
-  outline: 3px solid var(--color-border);
+  outline: 3px solid var(--eb-focus);
   outline-offset: 2px;
 }
 

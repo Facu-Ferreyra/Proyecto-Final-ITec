@@ -4,10 +4,11 @@
    Los estilos de cada pantalla van en su propio archivo .css. */
 
   :root {
-    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    /* Colores y fuente: styles/tokens.css */
+    font-family: var(--eb-font);
     line-height: 1.5;
-    color: #0b1f4b; /* azul oscuro del prototipo */
-    background: #f3f8ff; /* celeste muy claro del prototipo */
+    color: var(--eb-text);
+    background: var(--eb-canvas);
     color-scheme: light; /* el prototipo es claro, aunque el sistema esté en modo oscuro */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

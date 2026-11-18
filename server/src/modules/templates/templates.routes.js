@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { requireAuth, requireRole } from '../../middlewares/auth.js';
+import { logAdminAction } from '../../utils/auditLog.js';
 import * as service from './templates.service.js';
 import { createTemplateSchema, templateIdParams, updateTemplateSchema } from './templates.schemas.js';
 
@@ -26,17 +27,29 @@ adminTemplatesRouter.get('/', async (req, res) => {
 
 adminTemplatesRouter.post('/', async (req, res) => {
   const data = createTemplateSchema.parse(req.body);
-  res.status(201).json(await service.createTemplate(data));
+  const template = await service.createTemplate(data);
+  logAdminAction({ adminId: req.user.id, action: 'template.create', targetType: 'template', targetId: template.id, details: { key: data.key } });
+  res.status(201).json(template);
 });
 
 adminTemplatesRouter.put('/:id', async (req, res) => {
   const { id } = templateIdParams.parse(req.params);
   const data = updateTemplateSchema.parse(req.body);
-  res.json(await service.updateTemplate(id, data));
+  const template = await service.updateTemplate(id, data);
+  // Se anotan qué campos cambiaron (y el estado), no la config entera.
+  logAdminAction({
+    adminId: req.user.id,
+    action: 'template.update',
+    targetType: 'template',
+    targetId: id,
+    details: { fields: Object.keys(data), isActive: data.isActive },
+  });
+  res.json(template);
 });
 
 adminTemplatesRouter.delete('/:id', async (req, res) => {
   const { id } = templateIdParams.parse(req.params);
   await service.deleteTemplate(id);
+  logAdminAction({ adminId: req.user.id, action: 'template.delete', targetType: 'template', targetId: id });
   res.status(204).end();
 });

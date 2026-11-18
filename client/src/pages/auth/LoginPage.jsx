@@ -31,6 +31,15 @@ export default function LoginPage() {
       }
     >
       <form className="auth-form" onSubmit={form.handleSubmit} noValidate>
+        {/* 401: llegó acá desde una página privada sin sesión (ProtectedRoute guarda
+            a dónde iba en state.from). Después de entrar, vuelve a esa página. */}
+        {location.state?.from && !form.formError && (
+          <p className="notice auth-notice" role="status">
+            {location.state.reason === 'session-ended'
+              ? 'Tu sesión terminó: venció o se cerró desde otro lado. Iniciá sesión de nuevo y te llevamos a donde estabas.'
+              : 'Iniciá sesión para ver esa página. Después de entrar te llevamos de vuelta.'}
+          </p>
+        )}
         {form.formError && (
           <p className="notice notice-error" role="alert">
             {form.formError}

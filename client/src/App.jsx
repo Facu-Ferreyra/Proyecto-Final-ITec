@@ -12,12 +12,14 @@ import { Route, Routes, useNavigate, useParams } from 'react-router-dom'
 import ProtectedRoute from './components/common/ProtectedRoute.jsx'
 import RoleRoute from './components/common/RoleRoute.jsx'
 import AppLayout from './components/layout/AppLayout.jsx'
-import PlaceholderPage from './components/layout/PlaceholderPage.jsx'
 import AdminPage from './pages/admin/AdminPage.jsx'
 import LoginPage from './pages/auth/LoginPage.jsx'
 import RegisterPage from './pages/auth/RegisterPage.jsx'
+import ForgotPasswordPage from './pages/auth/ForgotPasswordPage.jsx'
+import ResetPasswordPage from './pages/auth/ResetPasswordPage.jsx'
 import BotWizardPage from './pages/bots/BotWizardPage.jsx'
 import MyBotsPage from './pages/bots/MyBotsPage.jsx'
+import NotFoundPage from './pages/errors/NotFoundPage.jsx'
 import HomePage from './pages/home/HomePage.jsx'
 import PrivacyPage from './pages/legal/PrivacyPage.jsx'
 import PanelPage from './pages/panel/PanelPage.jsx'
@@ -61,6 +63,8 @@ export default function App() {
       <Route path="/" element={<HomeRoute />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/chat/:slug" element={<PublicChatRoute />} />
       <Route path="/privacidad" element={<PrivacyPage />} />
 
@@ -79,7 +83,7 @@ export default function App() {
         </Route>
       </Route>
 
-      <Route path="*" element={<PlaceholderPage title="Página no encontrada" text="El link que seguiste no existe o cambió." />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   )
 }

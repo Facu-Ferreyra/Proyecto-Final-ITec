@@ -1,29 +1,6 @@
-// Portada: título principal, botones y un chat de ejemplo (solo ilustrativo).
+// Portada: título principal, botones y un chat de ejemplo animado (ExampleChat).
 
-const EXAMPLE_OPTIONS = ['Horarios', 'Precios', 'Ubicación', 'Sacar un turno']
-
-function ExampleChat() {
-  return (
-    <figure className="home-chat" aria-label="Ejemplo de conversación con el bot de Peluquería Lola">
-      <div className="home-chat-header">
-        <strong>Peluquería Lola</strong>
-        <span>Respuestas automáticas</span>
-      </div>
-      <div className="home-chat-body">
-        <p className="home-chat-bubble">¡Hola! Soy el asistente de Peluquería Lola. ¿En qué te puedo ayudar?</p>
-        <ul className="home-chip-list" aria-label="Opciones del bot">
-          {EXAMPLE_OPTIONS.map((option) => (
-            <li key={option} className="home-chip">
-              {option}
-            </li>
-          ))}
-        </ul>
-        <p className="home-chat-bubble home-chat-bubble-user">Horarios</p>
-        <p className="home-chat-bubble">Atendemos de martes a sábado de 9 a 19 h.</p>
-      </div>
-    </figure>
-  )
-}
+import ExampleChat from './ExampleChat.jsx'
 
 export default function HeroSection({ onRegister }) {
   return (

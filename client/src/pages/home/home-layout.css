@@ -117,8 +117,7 @@
 
 /* Tablet */
 @media (min-width: 640px) {
-  .home-steps,
-  .home-benefits {
+  .home-steps {
     grid-template-columns: repeat(2, 1fr);
   }
 }

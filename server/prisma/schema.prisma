@@ -33,18 +33,37 @@ enum LeadType {
 }
 
 model User {
-  id           String   @id @default(cuid())
-  email        String   @unique
-  passwordHash String   @map("password_hash")
-  name         String
-  role         Role     @default(USER)
-  isActive     Boolean  @default(true) @map("is_active")
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @updatedAt @map("updated_at")
+  id                String    @id @default(cuid())
+  email             String    @unique
+  passwordHash      String    @map("password_hash")
+  name              String
+  role              Role      @default(USER)
+  isActive          Boolean   @default(true) @map("is_active")
+  // Cuándo se cambió la contraseña por última vez: las sesiones iniciadas antes dejan de valer.
+  passwordChangedAt DateTime? @map("password_changed_at")
+  createdAt         DateTime  @default(now()) @map("created_at")
+  updatedAt         DateTime  @updatedAt @map("updated_at")
 
-  bots Bot[]
+  bots                Bot[]
+  passwordResetTokens PasswordResetToken[]
 
   @@map("users")
+}
+
+// Pedidos de "Olvidé mi contraseña" (guía de OWASP Forgot Password):
+// el token del link se guarda con hash (SHA-256), vence y se usa una sola vez.
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String    @map("user_id")
+  tokenHash String    @unique @map("token_hash")
+  expiresAt DateTime  @map("expires_at")
+  usedAt    DateTime? @map("used_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("password_reset_tokens")
 }
 
 model Template {

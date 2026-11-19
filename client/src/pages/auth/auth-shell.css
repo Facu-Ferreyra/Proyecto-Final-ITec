@@ -1,0 +1,15 @@
+/* Contenedor de las pantallas de login y registro: el contenido ocupa el alto
+   disponible y el pie de página (SiteFooter) queda siempre abajo, a todo el ancho. */
+
+.auth-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  background: var(--eb-navy);
+}
+
+/* .bots-area (theme.css) ocupa toda la pantalla: acá solo el espacio que deja el pie. */
+.auth-shell > .auth-page {
+  flex: 1;
+  min-height: 0;
+}

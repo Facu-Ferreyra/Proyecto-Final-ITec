@@ -136,6 +136,14 @@ describe('permisos con base de datos', { skip: SKIP_WITHOUT_DB }, () => {
     assert.equal(fromDb.role, 'USER');
   });
 
+  it('400: un solo admin, ni siquiera el ADMIN puede nombrar a otro', async () => {
+    const res = await api.patch(`/api/admin/users/${owner.id}`).set('Cookie', cookie.admin).send({ role: 'ADMIN' });
+    assert.equal(res.status, 400);
+    assert.equal(res.body.error.code, 'VALIDATION_ERROR');
+    const fromDb = await prisma.user.findUnique({ where: { id: owner.id } });
+    assert.equal(fromDb.role, 'USER');
+  });
+
   it('el ADMIN sí entra (el 403 es por el rol, no por otra cosa)', async () => {
     const res = await call('get', '/api/admin/users', cookie.admin);
     assert.equal(res.status, 200);

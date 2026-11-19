@@ -27,10 +27,8 @@
 .home-label {
   margin-top: 6px;
   color: var(--home-navy);
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 .home-template-panel {
@@ -70,8 +68,18 @@
   gap: 8px;
 }
 
+.home-footer-link {
+  color: var(--eb-white);
+  text-underline-offset: 2px;
+}
+
+.home-footer-link:focus-visible {
+  outline: 3px solid var(--eb-focus);
+  outline-offset: 2px;
+}
+
 .home-footer .home-logo {
-  color: #ffffff;
+  color: var(--eb-white);
   font-size: 1rem;
 }
 
@@ -90,12 +98,26 @@
   .home-header .home-icon {
     display: none;
   }
+
+  /* En celular chico "Iniciar sesión" queda dentro del menú lateral. */
+  .home-header .home-header-login {
+    display: none;
+  }
+}
+
+/* Hamburguesa: se ve mientras los links de secciones están ocultos (< 960px). */
+.home-header .home-menu-toggle {
+  margin-right: -8px;
+  color: var(--eb-white);
+}
+
+.home-header .home-menu-toggle:hover {
+  background: rgb(255 255 255 / 0.1);
 }
 
 /* Tablet */
 @media (min-width: 640px) {
-  .home-steps,
-  .home-benefits {
+  .home-steps {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -108,6 +130,10 @@
 
   .home-nav {
     display: flex;
+  }
+
+  .home-header .home-menu-toggle {
+    display: none;
   }
 
   .home-hero {

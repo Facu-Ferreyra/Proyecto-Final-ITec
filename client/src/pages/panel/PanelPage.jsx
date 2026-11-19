@@ -13,6 +13,7 @@ import ConversationsTab from './ConversationsTab.jsx'
 import LeadsTab from './LeadsTab.jsx'
 import { LEAD_TYPES, leadTypesFor } from './leadInfo.js'
 import './panel.css'
+import { ListSkeleton } from '../../components/common/Skeleton.jsx'
 
 export default function PanelPage({ onCreateBot }) {
   const selectId = useId()
@@ -52,7 +53,7 @@ export default function PanelPage({ onCreateBot }) {
         )}
       </header>
 
-      {status === 'loading' && <PageState title="Cargando tus bots…" />}
+      {status === 'loading' && <ListSkeleton label="Cargando tus bots…" />}
       {status === 'error' && (
         <PageState isError title="No pudimos cargar tus bots" text={error?.message} actionLabel="Reintentar" onAction={retry} />
       )}

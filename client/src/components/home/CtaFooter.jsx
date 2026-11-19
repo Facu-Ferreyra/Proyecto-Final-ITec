@@ -1,5 +1,7 @@
 // Llamado final a crear la cuenta y pie de página.
 
+import { Link } from 'react-router-dom'
+
 export default function CtaFooter({ onLogin, onRegister }) {
   return (
     <>
@@ -24,6 +26,9 @@ export default function CtaFooter({ onLogin, onRegister }) {
         <div className="home-container home-footer-inner">
           <span className="home-logo">EasyBot</span>
           <p>Proyecto Integrador Final · Programación Web con IA aplicada · IntegrarTEC 2026</p>
+          <Link to="/privacidad" className="home-footer-link">
+            Política de privacidad
+          </Link>
         </div>
       </footer>
     </>

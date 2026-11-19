@@ -2,14 +2,39 @@
 // No incluye la barra superior ni las rutas (están en App.jsx y AppLayout): quien la
 // monte en su ruta le pasa onCreate y onEdit para navegar al asistente.
 
+import emptyBotsArt from '../../assets/illustrations/empty-bots.svg'
+import ConfirmDialog from '../../components/common/ConfirmDialog.jsx'
 import BotCard from './BotCard.jsx'
 import PageState from './PageState.jsx'
 import { useMyBots } from './useMyBots.js'
 import './theme.css'
 import './MyBotsPage.css'
+import { BotCardsSkeleton } from '../../components/common/Skeleton.jsx'
+
+const plural = (count, one, many) => `${count} ${count === 1 ? one : many}`
+
+// Qué se pierde al eliminar: si el bot tiene actividad, se dice cuánta.
+function DeleteBotWarning({ bot }) {
+  const { conversations = 0, leads = 0 } = bot?.stats ?? {}
+  const hasActivity = conversations > 0 || leads > 0
+  return (
+    <>
+      <p>
+        {hasActivity
+          ? `Se borran también sus ${plural(conversations, 'conversación', 'conversaciones')} y ${plural(leads, 'registro', 'registros')}.`
+          : 'Se borran también sus conversaciones y registros.'}
+        {bot?.status === 'PUBLISHED' && ' El link público deja de funcionar.'}
+      </p>
+      <p>
+        <strong>Esta acción no se puede deshacer.</strong>
+      </p>
+    </>
+  )
+}
 
 export default function MyBotsPage({ onCreate, onEdit }) {
-  const { bots, status, loadError, retry, busyId, notice, remove, publish, unpublish } = useMyBots()
+  const { bots, status, loadError, retry, busyId, notice, remove, pendingDelete, confirmDelete, cancelDelete, publish, unpublish } =
+    useMyBots()
 
   return (
     <main className="bots-area">
@@ -22,7 +47,7 @@ export default function MyBotsPage({ onCreate, onEdit }) {
         )}
       </header>
 
-      {status === 'loading' && <PageState title="Cargando tus bots…" />}
+      {status === 'loading' && <BotCardsSkeleton />}
 
       {status === 'error' && (
         <PageState
@@ -36,6 +61,7 @@ export default function MyBotsPage({ onCreate, onEdit }) {
 
       {status === 'ready' && bots.length === 0 && (
         <PageState
+          illustration={emptyBotsArt}
           title="Todavía no creaste ningún bot"
           text="Elegí una plantilla, cargá los datos de tu negocio y publicá el link."
           actionLabel="Crear mi primer bot"
@@ -64,6 +90,17 @@ export default function MyBotsPage({ onCreate, onEdit }) {
           ))}
         </div>
       )}
+
+      <ConfirmDialog
+        open={Boolean(pendingDelete)}
+        title={`¿Eliminar "${pendingDelete?.name}"?`}
+        confirmLabel="Eliminar bot"
+        requireText={pendingDelete?.name}
+        onConfirm={confirmDelete}
+        onCancel={cancelDelete}
+      >
+        <DeleteBotWarning bot={pendingDelete} />
+      </ConfirmDialog>
     </main>
   )
 }

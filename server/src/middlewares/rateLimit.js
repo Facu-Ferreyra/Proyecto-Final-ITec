@@ -40,6 +40,25 @@ export const registerLimiter = rateLimit({
   handler: tooManyRequests('Se crearon demasiadas cuentas desde esta conexión. Probá de nuevo más tarde.'),
 });
 
+// Pedir el link de "Olvidé mi contraseña": 5 por hora por IP. Evita que alguien use
+// el formulario para llenarle el correo de mails a otra persona.
+export const forgotPasswordLimiter = rateLimit({
+  ...baseOptions,
+  windowMs: 60 * MINUTE,
+  limit: 5,
+  handler: tooManyRequests('Pediste demasiados links. Esperá una hora y probá de nuevo.'),
+});
+
+// Usar el link: 10 intentos FALLIDOS cada 15 minutos por IP (frena a quien prueba
+// tokens al azar). Los cambios que salen bien no cuentan.
+export const resetPasswordLimiter = rateLimit({
+  ...baseOptions,
+  windowMs: 15 * MINUTE,
+  limit: 10,
+  skipSuccessfulRequests: true,
+  handler: tooManyRequests('Demasiados intentos. Esperá 15 minutos y pedí un link nuevo.'),
+});
+
 // Resto de la API: 300 pedidos por minuto por IP. Es generoso a propósito
 // (el chat y el panel hacen varios pedidos seguidos), solo corta abusos.
 export const apiLimiter = rateLimit({

@@ -1,0 +1,138 @@
+/* Páginas de error (ErrorPage.jsx), con el estilo de devff.tech/404 y los colores y
+   la fuente de EasyBot (styles/tokens.css). No dependen de .bots-area. */
+
+.error-page {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-height: 100svh;
+  background: var(--eb-canvas);
+  color: var(--eb-navy);
+  font-family: var(--eb-font);
+  text-align: left;
+}
+
+/* Adentro de la barra de la app (ej.: 403): no ocupa toda la pantalla. */
+.error-page-embedded {
+  min-height: calc(100svh - 70px);
+}
+
+/* Barra superior, como la del sitio. */
+.error-page-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px;
+  background: var(--eb-white);
+  border-bottom: 1px solid var(--eb-line);
+}
+
+.error-page-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--eb-navy);
+  font-size: 1.2rem;
+  font-weight: 800;
+  font-stretch: var(--eb-wide);
+  text-decoration: none;
+}
+
+.error-page-bar-link {
+  padding: 8px 18px;
+  border-radius: var(--eb-radius-pill);
+  background: var(--eb-navy);
+  color: var(--eb-white);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Contenido: centrado en el alto disponible, alineado a la izquierda. */
+.error-page-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+  box-sizing: border-box;
+}
+
+/* Número enorme, en itálica y fino, en el azul de la marca. */
+.error-page-code {
+  margin: 0 0 8px;
+  color: var(--eb-blue);
+  font-size: clamp(72px, 14vw, 150px);
+  font-style: italic;
+  font-weight: 200;
+  line-height: 1;
+}
+
+/* Título grande y fino. */
+.error-page-title {
+  margin: 0 0 20px;
+  color: var(--eb-navy);
+  font-size: clamp(2.2rem, 6.5vw, 4.6rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.error-page-text {
+  max-width: 36rem;
+  margin: 0 0 36px;
+  color: var(--eb-muted);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.error-page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* Botón principal oscuro y secundario con borde, como en el ejemplo. */
+.error-page-btn {
+  padding: 14px 28px;
+  border: 1px solid var(--eb-navy);
+  border-radius: var(--eb-radius-pill);
+  background: var(--eb-navy);
+  color: var(--eb-white);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.error-page-btn:hover {
+  background: var(--eb-navy-deep);
+}
+
+.error-page-btn-ghost {
+  border-color: var(--eb-line-strong);
+  background: transparent;
+  color: var(--eb-navy);
+}
+
+.error-page-btn-ghost:hover {
+  background: var(--eb-white);
+}
+
+.error-page-btn:focus-visible,
+.error-page-brand:focus-visible,
+.error-page-bar-link:focus-visible {
+  outline: 3px solid var(--eb-focus);
+  outline-offset: 2px;
+}
+
+@media (min-width: 768px) {
+  .error-page-bar {
+    padding: 18px 48px;
+  }
+
+  .error-page-main {
+    padding: 64px 48px 96px;
+  }
+}

@@ -9,9 +9,9 @@
   box-sizing: border-box;
   min-height: 100svh;
   padding: 16px;
-  background: #f3f8ff;
-  color: #0b1f4b;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: var(--eb-sky);
+  color: var(--eb-navy);
+  font-family: var(--eb-font);
   color-scheme: light;
 }
 
@@ -29,8 +29,13 @@
 
 .public-chat-footer {
   margin: 0;
-  color: #475569;
+  color: var(--eb-muted);
   font-size: 0.8rem;
+}
+
+.public-chat-footer a {
+  color: inherit;
+  text-underline-offset: 2px;
 }
 
 .public-chat-missing {
@@ -38,8 +43,8 @@
   margin: auto;
   padding: 32px 24px;
   text-align: center;
-  background: #ffffff;
-  border: 1px solid #bfdbfe;
+  background: var(--eb-white);
+  border: 1px solid var(--eb-line);
   border-radius: 12px;
 }
 
@@ -50,7 +55,7 @@
 
 .public-chat-missing p {
   margin: 0;
-  color: #475569;
+  color: var(--eb-muted);
 }
 
 @media (min-width: 768px) {

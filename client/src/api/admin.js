@@ -31,7 +31,8 @@ export async function listUsers() {
   return data.items
 }
 
-// changes = { role } y/o { isActive }. 403 CANNOT_MODIFY_SELF si es la propia cuenta.
+// changes = { isActive } (o { role: 'USER' }). 403 CANNOT_MODIFY_SELF si es la propia cuenta.
+// Hay un solo admin: { role: 'ADMIN' } responde 400 VALIDATION_ERROR.
 export async function updateUser(id, changes) {
   const data = await request(`/admin/users/${id}`, { method: 'PATCH', body: changes })
   return data.user

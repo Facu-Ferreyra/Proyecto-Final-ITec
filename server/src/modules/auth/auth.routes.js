@@ -1,8 +1,9 @@
 import { Router } from 'express';
 import { clearSessionCookie, requireAuth, setSessionCookie } from '../../middlewares/auth.js';
-import { loginLimiter, registerLimiter } from '../../middlewares/rateLimit.js';
+import { forgotPasswordLimiter, loginLimiter, registerLimiter, resetPasswordLimiter } from '../../middlewares/rateLimit.js';
 import * as service from './auth.service.js';
-import { loginSchema, registerSchema } from './auth.schemas.js';
+import { forgotPasswordSchema, loginSchema, registerSchema, resetPasswordSchema } from './auth.schemas.js';
+import { requestPasswordReset, resetPassword } from './passwordReset.service.js';
 
 // /api/auth — registro, login, logout y sesión actual (Brandon).
 // Todas las respuestas con usuario tienen la forma { user: { id, email, name, role, createdAt } }.
@@ -34,6 +35,21 @@ authRouter.post('/login', loginLimiter, async (req, res) => {
 // y así el frontend puede llamarlo siempre (por ejemplo con la sesión ya vencida).
 authRouter.post('/logout', (req, res) => {
   clearSessionCookie(res);
+  res.status(204).end();
+});
+
+// "Olvidé mi contraseña": SIEMPRE responde lo mismo, exista o no el email
+// (no revela qué emails están registrados). Si existe, le llega un link por mail.
+authRouter.post('/forgot-password', forgotPasswordLimiter, async (req, res) => {
+  const { email } = forgotPasswordSchema.parse(req.body);
+  await requestPasswordReset(email);
+  res.json({ message: 'Si ese email está registrado, te enviamos un link para elegir una contraseña nueva.' });
+});
+
+// "Nueva contraseña": con el token del link. No inicia sesión: después se entra con la contraseña nueva.
+authRouter.post('/reset-password', resetPasswordLimiter, async (req, res) => {
+  const data = resetPasswordSchema.parse(req.body);
+  await resetPassword(data);
   res.status(204).end();
 });
 

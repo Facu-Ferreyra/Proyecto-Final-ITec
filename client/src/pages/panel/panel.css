@@ -47,7 +47,7 @@
 
 .lead-status-in_progress {
   background: #fef3c7;
-  color: #92400e;
+  color: var(--eb-warning-ink);
 }
 
 .lead-details {

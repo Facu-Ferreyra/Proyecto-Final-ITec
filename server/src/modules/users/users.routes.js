@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { requireAuth, requireRole } from '../../middlewares/auth.js';
+import { logAdminAction } from '../../utils/auditLog.js';
 import * as service from './users.service.js';
 import { updateUserSchema, userIdParams } from './users.schemas.js';
 
@@ -15,5 +16,7 @@ adminUsersRouter.get('/', async (req, res) => {
 adminUsersRouter.patch('/:id', async (req, res) => {
   const { id } = userIdParams.parse(req.params);
   const data = updateUserSchema.parse(req.body);
-  res.json({ user: await service.updateUser(req.user.id, id, data) });
+  const user = await service.updateUser(req.user.id, id, data);
+  logAdminAction({ adminId: req.user.id, action: 'user.update', targetType: 'user', targetId: id, details: data });
+  res.json({ user });
 });

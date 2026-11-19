@@ -1,4 +1,5 @@
-/* Barra superior de las pantallas privadas (Brandon). Mismos colores que theme.css. */
+/* Barra superior de las pantallas privadas (Brandon). Mismos colores que theme.css.
+   El menú del usuario (círculo + desplegable) tiene sus estilos en user-menu.css. */
 
 .app-bar {
   display: flex;
@@ -6,9 +7,9 @@
   align-items: center;
   gap: 8px 24px;
   padding: 12px 16px;
-  background: #ffffff;
-  border-bottom: 1px solid #bfdbfe;
-  color: #0b1f4b;
+  background: var(--eb-white);
+  border-bottom: 1px solid var(--eb-line);
+  color: var(--eb-navy);
 }
 
 .app-bar a {
@@ -34,12 +35,12 @@
 }
 
 .app-bar-nav a:hover {
-  background: #f3f8ff;
+  background: var(--eb-sky);
 }
 
 .app-bar-nav a.active {
-  background: #dbeafe;
-  color: #1d4ed8;
+  background: var(--eb-blue-soft);
+  color: var(--eb-blue);
 }
 
 .app-bar-user {
@@ -50,36 +51,31 @@
   min-width: 0;
 }
 
-.app-bar-user span {
-  overflow: hidden;
-  max-width: 160px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: #475569;
+/* Celular: solo logo + hamburguesa; los links y el usuario van en el menú lateral. */
+.app-bar-menu-toggle {
+  margin-left: auto;
+  margin-right: -8px;
 }
 
-.app-bar-logout {
-  padding: 6px 14px;
-  border: 1px solid #1d4ed8;
-  border-radius: 8px;
-  background: #ffffff;
-  color: #1d4ed8;
-  font: inherit;
-  font-weight: 600;
-  cursor: pointer;
-}
+@media (max-width: 767px) {
+  .app-bar {
+    flex-wrap: nowrap;
+    min-height: 60px;
+    padding-block: 8px;
+  }
 
-.app-bar-logout:hover:not(:disabled) {
-  background: #f3f8ff;
-}
-
-.app-bar-logout:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+  .app-bar-nav,
+  .app-bar-user {
+    display: none;
+  }
 }
 
 @media (min-width: 768px) {
   .app-bar {
     padding: 12px 48px;
+  }
+
+  .app-bar .app-bar-menu-toggle {
+    display: none;
   }
 }

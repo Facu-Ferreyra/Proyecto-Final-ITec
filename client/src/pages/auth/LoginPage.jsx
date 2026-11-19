@@ -6,6 +6,7 @@ import AuthField from './AuthField.jsx'
 import AuthLayout from './AuthLayout.jsx'
 import { loginSchema } from './authSchemas.js'
 import { useAuthForm } from './useAuthForm.js'
+import './password-reset.css'
 
 export default function LoginPage() {
   const { isAuthenticated, login } = useAuth()
@@ -30,6 +31,15 @@ export default function LoginPage() {
       }
     >
       <form className="auth-form" onSubmit={form.handleSubmit} noValidate>
+        {/* 401: llegó acá desde una página privada sin sesión (ProtectedRoute guarda
+            a dónde iba en state.from). Después de entrar, vuelve a esa página. */}
+        {location.state?.from && !form.formError && (
+          <p className="notice auth-notice" role="status">
+            {location.state.reason === 'session-ended'
+              ? 'Tu sesión terminó: venció o se cerró desde otro lado. Iniciá sesión de nuevo y te llevamos a donde estabas.'
+              : 'Iniciá sesión para ver esa página. Después de entrar te llevamos de vuelta.'}
+          </p>
+        )}
         {form.formError && (
           <p className="notice notice-error" role="alert">
             {form.formError}
@@ -67,6 +77,9 @@ export default function LoginPage() {
           onChange={form.setField}
           error={form.fieldErrors.password}
         />
+        <p className="auth-forgot">
+          <Link to="/forgot-password">¿Olvidaste tu contraseña?</Link>
+        </p>
         <button type="submit" className="btn btn-primary btn-block" disabled={form.submitting}>
           {form.submitting ? 'Entrando…' : 'Entrar'}
         </button>

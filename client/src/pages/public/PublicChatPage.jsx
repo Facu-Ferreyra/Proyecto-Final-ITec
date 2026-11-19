@@ -48,7 +48,12 @@ export default function PublicChatPage({ slug }) {
       ) : (
         <ChatWindow {...chat} subtitle="Respuestas automáticas" className="chat-full" headingLevel="h1" />
       )}
-      <p className="public-chat-footer">Hecho con EasyBot</p>
+      <p className="public-chat-footer">
+        Hecho con EasyBot ·{' '}
+        <a href="/privacidad" target="_blank" rel="noopener">
+          Privacidad
+        </a>
+      </p>
     </main>
   )
 }

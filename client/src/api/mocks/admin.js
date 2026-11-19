@@ -44,6 +44,12 @@ function handleUser(id, body) {
   if (id === 'demo') return fail(403, 'CANNOT_MODIFY_SELF', 'No podés cambiar tu propio rol ni desactivar tu propia cuenta')
   const user = users.find((u) => u.id === id)
   if (!user) return fail(404, 'USER_NOT_FOUND', 'El usuario no existe')
+  // Igual que el backend: un solo administrador, nadie puede ser nombrado ADMIN.
+  if (body?.role && body.role !== 'USER') {
+    return fail(400, 'VALIDATION_ERROR', 'Hay datos inválidos en el pedido', [
+      { path: 'role', message: 'Solo puede haber un administrador: no se puede nombrar a otro' },
+    ])
+  }
   if (body?.role) user.role = body.role
   if (typeof body?.isActive === 'boolean') user.isActive = body.isActive
   return ok({ user: toAdminUser(user) })

@@ -7,6 +7,7 @@ import { useApiData } from '../../components/common/useApiData.js'
 import '../../components/chat/chat.css'
 import PageState from '../bots/PageState.jsx'
 import { LEAD_TYPES } from './leadInfo.js'
+import { ChatSkeleton } from '../../components/common/Skeleton.jsx'
 
 const BUBBLE = { BOT: 'chat-bubble-bot', VISITOR: 'chat-bubble-visitor' }
 
@@ -23,7 +24,7 @@ export default function ConversationDetail({ conversationId, onBack }) {
         ← Volver a la lista
       </button>
 
-      {status === 'loading' && <PageState title="Cargando la conversación…" />}
+      {status === 'loading' && <ChatSkeleton label="Cargando la conversación…" />}
       {status === 'error' && (
         <PageState isError title="No pudimos cargar la conversación" text={error?.message} actionLabel="Reintentar" onAction={retry} />
       )}

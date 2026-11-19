@@ -82,6 +82,14 @@ export default function RegisterPage() {
         <button type="submit" className="btn btn-primary btn-block" disabled={form.submitting}>
           {form.submitting ? 'Creando cuenta…' : 'Crear cuenta'}
         </button>
+        <p className="auth-hint auth-legal">
+          Al crear tu cuenta aceptás la{' '}
+          {/* En otra pestaña: así no se pierde lo que ya se escribió en el formulario. */}
+          <Link to="/privacidad" target="_blank" rel="noopener">
+            política de privacidad
+          </Link>
+          .
+        </p>
       </form>
     </AuthLayout>
   )

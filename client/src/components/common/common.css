@@ -52,11 +52,11 @@
 
 .tab[aria-pressed='true'] {
   background: var(--color-primary);
-  color: #ffffff;
+  color: var(--eb-white);
 }
 
 .tab:focus-visible {
-  outline: 3px solid var(--color-border);
+  outline: 3px solid var(--eb-focus);
   outline-offset: 2px;
 }
 

@@ -6,6 +6,7 @@
 
 import { useId, useState } from 'react'
 import FieldWrapper from './FieldWrapper.jsx'
+import TimeSelect from './TimeSelect.jsx'
 import { DAYS, EMPTY_BLOCK, hoursToText, OPENING_TIMES, textToHours, to12h } from './fieldPresets.js'
 
 const MAX_BLOCKS = 4
@@ -50,14 +51,20 @@ export default function HoursField({ field, value = '', error, onChange }) {
           <div className="hours-field">
             {blocks.map((block, index) => (
               <div key={index} className="hours-row">
-                <span>De</span>
-                <Select label={`Desde el día, horario ${index + 1}`} value={block.from} options={DAYS} onChange={(v) => change(index, 'from', v)} />
-                <span>a</span>
-                <Select label={`Hasta el día, horario ${index + 1}`} value={block.to} options={DAYS} onChange={(v) => change(index, 'to', v)} />
-                <span>de</span>
-                <Select label={`Abre, horario ${index + 1}`} value={block.open} options={OPENING_TIMES} format={to12h} onChange={(v) => change(index, 'open', v)} />
-                <span>a</span>
-                <Select label={`Cierra, horario ${index + 1}`} value={block.close} options={OPENING_TIMES} format={to12h} onChange={(v) => change(index, 'close', v)} />
+                {/* Cada grupo corta de línea entero: "De [día] a [día]" / "de [hora] a [hora]". */}
+                <span className="hours-group">
+                  <span>De</span>
+                  <Select label={`Desde el día, horario ${index + 1}`} value={block.from} options={DAYS} onChange={(v) => change(index, 'from', v)} />
+                  <span>a</span>
+                  <Select label={`Hasta el día, horario ${index + 1}`} value={block.to} options={DAYS} onChange={(v) => change(index, 'to', v)} />
+                </span>
+                <span className="hours-group">
+                  <span>de</span>
+                  {/* Horas: selector propio con lista corta (48 opciones no entran en un <select> nativo). */}
+                  <TimeSelect label={`Abre, horario ${index + 1}`} value={block.open} options={OPENING_TIMES} format={to12h} onChange={(v) => change(index, 'open', v)} />
+                  <span>a</span>
+                  <TimeSelect label={`Cierra, horario ${index + 1}`} value={block.close} options={OPENING_TIMES} format={to12h} onChange={(v) => change(index, 'close', v)} />
+                </span>
                 {index > 0 && (
                   <button
                     type="button"

@@ -58,3 +58,18 @@ export function mockRegister({ name, email }) {
 export function mockLogout() {
   write(sessionStorage, SESSION_KEY, null)
 }
+
+// Recuperar contraseña simulado: no hay mail, el link de prueba se muestra en la
+// consola del navegador. Responde lo mismo exista o no el email (como el backend).
+const MOCK_RESET_TOKEN = 'token-de-prueba-easybot-0000000000000'
+
+export function mockForgotPassword({ email }) {
+  if (findAccount(email)) console.info(`[mock] Link para restablecer: /reset-password?token=${MOCK_RESET_TOKEN}`)
+  return 'Si ese email está registrado, te enviamos un link para elegir una contraseña nueva.'
+}
+
+export function mockResetPassword({ token }) {
+  if (token !== MOCK_RESET_TOKEN) {
+    throw new ApiError(400, 'INVALID_RESET_TOKEN', 'El link no es válido o ya venció. Pedí uno nuevo.')
+  }
+}

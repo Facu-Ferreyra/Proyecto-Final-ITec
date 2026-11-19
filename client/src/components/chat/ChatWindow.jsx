@@ -3,11 +3,14 @@
 // (se puede pasar con {...chat}) más un título y un subtítulo.
 
 import { useEffect, useRef } from 'react'
+import BotAvatar from '../common/BotAvatar.jsx'
 import ChatInput from './ChatInput.jsx'
 import './chat.css'
+import { Bone, ChatSkeleton } from '../common/Skeleton.jsx'
 
 export default function ChatWindow({
   title,
+  avatarName,
   subtitle,
   className = '',
   headingLevel = 'h2', // 'h1' cuando el chat es toda la página (chat público)
@@ -33,13 +36,29 @@ export default function ChatWindow({
   return (
     <section className={`chat ${className}`} aria-label={title || 'Chat'}>
       <header className="chat-header">
-        <Heading className="chat-title">{title || 'Chat'}</Heading>
-        {subtitle && <p className="chat-subtitle">{subtitle}</p>}
+        {/* El logo del bot (iniciales) le da identidad al chat de cada negocio.
+            avatarName: si el título no es el nombre del bot (ej. "Vista previa"). */}
+        {(avatarName ?? title) && <BotAvatar name={avatarName ?? title} size={40} />}
+        {/* Mientras carga el chat público todavía no hay nombre: silueta en vez de "Chat". */}
+        {!title && status === 'loading' ? (
+          <div className="chat-header-text sk-row" aria-hidden="true">
+            <Bone w={40} h={40} r={11} className="sk-on-dark" />
+            <span className="sk-stack" style={{ gap: 8 }}>
+              <Bone w={150} h={16} className="sk-on-dark" />
+              <Bone w={110} h={11} className="sk-on-dark" />
+            </span>
+          </div>
+        ) : (
+          <div className="chat-header-text">
+            <Heading className="chat-title">{title || 'Chat'}</Heading>
+            {subtitle && <p className="chat-subtitle">{subtitle}</p>}
+          </div>
+        )}
       </header>
 
       {/* aria-live: el lector de pantalla anuncia los mensajes nuevos. */}
       <div ref={bodyRef} className="chat-body" aria-live="polite">
-        {status === 'loading' && <p className="chat-status">Cargando…</p>}
+        {status === 'loading' && <ChatSkeleton />}
 
         {status === 'failed' && (
           <div className="chat-status chat-error" role="alert">
@@ -57,7 +76,15 @@ export default function ChatWindow({
           </p>
         ))}
 
-        {busy && <p className="chat-status">Escribiendo…</p>}
+        {/* Tres puntos, como en cualquier chat; el texto queda para lectores de pantalla. */}
+        {busy && (
+          <p className="chat-typing">
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+            <span className="visually-hidden">Escribiendo…</span>
+          </p>
+        )}
 
         {status === 'ready' && error && (
           <p className="chat-status chat-error" role="alert">

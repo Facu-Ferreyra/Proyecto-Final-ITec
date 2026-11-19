@@ -58,11 +58,17 @@ export function useMyBots() {
     }
   }
 
-  function remove(bot) {
-    const confirmed = window.confirm(
-      `¿Eliminar "${bot.name}"? También se borran sus conversaciones y contactos. No se puede deshacer.`,
-    )
-    if (!confirmed) return
+  // Eliminar va en dos pasos: remove() abre el diálogo de confirmación (MyBotsPage
+  // lo muestra mientras haya un pendingDelete) y confirmDelete() borra de verdad.
+  const [pendingDelete, setPendingDelete] = useState(null)
+
+  const remove = (bot) => setPendingDelete(bot)
+  const cancelDelete = () => setPendingDelete(null)
+
+  function confirmDelete() {
+    const bot = pendingDelete
+    if (!bot) return
+    setPendingDelete(null)
     return runAction(
       bot,
       async () => {
@@ -88,5 +94,5 @@ export function useMyBots() {
     )
   }
 
-  return { bots, status, loadError, retry, busyId, notice, remove, publish, unpublish }
+  return { bots, status, loadError, retry, busyId, notice, remove, pendingDelete, confirmDelete, cancelDelete, publish, unpublish }
 }

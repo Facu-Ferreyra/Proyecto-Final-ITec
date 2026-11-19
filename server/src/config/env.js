@@ -19,6 +19,10 @@ export const env = {
   // de aplicación". Opcionales: sin ellas, en desarrollo el mail se muestra en la terminal.
   GMAIL_USER: process.env.GMAIL_USER,
   GMAIL_APP_PASSWORD: process.env.GMAIL_APP_PASSWORD,
+  // En Render se usa Brevo (API HTTPS) porque el plan gratuito bloquea SMTP.
+  // MAIL_FROM tiene que ser un remitente verificado en Brevo.
+  BREVO_API_KEY: process.env.BREVO_API_KEY,
+  MAIL_FROM: process.env.MAIL_FROM,
 };
 
 export const isProduction = env.NODE_ENV === 'production';

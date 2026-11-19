@@ -1,0 +1,275 @@
+/* Campos con opciones predefinidas: horarios de atención, formas de pago y
+   horarios de los turnos. Variables de pages/bots/theme.css (.bots-area). */
+
+.field-hint {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+/* Horarios de atención: "De [día] a [día] de [hora] a [hora]" */
+.hours-field,
+.payment-field,
+.hours-legacy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.hours-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.hours-row span {
+  color: var(--color-muted);
+}
+
+.hours-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Celular: cada grupo ocupa una línea entera y los dos selectores se reparten el ancho. */
+@media (max-width: 559px) {
+  .hours-row {
+    width: 100%;
+  }
+
+  .hours-group {
+    display: grid;
+    grid-template-columns: 2ch minmax(0, 1fr) auto minmax(0, 1fr);
+    width: 100%;
+  }
+
+  .hours-group select,
+  .hours-group .time-select-button {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+.hours-row select,
+.time-select-button {
+  padding: 8px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+}
+
+/* Precio: "$" a la izquierda del número. */
+.price-input {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.price-input span {
+  color: var(--color-muted);
+  font-weight: 600;
+}
+
+.price-input input {
+  min-width: 0;
+}
+
+/* Precios (preguntas frecuentes): producto + precio en una fila. */
+.price-row {
+  display: grid;
+  grid-template-columns: 1fr minmax(120px, 180px) 5.5rem;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.price-row input:not([type='number']) {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  font: inherit;
+}
+
+/* Celular: el nombre arriba y el precio (y "Quitar") abajo. */
+@media (max-width: 479px) {
+  .price-row {
+    grid-template-columns: 1fr auto;
+  }
+
+  .price-row > input {
+    grid-column: 1 / -1;
+  }
+}
+
+.prices-legacy {
+  white-space: pre-line;
+}
+
+/* "Otras formas de pago" va dentro del campo: sin el marco de un campo aparte. */
+.payment-field .field {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+/* Selector de hora (TimeSelect.jsx): botón + lista corta con scroll propio. */
+.time-select {
+  position: relative;
+}
+
+.time-select-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 118px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.time-select-button svg {
+  flex-shrink: 0;
+  color: var(--color-muted);
+  transition: transform 150ms ease;
+}
+
+.time-select-button[aria-expanded='true'] {
+  border-color: var(--color-primary);
+}
+
+.time-select-button[aria-expanded='true'] svg {
+  transform: rotate(180deg);
+}
+
+.time-select-button:focus-visible,
+.time-select-list:focus-visible {
+  outline: 3px solid var(--eb-focus);
+  outline-offset: 2px;
+}
+
+/* .hours-row span pinta de gris los conectores ("de", "a"); el valor elegido no. */
+.hours-row .time-select-button > span {
+  color: var(--color-text);
+}
+
+.hours-row .time-select-button > .time-select-placeholder,
+.time-select-option.time-select-placeholder {
+  color: var(--color-muted);
+}
+
+.time-select-list {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 100%;
+  max-height: 248px; /* ~6 opciones: igual que LIST_HEIGHT en TimeSelect.jsx */
+  margin: 0;
+  padding: 4px;
+  overflow-y: auto;
+  overscroll-behavior: contain; /* el scroll de la lista no arrastra la página */
+  box-sizing: border-box;
+  list-style: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  background: var(--color-surface);
+  box-shadow: 0 12px 28px rgb(11 31 75 / 0.16);
+}
+
+.time-select-list-up {
+  top: auto;
+  bottom: calc(100% + 4px);
+  transform-origin: bottom left;
+}
+
+/* La lista "sale" del botón que la abre (no aparece de la nada). */
+.time-select-list {
+  transform-origin: top left;
+  transition:
+    opacity 150ms var(--eb-ease-out),
+    transform 150ms var(--eb-ease-out);
+}
+
+@starting-style {
+  .time-select-list {
+    opacity: 0;
+    transform: scale(0.97) translateY(-2px);
+  }
+
+  .time-select-list-up {
+    transform: scale(0.97) translateY(2px);
+  }
+}
+
+.time-select-option {
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: var(--color-text);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.time-select-option-active {
+  background: var(--color-bg);
+}
+
+.time-select-option[aria-selected='true'] {
+  background: var(--color-primary);
+  color: var(--eb-white);
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .time-select-button svg {
+    transition: none;
+  }
+}
+
+/* Horarios de los turnos: botones que se marcan al tocarlos. */
+.time-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.time-slot {
+  position: relative;
+  padding: 6px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+/* La casilla queda invisible pero sigue funcionando con teclado y lector de pantalla. */
+.time-slot input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.time-slot-checked {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--eb-white);
+}
+
+.time-slot:has(input:focus-visible) {
+  outline: 3px solid var(--eb-focus);
+  outline-offset: 2px;
+}
+
+.time-slot:has(input:disabled) {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

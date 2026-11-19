@@ -1,0 +1,200 @@
+/* Estilos de "Mis bots" (prototipo, pantalla 4). */
+
+.my-bots-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.my-bots-header h1 {
+  margin: 0;
+  font-size: clamp(1.9rem, 5vw, 2.4rem);
+}
+
+/* Grilla: 1 columna en celular, las que entren en pantallas más grandes.
+   Las tarjetas de una misma fila tienen el mismo alto. */
+.bot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* Tarjeta: franja a la izquierda. Naranja = publicado (está atendiendo clientes);
+   gris = borrador. Es el único lugar fijo de la pantalla donde aparece el naranja. */
+.bot-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 5px solid var(--color-badge-draft);
+  border-radius: var(--radius);
+}
+
+.bot-card-published {
+  border-left-color: var(--eb-sun);
+}
+
+/* Hover solo con mouse: en celular el hover queda "pegado" después de tocar. */
+@media (hover: hover) and (pointer: fine) {
+  .bot-card {
+    transition: border-color 150ms ease;
+  }
+
+  .bot-card:hover {
+    border-top-color: var(--eb-line-strong);
+    border-right-color: var(--eb-line-strong);
+    border-bottom-color: var(--eb-line-strong);
+  }
+}
+
+.bot-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.bot-card-icon {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--color-badge-published);
+  color: var(--color-primary);
+}
+
+.bot-card-draft .bot-card-icon {
+  background: var(--color-bg);
+  color: var(--color-muted);
+}
+
+.bot-card-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.bot-card-heading {
+  flex: 1;
+  min-width: 0;
+}
+
+.bot-card-title {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: 1.15rem;
+}
+
+.bot-card-template {
+  margin: 2px 0 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+/* Estado: punto de color + texto, debajo del nombre y la plantilla. */
+.status-badge {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  margin-top: 8px;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status-badge::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.status-published {
+  background: var(--eb-sun-soft);
+  color: var(--eb-sun-ink);
+}
+
+.status-draft {
+  background: var(--color-badge-draft);
+  color: var(--color-muted);
+}
+
+.bots-area .bot-card-summary {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.bots-area .bot-card-warning {
+  color: var(--eb-warning-ink);
+}
+
+.bots-area .bot-card-ready {
+  color: var(--color-success);
+}
+
+.bot-card-link {
+  align-self: flex-start;
+  color: var(--color-primary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.bot-card-link:hover,
+.bot-card-link:focus-visible {
+  text-decoration: underline;
+}
+
+/* Acciones abajo de todo y en una sola fila, a la misma altura en todas las tarjetas. */
+.bot-card-actions {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
+}
+
+/* Eliminar: ícono de tacho, discreto y separado a la derecha, para no tocarlo por error. */
+.bot-card-delete {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  margin-left: auto;
+  padding: 7px;
+  border: none;
+  border-radius: var(--radius-small);
+  background: transparent;
+  color: var(--color-error);
+  cursor: pointer;
+}
+
+.bot-card-delete svg {
+  width: 20px;
+  height: 20px;
+}
+
+.bot-card-delete:hover:not(:disabled) {
+  background: var(--color-error-bg);
+}
+
+.bot-card-delete:focus-visible {
+  outline: 3px solid var(--eb-focus);
+  outline-offset: 2px;
+}
+
+.bot-card-delete:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

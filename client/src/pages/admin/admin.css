@@ -1,0 +1,50 @@
+/* Administración. Reutiliza encabezado, listas y pestañas de components/common/common.css. */
+
+.admin-description {
+  margin: 8px 0 0;
+}
+
+/* Usuarios: búsqueda + filtro de estado. */
+.users-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.users-search {
+  flex: 1 1 260px;
+}
+
+.users-search input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 9px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.users-search input:focus-visible {
+  outline: 3px solid var(--eb-focus);
+  outline-offset: 1px;
+}
+
+.bots-area .users-results {
+  margin: 0 0 12px;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+/* Botón de acción que borra o desactiva algo: borde y texto en rojo. */
+.bots-area .btn-danger {
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+.bots-area .btn-danger:hover:not(:disabled) {
+  background: var(--color-error-bg);
+}

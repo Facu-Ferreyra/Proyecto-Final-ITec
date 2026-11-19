@@ -1,0 +1,52 @@
+/* Pie de página común (SiteFooter.jsx): mismos colores que el de la home.
+   Va siempre abajo de todo: las páginas que lo usan son columnas flex de alto completo. */
+
+.site-footer {
+  width: 100%;
+  margin-top: auto;
+  padding: 20px 24px;
+  box-sizing: border-box;
+  background: var(--eb-navy-deep);
+  color: var(--eb-on-dark);
+  font-family: var(--eb-font);
+  font-size: 0.85rem;
+}
+
+.site-footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.site-footer-inner p {
+  margin: 0;
+}
+
+.site-footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--eb-white);
+  font-weight: 700;
+  font-stretch: var(--eb-wide);
+}
+
+.site-footer-link {
+  color: var(--eb-white);
+  text-underline-offset: 2px;
+}
+
+.site-footer-link:focus-visible {
+  outline: 3px solid var(--eb-focus);
+  outline-offset: 2px;
+}
+
+@media (min-width: 768px) {
+  .site-footer {
+    padding: 22px 48px;
+  }
+}

@@ -1,82 +1,207 @@
 /* Tokens de diseño de EasyBot: la ÚNICA fuente de colores, tipografía y radios.
-   Dirección "Azul afinado": el azul de siempre, títulos anchos (Archivo expandida)
-   y un naranja reservado para lo importante (bot publicado, pedidos nuevos).
+   Dirección "Cartel de vidriera", versión sobria: los carteles de cartulina que se
+   pegan en la vidriera del comercio, impresos en arena y azul tinta. Fondo arena,
+   tinta casi negra, el azul tinta para la acción y lo seleccionado, y el verde
+   solo para "publicado".
+
+   Reglas del mundo:
+   - Una sola acción principal por pantalla: el cartel azul tinta.
+   - El estado no depende solo del color: publicado = borde firme verde y relleno
+     suave; borrador = borde punteado y sin relleno.
+   - En las pantallas de trabajo (panel, asistente, admin) lo seleccionado o activo
+     se marca con el azul suave y borde azul tinta.
+
+   Movimiento (tres gestos, nada de fundidos genéricos):
+   - Colgar: un cartel que aparece oscila desde la cinta y se asienta (eb-hang).
+   - Trazar: las líneas de tinta se dibujan de izquierda a derecha (eb-draw).
+   - Girar: los números ruedan hasta su valor, como el contador de turnos.
 
    Las variables de cada pantalla (--color-* en .bots-area, --home-* en .home,
    --chat-* en .chat) apuntan a estas. Para cambiar un color, cambialo acá. */
 
-/* Fuente autoalojada (sale del propio servidor, no de Google): eje de ancho
-   62–125 % y de peso 100–900 en un solo archivo. */
-@import '@fontsource-variable/archivo/wdth.css';
+/* Fuente autoalojada (sale del propio servidor, no de Google).
+   Bricolage Grotesque variable: peso 200–800 y tamaño óptico, así los títulos
+   grandes toman su forma de cartel y el texto chico la de lectura. */
+@import '@fontsource-variable/bricolage-grotesque/opsz.css';
 
 :root {
-  /* Azules */
-  --eb-navy: #0b1f4b;
-  --eb-navy-deep: #081633;
-  --eb-blue: #1d4ed8;
-  --eb-blue-dark: #1e40af;
-  --eb-blue-soft: #dbe5fb;
+  /* Arena, papel y tinta */
+  --eb-glass: #f3f1ec; /* fondo: arena */
+  --eb-paper: #fffefb; /* superficies: formularios, chat, tablas */
+  --eb-ink: #14171f; /* tinta */
+  --eb-ink-soft: #383c47; /* texto secundario fuerte */
+  --eb-muted: #5a5e68; /* texto secundario (6:1 sobre arena) */
+  --eb-line: #dcd7cc;
+  --eb-line-strong: #a7a194;
 
-  /* Superficies y líneas */
-  --eb-white: #ffffff;
-  --eb-canvas: #f5f7fb; /* fondo de las pantallas: gris azulado, no celeste */
-  --eb-sky: #eef2fb; /* globos del bot, zonas destacadas */
-  --eb-line: #d6deee;
-  --eb-line-strong: #b8c5e0;
+  /* Cartulinas impresas */
+  --eb-sand: #e6dcc4; /* el cartel de siempre */
+  --eb-sand-deep: #d8cbab;
+  --eb-sand-wash: #ebe5d8; /* franja de fondo más oscura que el arena del suelo */
+  /* Grano de cartulina: ruido muy suave (7 %) que se repite como textura del fondo. */
+  --eb-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .08 0 0 0 0 .09 0 0 0 0 .12 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --eb-accent: #23408e; /* azul tinta: acción principal y selección */
+  --eb-accent-dark: #192f6b;
+  --eb-accent-soft: #e2e7f3; /* selección suave: fila activa, pestaña, nav */
+  --eb-accent-wash: #f0f2f8; /* hover */
 
-  /* Texto */
-  --eb-text: #0b1f4b;
-  --eb-muted: #55607a;
-  --eb-on-dark: #b9c6e6; /* texto secundario sobre azul oscuro */
+  /* Estados (texto legible sobre papel y arena) */
+  --eb-green: #2f6b45; /* publicado / activo: borde y texto */
+  --eb-green-soft: #dfeae1;
+  --eb-error: #a8261b;
+  --eb-error-dark: #82190f;
+  --eb-error-soft: #f8e8e5;
+  --eb-success: var(--eb-green);
+  --eb-success-soft: var(--eb-green-soft);
+  --eb-warning-ink: #7a4a07;
 
-  /* Naranja: solo para lo importante */
-  --eb-sun: #ff8a1f;
-  --eb-sun-soft: #fff1e3;
-  --eb-sun-ink: #a14b00; /* texto naranja legible sobre fondo claro */
+  /* Anillo de foco: azul tinta con aura suave; sobre fondo oscuro, arena. */
+  --eb-focus: var(--eb-accent);
+  --eb-focus-halo: var(--eb-accent-soft);
 
-  /* Estados */
-  --eb-error: #b91c1c;
-  --eb-error-dark: #991b1b;
-  --eb-error-soft: #fef2f2;
-  --eb-success: #166534;
-  --eb-success-soft: #ecfdf3;
-  --eb-warning-ink: #92400e;
-  /* Anillo de foco: tiene que verse (contraste ≥ 3:1). Sobre azul oscuro, blanco. */
-  --eb-focus: #2563eb;
+  /* Tipografía: una sola familia; los títulos se distinguen por peso y tamaño óptico. */
+  --eb-font: 'Bricolage Grotesque Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --eb-display: var(--eb-font);
+  --eb-display-weight: 720;
 
-  /* Tipografía: una sola familia; los títulos se distinguen por el ancho. */
-  --eb-font: 'Archivo Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --eb-wide: 125%; /* font-stretch de títulos y logo */
-  --eb-semi-wide: 112%; /* títulos chicos (tarjetas) */
+  /* Radios: los carteles son cartulina cortada, casi rectos */
+  --eb-radius-lg: 6px; /* contenedores grandes: chat, diálogos */
+  --eb-radius: 4px; /* carteles y tarjetas */
+  --eb-radius-sm: 4px; /* campos de formulario */
+  --eb-radius-pill: 4px; /* botones y chips: también son carteles */
+  --eb-radius-bubble: 14px; /* globos del chat (la cara del negocio ante el cliente) */
 
-  /* Radios: jerarquía, no uno solo para todo */
-  --eb-radius-lg: 16px; /* contenedores grandes: chat, diálogos */
-  --eb-radius: 12px; /* tarjetas */
-  --eb-radius-sm: 8px; /* campos de formulario */
-  --eb-radius-pill: 999px; /* botones, chips, estados */
+  /* Profundidad: papel apoyado sobre la vidriera (offset + blur suave, nunca bloque duro) */
+  --eb-shadow-paper: 0 1px 0 rgb(20 23 31 / 0.05), 0 10px 22px -12px rgb(20 23 31 / 0.3);
+  --eb-shadow-pop: 0 22px 46px -16px rgb(20 23 31 / 0.34); /* menús, diálogos */
 
-  --eb-shadow-pop: 0 16px 40px rgb(11 31 75 / 0.14); /* solo lo que flota: menús, diálogos */
+  /* Movimiento. Interfaz: curvas fuertes y cortas (≤ 300 ms). Los gestos del
+     mundo (colgar, trazar, girar) duran más porque se miran, no se esperan. */
+  --eb-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --eb-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --eb-ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --eb-ease-pen: cubic-bezier(0.65, 0, 0.35, 1); /* el trazo: arranca y frena como una mano */
+  --eb-press: 160ms;
+  --eb-enter: 220ms;
 
-  /* Movimiento. Curvas fuertes (las de CSS por defecto son flojas) y duraciones
-     cortas: nada de interfaz pasa de 300 ms. */
-  --eb-ease-out: cubic-bezier(0.23, 1, 0.32, 1); /* entradas y respuestas a una acción */
-  --eb-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* algo que se mueve en pantalla */
-  --eb-ease-drawer: cubic-bezier(0.32, 0.72, 0, 1); /* paneles laterales (curva tipo iOS) */
-  --eb-press: 160ms; /* respuesta al presionar */
-  --eb-enter: 220ms; /* algo que aparece */
+  /* ---- Alias de nombres anteriores.
+     Los CSS de cada pantalla todavía usan estos nombres; apuntan a esta paleta. */
+  --eb-yellow: var(--eb-accent-soft); /* antes: resaltador flúo; hoy: selección */
+  --eb-yellow-soft: var(--eb-accent-wash);
+  --eb-pink: var(--eb-sand);
+  --eb-pink-soft: var(--eb-sand);
+  --eb-orange: var(--eb-sand-deep);
+  --eb-orange-soft: var(--eb-sand);
+  --eb-marker: var(--eb-display);
+  --eb-navy: var(--eb-ink);
+  --eb-navy-deep: #0c0e14;
+  --eb-blue: var(--eb-accent);
+  --eb-blue-dark: var(--eb-accent-dark);
+  --eb-blue-soft: var(--eb-accent-soft);
+  --eb-white: var(--eb-paper);
+  --eb-canvas: var(--eb-glass);
+  --eb-sky: var(--eb-paper);
+  --eb-text: var(--eb-ink);
+  --eb-on-dark: #d4d6dc;
+  --eb-sun: var(--eb-green);
+  --eb-sun-soft: var(--eb-green-soft);
+  --eb-sun-ink: var(--eb-green);
+  --eb-wide: normal;
+  --eb-semi-wide: normal;
 }
 
-/* Sobre fondos azul oscuro el anillo de foco azul no se ve: va en blanco. */
+/* Sobre fondo oscuro el anillo de foco va en arena. */
 .home-dark,
 .home-footer,
-.auth-bar,
-.chat-header {
-  --eb-focus: #ffffff;
+.chat-header,
+.eb-on-ink {
+  --eb-focus: var(--eb-sand);
+  --eb-focus-halo: transparent;
+}
+
+/* ---------- Superficies del navegador ----------
+   Lo que el navegador dibuja solo también lleva el mundo: selección en azul
+   suave, cursor de texto en tinta, scrollbar fina, foco visible. */
+::selection {
+  background: var(--eb-accent-soft);
+  color: var(--eb-ink);
+}
+
+:root {
+  caret-color: var(--eb-accent);
+  accent-color: var(--eb-accent);
+  scrollbar-color: var(--eb-line-strong) transparent;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 0.08em;
+  font-optical-sizing: auto;
+  font-variant-numeric: tabular-nums; /* horarios, precios y turnos en columnas fijas */
+}
+
+:focus-visible {
+  outline: 3px solid var(--eb-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px var(--eb-focus-halo);
+}
+
+/* ---------- Cartel ----------
+   La pieza del mundo: cartulina cortada con una tira de cinta arriba.
+   Variantes: .eb-sign--sand (la de siempre), --blue (azul tinta, texto claro),
+   --paper. Las clases --yellow / --pink / --green son nombres viejos. */
+.eb-sign {
+  position: relative;
+  background: var(--eb-paper);
+  color: var(--eb-ink);
+  border-radius: var(--eb-radius);
+  box-shadow: var(--eb-shadow-paper);
+}
+
+.eb-sign--sand,
+.eb-sign--yellow {
+  background: var(--eb-sand);
+}
+
+.eb-sign--blue,
+.eb-sign--pink {
+  background: var(--eb-accent);
+  color: var(--eb-paper);
+}
+
+.eb-sign--green {
+  background: var(--eb-sand-deep);
+}
+
+.eb-sign--ink {
+  background: var(--eb-ink);
+  color: var(--eb-paper);
+}
+
+/* Cinta: una tira translúcida que sostiene el cartel contra la vidriera.
+   Sesgada apenas y con los extremos cortados, como cinta de papel arrancada. */
+.eb-tape::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 70px;
+  height: 20px;
+  translate: -50% 0;
+  rotate: -2deg;
+  background: rgb(255 254 251 / 0.62);
+  border-inline: 1px dashed rgb(20 23 31 / 0.12);
+  box-shadow: 0 1px 2px rgb(20 23 31 / 0.1);
+  pointer-events: none;
+}
+
+/* Títulos de cartel (el nombre de clase viene de la versión con fibrón). */
+.eb-marker {
+  font-family: var(--eb-display);
+  font-weight: var(--eb-display-weight);
+  letter-spacing: -0.025em;
+  line-height: 1.02;
 }
 
 /* ---------- Respuesta al presionar ----------
-   Todo lo que se toca se achica apenas (0.97) mientras se presiona: confirma que
-   la interfaz escuchó. Solo transform (no mueve el layout, lo hace la GPU). */
+   Todo lo que se toca se achica apenas (0.97) mientras se presiona. */
 .btn,
 .home-btn,
 .chat-option,
@@ -94,7 +219,8 @@
     transform var(--eb-press) var(--eb-ease-out),
     background-color 150ms ease,
     border-color 150ms ease,
-    color 150ms ease;
+    color 150ms ease,
+    box-shadow 150ms ease;
 }
 
 :is(
@@ -114,14 +240,13 @@
   transform: scale(0.97);
 }
 
-/* ---------- Spinner de carga ----------
-   Rápido a propósito: un spinner que gira rápido hace que la espera se sienta más corta. */
+/* ---------- Spinner de carga ---------- */
 .eb-spinner {
   display: inline-block;
   width: 28px;
   height: 28px;
-  border: 3px solid var(--eb-blue-soft);
-  border-top-color: var(--eb-blue);
+  border: 3px solid var(--eb-line);
+  border-top-color: var(--eb-ink);
   border-radius: 50%;
   animation: eb-spin 700ms linear infinite;
 }
@@ -132,8 +257,65 @@
   }
 }
 
-/* Menos movimiento: sin desplazamientos ni escalas; el spinner gira más lento
-   (sigue indicando que algo pasa, sin marear). */
+/* ---------- Los tres gestos del mundo ---------- */
+
+/* Colgar: el cartel queda colgado de la cinta, oscila como un péndulo que pierde
+   fuerza y se asienta derecho. Gira desde arriba (donde está la cinta). Arranca
+   visible: si la animación no corre, el cartel igual está. */
+/* Cada tramo lleva su propia curva (seno de ida y vuelta): el cartel frena en los
+   extremos y va más rápido al pasar por el centro, como un péndulo de verdad.
+   Por eso no importa qué curva le pase quien la use. */
+@keyframes eb-hang {
+  0% {
+    rotate: -4.5deg;
+    animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
+  }
+  28% {
+    rotate: 3deg;
+    animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
+  }
+  50% {
+    rotate: -1.6deg;
+    animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
+  }
+  70% {
+    rotate: 0.7deg;
+    animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
+  }
+  86% {
+    rotate: -0.25deg;
+    animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
+  }
+  100% {
+    rotate: 0deg;
+  }
+}
+
+.eb-hang {
+  transform-origin: 50% 0;
+}
+
+/* Trazar: una línea de tinta que se dibuja de izquierda a derecha. */
+@keyframes eb-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Escribir: el texto aparece de izquierda a derecha, como si se fuera escribiendo
+   (recorte, no fundido). */
+@keyframes eb-write {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   :is(
       .btn,
@@ -157,7 +339,7 @@
   }
 }
 
-/* Logo: ícono (favicon) + "EasyBot" en Archivo ancha. Lo usan la barra de la app,
+/* Logo: sello (favicon) + "EasyBot" en la letra de los títulos. Lo usan la barra de la app,
    el inicio, login/registro y la página legal. */
 .brand-mark {
   flex-shrink: 0;
@@ -171,14 +353,77 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-stretch: var(--eb-wide);
-  font-weight: 800;
-  letter-spacing: -0.01em;
+  font-family: var(--eb-display);
+  font-weight: 760;
+  letter-spacing: -0.02em;
 }
 
-/* Títulos anchos: el rasgo tipográfico de la marca. */
+/* Clase heredada de versiones anteriores: hoy es la letra de títulos. */
 .eb-wide {
-  font-stretch: var(--eb-wide);
-  font-weight: 800;
-  letter-spacing: -0.01em;
+  font-family: var(--eb-display);
+  font-weight: var(--eb-display-weight);
+  letter-spacing: -0.02em;
+}
+
+/* ---------- Pestañas de navegador (barras de la portada y de la app) ----------
+   Como en Opera: el link sobre el que está el mouse se dibuja como una pestaña,
+   con la parte de arriba redondeada, sin borde abajo y con dos "pies" curvos que
+   la unen a la línea de la barra. Cada barra define sus colores con variables:
+   --tab-fill (relleno), --tab-line (borde), --tab-bw (grosor del borde de la barra). */
+:is(.home-nav, .app-bar-nav) > a {
+  --tab-fill: transparent;
+  --tab-line: transparent;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: calc(var(--tab-bw) * -1); /* tapa la línea de la barra */
+  padding: 0 16px;
+  border: var(--tab-bw) solid var(--tab-line);
+  border-bottom: 0;
+  border-radius: 10px 10px 0 0;
+  background: var(--tab-fill);
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+/* Los pies: un cuarto de círculo hueco a cada lado, del color de la pestaña,
+   con el mismo borde. Solo se ven cuando la pestaña está dibujada. */
+:is(.home-nav, .app-bar-nav) > a::before,
+:is(.home-nav, .app-bar-nav) > a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 10px;
+  height: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease;
+}
+
+:is(.home-nav, .app-bar-nav) > a::before {
+  left: -10px;
+  background: radial-gradient(
+    circle at 0 0,
+    transparent calc(10px - var(--tab-bw)),
+    var(--tab-line) calc(10px - var(--tab-bw)) 10px,
+    var(--tab-fill) 10px
+  );
+}
+
+:is(.home-nav, .app-bar-nav) > a::after {
+  right: -10px;
+  background: radial-gradient(
+    circle at 100% 0,
+    transparent calc(10px - var(--tab-bw)),
+    var(--tab-line) calc(10px - var(--tab-bw)) 10px,
+    var(--tab-fill) 10px
+  );
+}
+
+:is(.home-nav, .app-bar-nav) > a:is(:hover, .active)::before,
+:is(.home-nav, .app-bar-nav) > a:is(:hover, .active)::after {
+  opacity: 1;
 }

@@ -5,8 +5,8 @@
   --legal-navy: var(--eb-navy);
   --legal-primary: var(--eb-blue);
   --legal-muted: var(--eb-muted);
-  --legal-border: var(--eb-blue-soft);
-  --legal-tint: var(--eb-sky);
+  --legal-border: var(--eb-line);
+  --legal-tint: var(--eb-accent-wash);
 
   min-height: 100svh;
   display: flex;
@@ -72,15 +72,6 @@
   margin-bottom: 28px;
 }
 
-.legal-eyebrow {
-  margin: 0 0 4px;
-  color: var(--legal-primary);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 .legal h1 {
   margin: 0;
   color: var(--legal-navy);
@@ -98,7 +89,7 @@
 .legal-lead {
   margin: 20px 0 0;
   padding: 16px 18px;
-  border-radius: 12px;
+  border-radius: var(--eb-radius);
   background: var(--legal-tint);
   font-size: 1.05rem;
 }
@@ -107,7 +98,7 @@
   margin-bottom: 8px;
   padding: 16px 18px;
   border: 1px solid var(--legal-border);
-  border-radius: 12px;
+  border-radius: var(--eb-radius);
 }
 
 .legal-toc ol {
@@ -164,8 +155,8 @@
 .legal-callout {
   margin-top: 16px;
   padding: 14px 16px;
-  border-left: 4px solid var(--legal-primary);
-  border-radius: 0 10px 10px 0;
+  border: 1.5px solid var(--eb-ink);
+  border-radius: var(--eb-radius);
   background: var(--legal-tint);
 }
 
@@ -173,7 +164,7 @@
 .legal-table-wrap {
   overflow-x: auto;
   border: 1px solid var(--legal-border);
-  border-radius: 12px;
+  border-radius: var(--eb-radius);
 }
 
 .legal-table {

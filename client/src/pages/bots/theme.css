@@ -1,19 +1,22 @@
 /* Base de las pantallas con sesión (bots, asistente, panel, admin) y de login/registro.
+   Mundo "Cartel de vidriera" en modo trabajo: arena, papel y tinta; el azul tinta
+   marca la acción y lo activo. El título de cada pantalla lleva una línea de tinta
+   azul que se traza debajo al entrar.
    Los nombres --color-* se mantienen (los usan todos los CSS de estas pantallas),
    pero los valores salen de styles/tokens.css. */
 
 .bots-area {
-  --color-navy: var(--eb-navy);
-  --color-primary: var(--eb-blue);
-  --color-primary-dark: var(--eb-blue-dark);
-  --color-bg: var(--eb-canvas);
-  --color-surface: var(--eb-white);
+  --color-navy: var(--eb-ink);
+  --color-primary: var(--eb-accent);
+  --color-primary-dark: var(--eb-accent-dark);
+  --color-bg: var(--eb-glass);
+  --color-surface: var(--eb-paper);
   --color-border: var(--eb-line);
-  --color-text: var(--eb-text);
+  --color-text: var(--eb-ink);
   --color-muted: var(--eb-muted);
-  --color-label: var(--eb-navy);
-  --color-badge-published: var(--eb-blue-soft);
-  --color-badge-draft: #e6eaf2;
+  --color-label: var(--eb-ink);
+  --color-badge-published: var(--eb-green-soft);
+  --color-badge-draft: transparent;
   --color-error: var(--eb-error);
   --color-error-bg: var(--eb-error-soft);
   --color-success: var(--eb-success);
@@ -35,22 +38,42 @@
   color-scheme: light; /* el prototipo es claro aunque el sistema esté en modo oscuro */
 }
 
-/* Títulos: h1 ancho (rasgo de la marca), h2/h3 un poco ensanchados. */
+/* Títulos: el h1 de cada página va en la letra de títulos (con su línea); h2 y h3 son
+   letra de interfaz, firme. */
 .bots-area h1,
 .bots-area h2,
 .bots-area h3 {
   color: var(--color-text);
-  font-weight: 700;
-  font-stretch: var(--eb-semi-wide);
-  letter-spacing: normal;
+  font-weight: 800;
+  letter-spacing: -0.005em;
   line-height: 1.25;
 }
 
 .bots-area h1 {
-  font-stretch: var(--eb-wide);
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  line-height: 1.1;
+  position: relative;
+  padding-bottom: 10px;
+  font-family: var(--eb-display);
+  font-weight: var(--eb-display-weight);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+/* La línea bajo el título: corta, azul tinta, trazada de izquierda a derecha. */
+.bots-area h1::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: min(2.4em, 100%);
+  height: 3px;
+  background: var(--eb-accent);
+  transform-origin: 0 50%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .bots-area h1::after {
+    animation: eb-draw 640ms var(--eb-ease-pen) 120ms both;
+  }
 }
 
 .bots-area p {
@@ -63,34 +86,44 @@
   }
 }
 
-/* Botones */
+/* Botones: carteles chicos. Primario = el cartel azul tinta; secundario = borde azul. */
 .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
   padding: 10px 20px;
   border-radius: var(--eb-radius-pill);
-  border: 1.5px solid var(--color-primary);
+  border: 2px solid var(--color-primary);
   font: inherit;
-  font-weight: 600;
+  font-weight: 700;
+  line-height: 1.2;
   cursor: pointer;
   /* transición y respuesta al presionar: styles/tokens.css */
 }
 
 .btn:disabled {
-  opacity: 0.6;
+  opacity: 0.55;
   cursor: not-allowed;
-}
-
-.btn:focus-visible {
-  outline: 3px solid var(--eb-focus);
-  outline-offset: 2px;
 }
 
 .btn-primary {
   background: var(--color-primary);
-  color: #ffffff;
+  color: var(--eb-paper);
+}
+
+/* Al pasar el mouse, el azul más oscuro cubre el cartel de izquierda a derecha. */
+.btn-primary {
+  background: linear-gradient(var(--color-primary-dark), var(--color-primary-dark)) no-repeat 0 0 / 0 100%
+    var(--color-primary);
+  transition:
+    background-size 320ms var(--eb-ease-pen),
+    transform var(--eb-press) var(--eb-ease-out);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: var(--color-primary-dark);
+  background-size: 100% 100%;
 }
 
 .btn-secondary {
@@ -99,10 +132,11 @@
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: var(--eb-sky);
+  background: var(--eb-accent-wash);
 }
 
 .btn-small {
+  min-height: 36px;
   padding: 6px 14px;
   font-size: 0.9rem;
 }
@@ -113,16 +147,16 @@
 
 /* Para que los <a> con clase .btn se vean como botón. */
 a.btn {
-  display: inline-block;
   text-decoration: none;
 }
 
-/* Tarjeta blanca con borde celeste */
+/* Tarjeta: una hoja de papel apoyada en la vidriera. */
 .card {
   padding: 24px;
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--eb-ink);
   border-radius: var(--radius);
+  box-shadow: var(--eb-shadow-paper);
 }
 
 /* Texto solo para lectores de pantalla (no se ve, pero se lee). */
@@ -135,20 +169,24 @@ a.btn {
   white-space: nowrap;
 }
 
-/* Estados de carga, vacío y error (PageState) */
+/* Estados de carga, vacío y error (PageState): un cartel de papel centrado. */
 .page-state {
   max-width: 480px;
   margin: 48px auto;
   padding: 32px 24px;
   text-align: center;
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1.5px dashed var(--eb-ink);
   border-radius: var(--radius);
 }
 
 .page-state-title {
   margin: 0 0 8px;
-  font-size: 1.25rem;
+  font-family: var(--eb-display);
+  font-weight: var(--eb-display-weight);
+  letter-spacing: -0.02em;
+  font-size: 1.6rem;
+  line-height: 1.1;
   text-wrap: balance;
 }
 
@@ -157,11 +195,13 @@ a.btn {
   color: var(--color-muted);
 }
 
-/* Avisos (errores y confirmaciones) */
+/* Avisos (errores y confirmaciones): borde completo + fondo suave, nunca una barra al costado. */
 .notice {
   padding: 12px 16px;
+  border: 1.5px solid currentColor;
   border-radius: var(--radius);
   margin-bottom: 16px;
+  font-weight: 600;
   /* Entra con un leve movimiento: un aviso que aparece de golpe se ve como un error de la página. */
   transition:
     opacity var(--eb-enter) var(--eb-ease-out),
@@ -179,7 +219,7 @@ a.btn {
 .page-state-art {
   display: block;
   width: 100%;
-  max-width: 320px;
+  max-width: 280px;
   height: auto;
   margin: -8px auto 8px;
 }

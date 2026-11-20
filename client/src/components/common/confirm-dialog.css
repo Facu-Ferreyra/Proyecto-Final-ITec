@@ -5,18 +5,18 @@
   width: min(440px, calc(100vw - 32px));
   max-height: calc(100dvh - 32px);
   padding: 0;
-  border: 0;
-  border-radius: 16px;
+  border: 2px solid var(--eb-ink);
+  border-radius: var(--eb-radius-lg);
   background: var(--color-surface, var(--eb-white));
   color: var(--color-text, var(--eb-navy));
-  box-shadow: 0 24px 60px rgb(8 22 51 / 0.3);
+  box-shadow: 0 24px 60px rgb(20 23 31 / 0.3);
   font-family: var(--eb-font);
   text-align: left;
   color-scheme: light;
 }
 
 .confirm-dialog::backdrop {
-  background: rgb(8 22 51 / 0.55);
+  background: rgb(20 23 31 / 0.55);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -91,7 +91,7 @@
 .confirm-dialog-field input {
   padding: 10px 12px;
   border: 1px solid var(--color-border, var(--eb-line));
-  border-radius: var(--radius-small, 8px);
+  border-radius: var(--radius-small, var(--eb-radius-sm));
   font: inherit;
 }
 

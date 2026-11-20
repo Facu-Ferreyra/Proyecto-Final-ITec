@@ -11,11 +11,10 @@ import TemplatesSection from '../../components/home/TemplatesSection.jsx'
 import CtaFooter from '../../components/home/CtaFooter.jsx'
 import './home.css'
 import './home-sections.css'
-import './home-layout.css'
 
 export default function HomePage({ onLogin, onRegister }) {
   return (
-    <div className="home">
+    <div className="home" id="top">
       <HomeHeader onLogin={onLogin} onRegister={onRegister} />
       <main>
         <HeroSection onRegister={onRegister} />

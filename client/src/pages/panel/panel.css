@@ -46,7 +46,7 @@
 }
 
 .lead-status-in_progress {
-  background: #fef3c7;
+  background: var(--eb-accent-wash);
   color: var(--eb-warning-ink);
 }
 

@@ -1,40 +1,63 @@
-// "Cómo funciona": los 4 pasos del asistente de creación de bots.
+// "Cómo funciona": los 4 pasos del asistente, uno por fila de ancho completo.
+// A la derecha de cada paso, un dato concreto de lo que pasa en ese paso.
+//
+// Movimiento (una vez, al entrar en pantalla): el número de cada paso gira hasta
+// su valor como el contador de "su turno", y la línea de tinta debajo de cada
+// fila se traza de izquierda a derecha, una fila después de la otra.
+
+import useSeenOnce from './useSeenOnce.js'
+
+const DIGITS = [0, 1, 2, 3, 4]
 
 const STEPS = [
   {
     title: 'Elegí una plantilla',
-    text: 'Preguntas frecuentes, turnos o pedidos. Ya traen sus preguntas y respuestas listas.',
+    text: 'Preguntas frecuentes, turnos o pedidos. Cada una trae sus preguntas y respuestas armadas.',
+    fact: '3 plantillas',
   },
   {
     title: 'Cargá los datos de tu negocio',
-    text: 'Nombre, horarios, dirección, servicios o catálogo. Un formulario simple, paso a paso.',
+    text: 'Nombre, horarios, dirección, servicios o catálogo, en un formulario guiado.',
+    fact: 'Horarios · precios · catálogo',
   },
   {
-    title: 'Probalo en la vista previa',
-    text: 'Chateá con tu bot antes de publicarlo y mirá cómo lo van a ver tus clientes.',
+    title: 'Probá el bot en la vista previa',
+    text: 'Mientras completás los datos, chateás con tu bot tal como lo van a ver tus clientes.',
+    fact: 'Vista previa en vivo',
   },
   {
     title: 'Publicá y compartí el link',
-    text: 'Compartilo en tus redes sociales o en un mensaje. Ya está atendiendo.',
+    text: 'En tus redes, en un QR o en un mensaje. Desde ese momento el bot atiende.',
+    fact: '/chat/tu-negocio',
   },
 ]
 
 export default function StepsSection() {
+  const [ref, seen] = useSeenOnce(0.25)
   return (
-    <section id="como-funciona" className="home-section" aria-labelledby="home-steps-title">
+    <section id="como-funciona" className="home-section home-steps-section" aria-labelledby="home-steps-title">
       <div className="home-container">
-        <p className="home-eyebrow">Cómo funciona</p>
-        <h2 id="home-steps-title" className="home-title">
-          Cuatro pasos y tu bot ya atiende
-        </h2>
-        <ol className="home-grid home-steps">
+        <div className="home-section-head">
+          <h2 id="home-steps-title" className="home-title eb-marker">
+            Tu bot en 4 pasos
+          </h2>
+          <p className="home-text">Un asistente te pide los datos de a uno. No hace falta saber de tecnología.</p>
+        </div>
+        <ol ref={ref} className="home-steps" data-seen={seen}>
           {STEPS.map((step, index) => (
-            <li key={step.title} className="home-card">
-              <span className="home-step-number" aria-hidden="true">
-                {index + 1}
+            <li key={step.title} className="home-step" style={{ '--i': index }}>
+              <span className="home-step-number eb-sign eb-sign--sand eb-marker" aria-hidden="true">
+                <span className="home-roll" style={{ '--n': index + 1 }}>
+                  {DIGITS.map((digit) => (
+                    <span key={digit}>{digit}</span>
+                  ))}
+                </span>
               </span>
-              <h3 className="home-card-title">{step.title}</h3>
-              <p className="home-card-text">{step.text}</p>
+              <div className="home-step-body">
+                <h3 className="home-step-title">{step.title}</h3>
+                <p className="home-step-text">{step.text}</p>
+              </div>
+              <p className="home-step-fact">{step.fact}</p>
             </li>
           ))}
         </ol>

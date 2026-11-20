@@ -1,567 +1,616 @@
-/* Home: chat de ejemplo, chips, secciones y tarjetas.
-   Base y variables en home.css; plantillas, pie y escritorio en home-layout.css. */
+/* Secciones de la portada: preguntas (vidriera de carteles), 4 pasos, panel,
+   plantillas, cierre y pie. Base y botones: home.css. */
 
-/* Ilustración de la portada: dial de 24 h con conversación alrededor
-   (assets/illustrations/hero-dial.svg). La aguja naranja marca las 22:30:
-   el negocio ya cerró y el bot sigue atendiendo. Es decorativa. */
-.home-hero {
-  overflow: hidden; /* el dial es más grande que su columna: no genera scroll lateral */
-}
-
-.home-hero-copy {
-  position: relative;
-  z-index: 1; /* el texto siempre por encima de la ilustración */
-}
-
-.home-hero-art {
-  position: relative;
-  isolation: isolate;
-}
-
-/* Solo en escritorio: en celular el chat tapa casi todo el dial y lo que asoma
-   en los bordes parece un error. Tamaño tope para que entre entero en la portada. */
-@media (min-width: 960px) {
-  .home-hero-art::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    top: 50%;
-    left: 50%;
-    width: min(150%, 640px);
-    aspect-ratio: 1;
-    transform: translate(-50%, -50%);
-    background: url('../../assets/illustrations/hero-dial.svg') center / contain no-repeat;
-    pointer-events: none;
-  }
-}
-
-/* Chat de ejemplo de la portada */
-.home-chat {
-  overflow: hidden;
-  background: var(--eb-white);
-  border-radius: var(--eb-radius-lg);
-  color: var(--home-navy);
-}
-
-.home-chat-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 16px;
-  background: var(--home-primary);
-  color: var(--eb-white);
-}
-
-.home-chat-header .bot-avatar {
-  box-shadow: 0 0 0 2px rgb(255 255 255 / 0.55);
-}
-
-.home-chat-header-text {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.home-chat-header-text span {
-  font-size: 0.8rem;
-  opacity: 0.85;
-}
-
-/* "Ver de nuevo": aparece al terminar la conversación de ejemplo. */
-.home-chat-replay {
-  margin-left: auto;
-  padding: 4px 12px;
-  border: 1.5px solid rgb(255 255 255 / 0.6);
-  border-radius: var(--eb-radius-pill);
-  background: transparent;
-  color: var(--eb-white);
-  font: inherit;
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition:
-    opacity var(--eb-enter) var(--eb-ease-out),
-    background-color 150ms ease,
-    transform var(--eb-press) var(--eb-ease-out);
-}
-
-@starting-style {
-  .home-chat-replay {
-    opacity: 0;
-  }
-}
-
-.home-chat-replay:hover {
-  background: rgb(255 255 255 / 0.12);
-}
-
-.home-chat-replay:active {
-  transform: scale(0.97);
-}
-
-.home-chat-replay:focus-visible {
-  outline: 3px solid var(--eb-white);
-  outline-offset: 2px;
-}
-
-/* ---- Conversación animada (ExampleChat.jsx) ----
-   Cada mensaje ocupa su lugar desde el principio (el chat no cambia de tamaño) y
-   se hace visible en su turno: sube 6px desde abajo, como un mensaje nuevo. */
-.home-reveal {
-  transition:
-    opacity var(--eb-enter) var(--eb-ease-out),
-    transform var(--eb-enter) var(--eb-ease-out),
-    visibility 0s;
-}
-
-.home-reveal[data-shown='false'] {
-  visibility: hidden;
-  opacity: 0;
-  transform: translateY(6px) scale(0.98);
-  transition: none; /* al reiniciar ("Ver de nuevo") desaparece de golpe, no animado */
-}
-
-.home-chat-bubble.home-reveal {
-  transform-origin: bottom left;
-}
-
-.home-chat-bubble-user.home-reveal {
-  transform-origin: bottom right;
-}
-
-/* La opción que "toca" el cliente se marca como elegida. */
-.home-chip {
-  transition:
-    background-color 200ms ease,
-    color 200ms ease,
-    transform var(--eb-press) var(--eb-ease-out);
-}
-
-.home-chip[data-pressed='true'] {
-  background: var(--home-primary);
-  color: var(--eb-white);
-}
-
-/* Lugar de un mensaje del bot: mientras "escribe", los puntos ocupan su lugar. */
-.home-chat-slot {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-}
-
-.home-typing {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: inline-flex;
-  gap: 5px;
-  padding: 12px 14px;
-  border-radius: 14px 14px 14px 4px;
-  background: var(--home-tint);
-  transition: opacity 150ms var(--eb-ease-out);
-}
-
-@starting-style {
-  .home-typing {
-    opacity: 0;
-  }
-}
-
-.home-typing span {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--home-muted);
-  animation: home-typing 1s ease-in-out infinite;
-}
-
-.home-typing span:nth-child(2) {
-  animation-delay: 150ms;
-}
-
-.home-typing span:nth-child(3) {
-  animation-delay: 300ms;
-}
-
-@keyframes home-typing {
-  0%,
-  60%,
-  100% {
-    opacity: 0.35;
-    transform: translateY(0);
-  }
-
-  30% {
-    opacity: 1;
-    transform: translateY(-3px);
-  }
-}
-
-.home-chat-body {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 16px;
-}
-
-.home-chat-bubble {
-  max-width: 85%;
-  padding: 8px 12px;
-  background: var(--home-tint);
-  border-radius: 14px 14px 14px 4px;
-  font-size: 0.9rem;
-}
-
-.home-chat-bubble-user {
-  align-self: flex-end;
-  background: var(--home-primary);
-  color: var(--eb-white);
-  border-radius: 14px 14px 4px 14px;
-}
-
-/* Chips (opciones del bot y tipos de negocio) */
-.home-chip-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.home-chip {
-  padding: 4px 12px;
-  border: 1.5px solid var(--home-primary);
-  border-radius: var(--eb-radius-pill);
-  color: var(--home-primary);
-  font-size: 0.85rem;
-  font-weight: 600;
-  background: var(--eb-white);
-}
-
-.home-chip-soft {
-  border-color: var(--home-border);
-  background: var(--home-bg);
-  color: var(--home-navy);
-  padding: 8px 16px;
-}
-
-/* Secciones */
 .home-section {
-  padding: 64px 0;
+  padding-block: var(--home-section-y);
 }
 
-.home-section-white {
-  background: var(--eb-white);
-}
-
-/* Nombre de la sección, en minúscula normal (no ALL CAPS): orienta sin gritar. */
-.home-eyebrow {
-  margin-bottom: 8px;
-  color: var(--home-primary);
-  font-size: 0.95rem;
-  font-weight: 700;
+/* Encabezado de sección: título grande y una o dos líneas debajo.
+   Más aire arriba del título que abajo. */
+.home-section-head {
+  display: grid;
+  gap: 16px;
+  max-width: 40rem;
+  margin-bottom: clamp(36px, 5vw, 56px);
 }
 
 .home-title {
-  margin-bottom: 32px;
-  font-size: clamp(1.8rem, 4.4vw, 2.6rem);
-  line-height: 1.05;
-  font-weight: 800;
-  font-stretch: var(--eb-wide);
-  letter-spacing: -0.015em;
+  font-size: clamp(2.1rem, 4.2vw, 3.4rem);
+  line-height: 1.04;
   text-wrap: balance;
 }
 
-.home-title-narrow {
-  max-width: 34rem;
+.home-text {
+  color: var(--eb-ink-soft);
+  font-size: clamp(17px, 1.4vw, 19px);
+  text-wrap: pretty;
 }
 
-.home-subtitle {
-  margin-bottom: 24px;
-  font-size: 1.5rem;
-  font-weight: 800;
-  font-stretch: var(--eb-semi-wide);
+/* ---------- Preguntas: la vidriera ----------
+   Una franja de arena más oscura con los carteles pegados en grilla. */
+.home-problem {
+  background: var(--eb-grain) var(--eb-sand-wash);
+  border-block: 1px solid var(--eb-line);
 }
 
-.home-text,
-.home-card-text {
-  color: var(--home-muted);
-}
-
-.home-two-columns {
+.home-problem-grid {
   display: grid;
-  gap: 32px;
-  align-items: center;
+  gap: 8px;
 }
 
-.home-two-columns .home-title {
-  margin-bottom: 16px;
+/* La vidriera compuesta: el primer cartel ocupa dos columnas y manda; los demás
+   quedan a distintas alturas (desfasajes fijos, no al azar). */
+.home-window {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px 20px;
+  align-items: start;
 }
 
-.home-question-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+.home-window-item {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
 }
 
-/* Las preguntas repetidas se ven como mensajes entrantes de un cliente. */
-.home-question {
-  padding: 10px 16px;
-  border-radius: 14px 14px 14px 4px;
-  background: var(--eb-sky);
+.home-window-lead {
+  grid-column: 1 / -1;
+}
+
+/* La pregunta: el globo del cliente, como en el chat real (azul tinta, punta abajo
+   a la derecha). */
+.home-window-question {
+  justify-self: end;
+  max-width: 92%;
+  padding: 8px 14px;
+  border-radius: var(--eb-radius-bubble) var(--eb-radius-bubble) 4px var(--eb-radius-bubble);
+  background: var(--eb-accent);
+  color: var(--eb-paper);
+  font-size: 15px;
   font-weight: 600;
+  line-height: 1.35;
 }
 
-/* Tarjetas */
-.home-grid {
+/* La respuesta: el cartel colgado debajo. */
+.home-window-answer {
+  width: 100%;
+  margin: 0;
+  padding: 24px 20px 18px;
+  font-size: clamp(22px, 2vw, 28px);
+  line-height: 1.05;
+}
+
+.home-window-lead .home-window-answer {
+  padding: 30px 26px 24px;
+  font-size: clamp(32px, 3.6vw, 48px);
+}
+
+@media (max-width: 559px) {
+  .home-window {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (min-width: 560px) {
+  .home-window-item:nth-child(2) {
+    margin-top: 0;
+  }
+
+  .home-window-item:nth-child(3),
+  .home-window-item:nth-child(5) {
+    margin-top: 28px;
+  }
+
+  .home-window-item:nth-child(4) {
+    margin-top: -6px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-problem-grid {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+    gap: 56px;
+    align-items: start;
+  }
+
+  .home-problem .home-section-head {
+    position: sticky;
+    top: 108px;
+  }
+}
+
+/* ---------- 4 pasos: una fila de ancho completo por paso ---------- */
+.home-steps {
+  border-top: 2px solid var(--eb-ink);
+}
+
+.home-step {
   display: grid;
-  gap: 16px;
-}
-
-.home-card {
-  padding: 20px;
-  background: var(--eb-white);
-  border: 1px solid var(--home-border);
-  border-radius: var(--home-radius);
-}
-
-.home-card-tinted {
-  background: var(--home-bg);
-}
-
-.home-card-title {
-  margin: 12px 0 8px;
-  font-size: 1.1rem;
-  font-weight: 700;
-  font-stretch: var(--eb-semi-wide);
-}
-
-.home-step-number,
-.home-icon-box {
-  display: inline-grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  border-radius: var(--eb-radius-pill);
-  background: var(--home-primary);
-  color: var(--eb-white);
-  font-weight: 800;
-  font-stretch: var(--eb-wide);
-}
-
-.home-icon-box {
-  border-radius: 8px;
-  background: var(--home-tint);
-  color: var(--home-primary);
-}
-
-/* ---------- Beneficios en formato bento (BenefitsSection.jsx) ----------
-   Celular: una columna. Tablet: dos. Escritorio: tres, con el panel ocupando
-   2×2 y el resto alrededor. Cada tarjeta tiene el tamaño que pide su contenido. */
-.bento {
-  display: grid;
-  gap: 16px;
-}
-
-.bento-tile {
-  display: flex;
-  flex-direction: column;
-  padding: 24px;
-  border: 1px solid var(--home-border);
-  border-radius: var(--eb-radius-lg);
-  background: var(--home-bg);
-  overflow: hidden;
-}
-
-.bento-tile .home-card-title {
-  margin-top: 14px;
-}
-
-/* "Respuestas a toda hora": azul noche con el dial de 24 h de la portada. */
-.bento-tile-dark {
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px 20px;
+  align-items: start;
   position: relative;
-  min-height: 220px;
-  border-color: transparent;
-  background: var(--home-navy);
-  color: var(--eb-white);
-  isolation: isolate;
+  padding-block: 28px;
 }
 
-/* Dial a la derecha, centrado en alto: la aguja (22:30) queda lejos del texto. */
-.bento-tile-dark::after {
+/* La línea de tinta debajo de cada paso (se traza al entrar en pantalla). */
+.home-step::after {
   content: '';
   position: absolute;
-  z-index: -1;
-  top: 50%;
-  right: -32%;
-  width: 82%;
-  aspect-ratio: 1;
-  transform: translateY(-50%);
-  background: url('../../assets/illustrations/dial.svg') center / contain no-repeat;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--eb-ink);
+  transform-origin: 0 50%;
 }
 
-.bento-tile-dark .home-card-text {
-  max-width: 24ch;
-  color: var(--home-on-dark);
-}
-
-.bento-tile-dark .home-icon-box {
-  background: rgb(255 255 255 / 0.12);
-  color: var(--eb-white);
-}
-
-/* Link de ejemplo, con el dominio real del sitio. */
-.bento-link {
-  align-self: flex-start;
-  max-width: 100%;
-  margin-top: auto;
-  padding: 8px 14px;
+/* El número del paso: una ventanita de 1em por la que gira una columna de
+   cifras 0–4 hasta quedar en la del paso (--n). */
+.home-step-number {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
   overflow: hidden;
-  border: 1.5px dashed var(--home-primary);
-  border-radius: var(--eb-radius-pill);
-  background: var(--eb-white);
-  color: var(--home-primary);
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-overflow: ellipsis;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.home-roll {
+  display: flex;
+  flex-direction: column;
+  height: 1em;
+  overflow: hidden;
+  font-variant-numeric: tabular-nums;
+}
+
+.home-roll span {
+  display: block;
+  flex-shrink: 0;
+  height: 1em;
+  line-height: 1;
+  text-align: center;
+  transform: translateY(calc(var(--n) * -100%));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-steps[data-seen='false'] .home-roll span {
+    transform: translateY(0);
+  }
+
+  .home-steps[data-seen='false'] .home-step::after {
+    transform: scaleX(0);
+  }
+
+  .home-steps[data-seen='true'] .home-roll span {
+    transition: transform 900ms cubic-bezier(0.34, 1.32, 0.64, 1);
+    transition-delay: calc(var(--i) * 140ms + 200ms);
+  }
+
+  .home-steps[data-seen='true'] .home-step::after {
+    animation: eb-draw 720ms var(--eb-ease-pen) both;
+    animation-delay: calc(var(--i) * 140ms);
+  }
+}
+
+.home-step-body {
+  display: grid;
+  gap: 6px;
+}
+
+.home-step-title {
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.home-step-text {
+  max-width: 40em;
+  color: var(--eb-ink-soft);
+}
+
+/* El dato de cada paso, como un sello. */
+.home-step-fact {
+  grid-column: 2;
+  justify-self: start;
+  padding: 4px 10px;
+  border: 1.5px solid var(--eb-ink);
+  border-radius: var(--eb-radius);
+  background: var(--eb-paper);
+  font-size: 14px;
+  font-weight: 700;
   white-space: nowrap;
 }
 
-.bento-tile .bento-link {
-  margin-top: 16px;
+@media (min-width: 768px) {
+  .home-step {
+    grid-template-columns: 72px minmax(0, 1fr) auto;
+    gap: 32px;
+    align-items: center;
+    padding-block: 32px;
+  }
+
+  .home-step-number {
+    width: 72px;
+    height: 72px;
+    font-size: 40px;
+  }
+
+  .home-step-fact {
+    grid-column: auto;
+    justify-self: end;
+  }
 }
 
-/* ---- Panel en miniatura ---- */
-.bento-panel {
-  margin-top: 20px;
-  overflow: hidden;
-  border: 1px solid var(--home-border);
-  border-radius: var(--eb-radius);
-  background: var(--eb-white);
+/* ---------- Panel ---------- */
+.home-panel-section {
+  background: var(--eb-grain) var(--eb-paper);
+  border-block: 1px solid var(--eb-line);
+}
+
+.home-panel-grid {
+  display: grid;
+  gap: 40px;
+  align-items: center;
+}
+
+.home-panel-grid .home-section-head {
+  margin-bottom: 0;
+}
+
+.home-points {
+  display: grid;
+  gap: 18px;
+  margin-top: 12px;
+}
+
+.home-points li {
+  padding-left: 18px;
+  border-left: 0;
+  position: relative;
+}
+
+/* Viñeta: un cuadradito de tinta lleno (como los datos de la portada); vacío se
+   leería como una casilla para tildar. */
+.home-points li::before {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  background: var(--eb-ink);
+}
+
+.home-point-title {
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.home-point-text {
+  color: var(--eb-ink-soft);
+}
+
+/* El panel en miniatura: la misma interfaz que ve el dueño. */
+.home-panel {
+  border: 2px solid var(--eb-ink);
+  border-radius: var(--eb-radius-lg);
+  background: var(--eb-paper);
   box-shadow: var(--eb-shadow-pop);
+  overflow: hidden;
 }
 
-.bento-panel-bar {
+.home-panel-bar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px 10px;
-  padding: 12px 14px;
-  border-bottom: 1px solid var(--home-border);
-  font-size: 0.9rem;
+  gap: 10px 12px;
+  padding: 14px 18px;
+  border-bottom: 2px solid var(--eb-ink);
 }
 
-.bento-panel-tabs {
+.home-panel-tabs {
   display: flex;
   gap: 4px;
   margin-left: auto;
-  font-size: 0.78rem;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 700;
 }
 
-.bento-panel-tabs span {
-  padding: 4px 10px;
-  border-radius: var(--eb-radius-pill);
-  color: var(--home-muted);
+.home-panel-tabs span {
+  padding: 6px 10px;
+  border-radius: var(--eb-radius);
+  color: var(--eb-muted);
 }
 
-.bento-panel-tabs .is-active {
-  background: var(--home-primary);
-  color: var(--eb-white);
+.home-panel-tabs .is-active {
+  background: var(--eb-accent-soft);
+  color: var(--eb-ink);
 }
 
-.bento-panel-list {
-  margin: 0;
-  padding: 6px;
-  list-style: none;
-}
-
-.bento-panel-list li {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.home-panel-list li {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr) auto;
   gap: 12px;
-  padding: 10px 10px;
-  border-radius: 8px;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--eb-line);
 }
 
-.bento-panel-list li + li {
-  border-top: 1px solid var(--home-tint);
+.home-panel-list li:last-child {
+  border-bottom: 0;
 }
 
-.bento-lead-text {
-  display: flex;
-  flex-direction: column;
+/* Lo nuevo, marcado en azul suave. */
+.home-panel-list li[data-new='true'] {
+  background: var(--eb-accent-wash);
+}
+
+.home-panel-type {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--eb-muted);
+}
+
+.home-panel-text {
+  display: grid;
   min-width: 0;
-  font-size: 0.88rem;
+  line-height: 1.3;
 }
 
-.bento-lead-text span {
+.home-panel-text span {
   overflow: hidden;
-  color: var(--home-muted);
-  font-size: 0.8rem;
+  color: var(--eb-muted);
+  font-size: 14px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.bento-badge {
-  flex-shrink: 0;
+/* Estado por forma, no solo por color: nuevo = cartel lleno; visto = punteado. */
+.home-panel-state {
   padding: 3px 10px;
-  border-radius: var(--eb-radius-pill);
-  background: var(--home-tint);
-  color: var(--home-navy);
-  font-size: 0.75rem;
+  border: 1.5px solid var(--eb-line-strong);
+  border-radius: var(--eb-radius);
+  color: var(--eb-ink-soft);
+  font-size: 13px;
   font-weight: 700;
 }
 
-/* "Nuevo": el naranja marca lo que todavía no miraste. */
-.bento-badge-new {
-  background: var(--eb-sun-soft);
-  color: var(--eb-sun-ink);
+.home-panel-list li[data-new='true'] .home-panel-state {
+  border: 1.5px solid var(--eb-ink);
+  background: var(--eb-accent-soft);
+  color: var(--eb-ink);
 }
 
-/* Las filas llegan en ola cuando la sección entra en pantalla (una sola vez). */
 @media (prefers-reduced-motion: no-preference) {
-  .bento-panel-list li {
-    transition:
-      opacity 320ms var(--eb-ease-out),
-      transform 320ms var(--eb-ease-out);
-    transition-delay: calc(var(--i) * 90ms + 150ms);
+  .home-panel[data-seen='false'] .home-panel-list li {
+    clip-path: inset(0 100% 0 0);
   }
 
-  .bento-panel[data-seen='false'] .bento-panel-list li {
-    opacity: 0;
-    transform: translateY(10px);
+  /* Cada fila se escribe de izquierda a derecha, una después de otra. */
+  .home-panel[data-seen='true'] .home-panel-list li {
+    animation: eb-write 520ms var(--eb-ease-pen) both;
+    animation-delay: calc(var(--i) * 160ms + 150ms);
   }
 }
 
-@media (min-width: 640px) {
-  .bento {
-    grid-template-columns: repeat(2, 1fr);
+@media (max-width: 479px) {
+  .home-panel-list li {
+    grid-template-columns: minmax(0, 1fr) auto;
   }
 
-  .bento-tile-panel {
-    grid-column: 1 / -1;
-  }
-
-  /* Tablet: la última tarjeta chica quedaría sola; ocupa toda la fila. */
-  .bento-tile-small:last-child {
-    grid-column: 1 / -1;
+  .home-panel-type {
+    display: none;
   }
 }
 
 @media (min-width: 960px) {
-  .bento {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .bento-tile-panel {
-    grid-column: 1 / 3;
-    grid-row: 1 / 3;
-  }
-
-  .bento-tile-small:last-child {
-    grid-column: auto;
+  .home-panel-grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: 64px;
   }
 }
+
+/* ---------- Plantillas: tres carteles ---------- */
+.home-templates {
+  display: grid;
+  gap: 32px 24px;
+}
+
+.home-template {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  padding: 32px 26px 26px;
+}
+
+.home-template-title {
+  font-size: clamp(28px, 2.6vw, 34px);
+  line-height: 1.05;
+}
+
+.home-template-ideal {
+  font-weight: 800;
+}
+
+.home-template-text {
+  color: var(--eb-ink);
+}
+
+.home-template-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.home-template-options li {
+  padding: 4px 10px;
+  border: 1.5px solid var(--eb-ink);
+  border-radius: var(--eb-radius);
+  background: rgb(255 255 255 / 0.7);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.home-template-panel {
+  padding-top: 14px;
+  border-top: 1.5px solid var(--eb-ink);
+  font-size: 15px;
+}
+
+.home-business {
+  max-width: 48em;
+  margin-top: 40px;
+  color: var(--eb-ink-soft);
+}
+
+.home-business strong {
+  color: var(--eb-ink);
+}
+
+@media (min-width: 900px) {
+  .home-templates {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Cierre ---------- */
+.home-close {
+  padding-top: calc(var(--home-section-y) * 0.6);
+}
+
+.home-close-sign {
+  display: grid;
+  gap: 20px;
+  justify-items: start;
+  padding: clamp(36px, 6vw, 72px) clamp(24px, 5vw, 64px);
+}
+
+.home-close-title {
+  max-width: 14em;
+  font-size: clamp(2.4rem, 5.6vw, 4.6rem);
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.home-close-text {
+  max-width: 34em;
+  font-size: clamp(17px, 1.5vw, 20px);
+}
+
+/* ---------- Pie ---------- */
+.home-footer {
+  background: var(--eb-ink);
+  color: var(--eb-on-dark);
+  font-size: 15px;
+}
+
+.home-footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 28px;
+  padding-block: 28px;
+}
+
+.home-footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--eb-paper);
+  font-family: var(--eb-display);
+  font-weight: var(--eb-display-weight);
+  letter-spacing: -0.02em;
+  font-size: 20px;
+}
+
+.home-footer-link {
+  color: var(--eb-paper);
+  font-weight: 700;
+}
+
+.home-footer-link:hover {
+  text-decoration-color: var(--eb-sand);
+  text-decoration-thickness: 3px;
+}
+
+@media (min-width: 960px) {
+  .home-footer-link {
+    margin-left: auto;
+  }
+}
+
+/* ---------- Carteles colgados: hover ----------
+   Con mouse, el cartel se mece apenas desde su cinta (gira desde arriba), como
+   cuando alguien lo roza al pasar. Solo con puntero fino: en celular no hay hover. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .home-window-answer,
+  .home-template {
+    transform-origin: 50% 0;
+    transition: rotate 520ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .home-window-item:hover .home-window-answer {
+    rotate: -1.4deg;
+  }
+
+  .home-window-item:nth-child(even):hover .home-window-answer {
+    rotate: 1.4deg;
+  }
+
+  .home-template:hover {
+    rotate: -0.8deg;
+  }
+}
+
+/* ---------- Carteles azul tinta ----------
+   Sobre el azul, el texto va en papel y el botón principal se invierte (papel con
+   letra azul), para que siga siendo el único cartel que se toca primero. */
+.home-template.eb-sign--blue .home-template-text,
+.home-template.eb-sign--blue .home-template-panel,
+.home-close-text {
+  color: var(--eb-paper);
+}
+
+.home-template.eb-sign--blue .home-template-options li {
+  border-color: rgb(255 254 251 / 0.7);
+  background: transparent;
+  color: var(--eb-paper);
+}
+
+.home-template.eb-sign--blue .home-template-panel {
+  border-top-color: rgb(255 254 251 / 0.6);
+}
+
+.home-close .home-btn-primary {
+  border-color: var(--eb-paper);
+  background: linear-gradient(var(--eb-sand), var(--eb-sand)) no-repeat 0 0 / 0 100% var(--eb-paper);
+  color: var(--eb-accent-dark);
+}
+
+.home-close .home-btn-primary:hover {
+  border-color: var(--eb-sand);
+  background-size: 100% 100%;
+}
+
+.home-close .home-link {
+  color: var(--eb-paper);
+}
+
+.home-close .home-link:hover {
+  text-decoration-color: var(--eb-paper);
+}
+
+.home-close {
+  --eb-focus: var(--eb-sand);
+  --eb-focus-halo: transparent;
+}
+
+/* El cartel de cierre gira desde su cinta, como los demás. */
+.home-close-sign {
+  transform-origin: 50% 0;
+}
+
+

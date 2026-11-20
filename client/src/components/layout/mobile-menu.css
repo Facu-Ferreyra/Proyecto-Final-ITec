@@ -7,7 +7,7 @@
   height: 44px;
   padding: 0;
   border: 0;
-  border-radius: 10px;
+  border-radius: var(--eb-radius);
   background: transparent;
   color: inherit;
   cursor: pointer;
@@ -15,7 +15,7 @@
 }
 
 .mobile-menu-toggle:hover {
-  background: rgb(29 78 216 / 0.08);
+  background: rgb(20 23 31 / 0.08);
 }
 
 .mobile-menu-toggle:focus-visible,
@@ -39,14 +39,14 @@
   border: 0;
   background: var(--eb-white);
   color: var(--eb-navy);
-  box-shadow: -16px 0 40px rgb(8 22 51 / 0.25);
+  box-shadow: -16px 0 40px rgb(20 23 31 / 0.25);
   font-family: var(--eb-font);
   text-align: left;
   color-scheme: light;
 }
 
 .mobile-menu::backdrop {
-  background: rgb(8 22 51 / 0.55);
+  background: rgb(20 23 31 / 0.55);
 }
 
 /* Animación de entrada y salida (si el navegador la soporta; si no, aparece directo). */
@@ -109,7 +109,7 @@ html:has(.mobile-menu[open]) {
   justify-content: space-between;
   margin-bottom: 8px;
   padding-bottom: 12px;
-  border-bottom: 1px solid var(--eb-blue-soft);
+  border-bottom: 1px solid var(--eb-line);
 }
 
 .mobile-menu-title {
@@ -125,14 +125,14 @@ html:has(.mobile-menu[open]) {
   margin-right: -8px;
   padding: 0;
   border: 0;
-  border-radius: 10px;
+  border-radius: var(--eb-radius);
   background: transparent;
   color: inherit;
   cursor: pointer;
 }
 
 .mobile-menu-close:hover {
-  background: var(--eb-sky);
+  background: var(--eb-accent-wash);
 }
 
 /* Links: una fila grande por opción, fácil de tocar con el dedo. */
@@ -150,7 +150,7 @@ html:has(.mobile-menu[open]) {
   align-items: center;
   min-height: 48px;
   padding: 0 14px;
-  border-radius: 10px;
+  border-radius: var(--eb-radius);
   color: var(--eb-navy);
   font-size: 1.05rem;
   font-weight: 600;
@@ -158,7 +158,7 @@ html:has(.mobile-menu[open]) {
 }
 
 .mobile-menu-links a:hover {
-  background: var(--eb-sky);
+  background: var(--eb-accent-wash);
 }
 
 .mobile-menu-links a.active {
@@ -173,7 +173,7 @@ html:has(.mobile-menu[open]) {
   gap: 10px;
   margin-top: auto;
   padding-top: 16px;
-  border-top: 1px solid var(--eb-blue-soft);
+  border-top: 1px solid var(--eb-line);
 }
 
 .mobile-menu-user {
@@ -200,7 +200,7 @@ html:has(.mobile-menu[open]) {
   justify-content: center;
   min-height: 48px;
   border: 1px solid var(--eb-blue);
-  border-radius: 10px;
+  border-radius: var(--eb-radius);
   background: var(--eb-white);
   color: var(--eb-blue);
   font: inherit;

@@ -1,204 +1,649 @@
-/* Home: variables, base, botones, barra superior y portada.
-   Todo empieza con "home-" y las variables viven en .home para no pisar
-   estilos de otras pantallas. Los valores salen de styles/tokens.css. */
+/* Portada (landing), mundo "Cartel de vidriera": fondo arena, tinta, carteles de
+   cartulina impresa y el azul tinta para la acción. Colores y fuentes: styles/tokens.css.
+   Este archivo: base, barra superior, botones, portada y chat de ejemplo.
+   home-sections.css: el resto de las secciones, el cierre y el pie. */
 
 .home {
-  --home-navy: var(--eb-navy);
-  --home-navy-dark: var(--eb-navy-deep);
-  --home-primary: var(--eb-blue);
-  --home-bg: var(--eb-canvas);
-  --home-tint: var(--eb-sky);
-  --home-border: var(--eb-line);
-  --home-muted: var(--eb-muted);
-  --home-on-dark: var(--eb-on-dark);
-  --home-radius: var(--eb-radius);
+  --home-gutter: 16px;
+  --home-max: 1200px;
+  --home-section-y: clamp(72px, 10vw, 128px);
 
   min-height: 100svh;
-  background: var(--home-bg);
-  color: var(--home-navy);
+  background: var(--eb-grain) var(--eb-glass);
+  color: var(--eb-ink);
   font-family: var(--eb-font);
-  line-height: 1.5;
+  font-size: 17px;
+  line-height: 1.55;
   text-align: left;
-  color-scheme: light;
 }
 
-/* Se sacan los márgenes que pone el navegador. :where() hace que esta regla
-   no tenga peso: así los márgenes de cada clase (ej. .home-title) sí se aplican. */
-:where(.home) :where(h1, h2, h3, h4, p, ul, ol, figure) {
+.home *,
+.home *::before,
+.home *::after {
+  box-sizing: border-box;
+}
+
+.home :where(h1, h2, h3, p, ul, ol) {
   margin: 0;
 }
 
-:where(.home) :where(ul, ol) {
+.home :where(ul, ol) {
   padding: 0;
   list-style: none;
 }
 
-/* Los links de la barra bajan suave a cada sección (salvo que el usuario
-   prefiera menos movimiento). */
-@media (prefers-reduced-motion: no-preference) {
-  html:has(.home) {
-    scroll-behavior: smooth;
+.home-container {
+  width: 100%;
+  max-width: calc(var(--home-max) + var(--home-gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--home-gutter);
+}
+
+@media (min-width: 640px) {
+  .home {
+    --home-gutter: 32px;
   }
 }
 
-.home-container {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 16px;
+@media (min-width: 1024px) {
+  .home {
+    --home-gutter: 48px;
+  }
 }
 
-.home-dark {
-  background: var(--home-navy);
-  color: #ffffff;
-}
-
-.home-dark h1,
-.home-dark h2 {
-  color: #ffffff;
-}
-
-/* Botones */
+/* ---------- Botones: carteles chicos ----------
+   Primario: el único cartel negro. Fantasma: borde de tinta. */
 .home-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  padding: 12px 22px;
-  border: 1.5px solid transparent;
+  min-height: 52px;
+  padding: 0 26px;
+  border: 2px solid var(--eb-ink);
   border-radius: var(--eb-radius-pill);
   font: inherit;
-  font-weight: 600;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1;
   text-decoration: none;
+  white-space: nowrap;
   cursor: pointer;
-  /* transición y respuesta al presionar: styles/tokens.css */
 }
 
-.home-btn:focus-visible,
-.home-nav a:focus-visible {
-  outline: 3px solid var(--eb-focus);
-  outline-offset: 2px;
+/* Primario: el cartel azul tinta. Al pasar el mouse, un azul más oscuro lo
+   cubre de izquierda a derecha, como tinta que entra en el papel. */
+.home-btn-primary {
+  border-color: var(--eb-accent);
+  background: linear-gradient(var(--eb-accent-dark), var(--eb-accent-dark)) no-repeat 0 0 / 0 100%
+    var(--eb-accent);
+  color: var(--eb-paper);
+  box-shadow: var(--eb-shadow-paper);
+  transition:
+    background-size 320ms var(--eb-ease-pen),
+    border-color 320ms var(--eb-ease-pen),
+    transform var(--eb-press) var(--eb-ease-out);
 }
 
-.home-btn-light {
-  background: var(--eb-white);
-  color: var(--home-navy);
+.home-btn-primary:hover {
+  border-color: var(--eb-accent-dark);
+  background-size: 100% 100%;
 }
 
-.home-btn-light:hover {
-  background: var(--eb-blue-soft);
-}
-
-.home-btn-outline {
+.home-btn-ghost {
   background: transparent;
-  color: var(--eb-white);
-  border-color: rgb(255 255 255 / 0.45);
+  color: var(--eb-ink);
 }
 
-.home-btn-outline:hover {
-  background: rgba(255, 255, 255, 0.1);
+.home-btn-ghost:hover {
+  background: var(--eb-paper);
 }
 
 .home-btn-small {
-  padding: 8px 14px;
-  font-size: 0.9rem;
+  min-height: 44px;
+  padding: 0 18px;
+  font-size: 15px;
 }
 
-.home-icon {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
+/* Link de texto: subrayado de tinta que se engrosa al pasar el mouse. */
+.home-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--eb-ink);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+  cursor: pointer;
+  transition: text-decoration-thickness 150ms ease;
 }
 
-/* Barra superior: queda fija arriba al bajar por la página. */
+.home-link:hover {
+  text-decoration-thickness: 4px;
+  text-decoration-color: var(--eb-ink);
+}
+
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+}
+
+/* ---------- Barra superior ---------- */
 .home-header {
   position: sticky;
   top: 0;
-  z-index: 10;
-  padding: 16px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  z-index: 20;
+  background: rgb(255 254 251 / 0.94);
+  border-bottom: 1px solid var(--eb-line);
+  backdrop-filter: saturate(1.4) blur(10px);
 }
 
 .home-header-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  gap: 24px;
+  min-height: 68px;
 }
 
 .home-logo {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-weight: 800;
-  font-size: 1.25rem;
-  font-stretch: var(--eb-wide);
-  letter-spacing: -0.01em;
+  color: var(--eb-ink);
+  font-family: var(--eb-display);
+  font-weight: var(--eb-display-weight);
+  letter-spacing: -0.02em;
+  font-size: 24px;
+  line-height: 1;
+  text-decoration: none;
 }
 
+/* Links de secciones: pestañas de navegador (mecánica en styles/tokens.css).
+   La barra es papel; la pestaña sobre la que está el mouse toma el arena de la
+   página, como si se abriera hacia ella. */
 .home-nav {
-  display: none; /* en celular se ocultan: la página se recorre bajando */
-  gap: 24px;
+  --tab-bw: 1px;
+
+  display: none;
+  align-self: stretch;
+  align-items: flex-end;
+  gap: 2px;
+  margin-left: 12px;
 }
 
 .home-nav a {
-  color: #ffffff;
+  height: 54px;
+  color: var(--eb-ink-soft);
+  font-weight: 600;
   text-decoration: none;
-  font-size: 0.95rem;
 }
 
 .home-nav a:hover {
-  text-decoration: underline;
+  --tab-fill: var(--eb-glass);
+  --tab-line: var(--eb-line);
+
+  color: var(--eb-ink);
 }
 
 .home-header-actions {
   display: flex;
-  gap: 8px;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
 }
 
-/* Portada */
+.home-header .home-menu-toggle:hover {
+  background: rgb(20 23 31 / 0.06);
+}
+
+@media (max-width: 479px) {
+  .home-header-login {
+    display: none;
+  }
+
+  .home-header-actions .home-btn-small {
+    padding: 0 14px;
+  }
+}
+
+@media (min-width: 960px) {
+  .home-nav {
+    display: flex;
+  }
+
+  .home-header .home-menu-toggle {
+    display: none;
+  }
+}
+
+/* ---------- Portada ---------- */
+/* overflow-x: clip: mientras el cartel oscila, sus esquinas no pueden empujar la
+   página hacia los costados (en celular el cartel ocupa todo el ancho). */
 .home-hero {
-  padding: 48px 0 64px;
+  overflow-x: clip;
+  padding-bottom: clamp(56px, 8vw, 96px);
 }
 
-.home-hero-inner {
+/* ---------- Toldo ----------
+   El toldo a rayas del local, a todo el ancho, justo debajo de la barra: una
+   franja de tela (azul tinta y papel) colgada de un caño, con el borde de abajo
+   en ondas, una onda por raya. Se despliega una vez al cargar (de arriba hacia
+   abajo, como cuando se baja un toldo). */
+.home-awning {
+  --stripe: 44px;
+
+  position: relative;
+  height: calc(var(--stripe) + 24px);
+  margin-bottom: clamp(32px, 5vw, 56px);
+  border-top: 5px solid var(--eb-ink);
+  filter: drop-shadow(0 10px 12px rgb(20 23 31 / 0.16));
+}
+
+/* La tela: rayas verticales con una sombra arriba (el pliegue contra el caño). */
+.home-awning::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 calc(var(--stripe) / 2) 0;
+  background:
+    linear-gradient(rgb(20 23 31 / 0.18), transparent 45%),
+    repeating-linear-gradient(90deg, var(--eb-accent) 0 var(--stripe), var(--eb-paper) var(--stripe) calc(var(--stripe) * 2));
+}
+
+/* Las ondas: medio círculo debajo de cada raya, del mismo color. */
+.home-awning::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(var(--stripe) / 2 + 1px);
+  background:
+    radial-gradient(circle at calc(var(--stripe) / 2) 0, var(--eb-accent) calc(var(--stripe) / 2 - 0.5px), transparent calc(var(--stripe) / 2))
+      0 0 / calc(var(--stripe) * 2) 100% repeat-x,
+    radial-gradient(circle at calc(var(--stripe) / 2) 0, var(--eb-paper) calc(var(--stripe) / 2 - 0.5px), transparent calc(var(--stripe) / 2))
+      var(--stripe) 0 / calc(var(--stripe) * 2) 100% repeat-x;
+}
+
+@media (max-width: 639px) {
+  .home-awning {
+    --stripe: 30px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-awning {
+    animation: home-awning-unroll 720ms var(--eb-ease-pen) both;
+  }
+}
+
+@keyframes home-awning-unroll {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 -40px 0);
+  }
+}
+
+.home-hero-grid {
   display: grid;
-  gap: 40px;
+  gap: 48px;
   align-items: center;
 }
 
-.home-badge {
-  display: inline-block;
-  margin-bottom: 20px;
-  padding: 4px 12px;
-  border: 1px solid rgb(255 255 255 / 0.35);
-  border-radius: 999px;
-  font-size: 0.8rem;
+.home-hero-copy {
+  display: grid;
+  gap: 28px;
+  justify-items: start;
 }
 
-/* El título de la portada es lo memorable: Archivo a todo lo ancho, grande y apretado. */
+/* El cartel de cartulina arena con el título. */
+.home-hero-sign {
+  width: 100%;
+  padding: clamp(28px, 4vw, 48px) clamp(24px, 4vw, 44px);
+}
+
 .home-hero-title {
-  font-size: clamp(2.4rem, 7vw, 3.6rem);
-  line-height: 0.98;
-  font-weight: 800;
-  font-stretch: var(--eb-wide);
-  letter-spacing: -0.02em;
+  font-size: clamp(2.6rem, 6.4vw, 5.25rem);
+  line-height: 1;
   text-wrap: balance;
 }
 
 .home-hero-text {
-  margin: 20px 0 28px;
-  color: var(--home-on-dark);
-  font-size: 1.1rem;
-  max-width: 34rem;
+  max-width: 34em;
+  color: var(--eb-ink-soft);
+  font-size: clamp(17px, 1.6vw, 20px);
+  text-wrap: pretty;
 }
 
-.home-actions {
+/* Datos duros de la portada: cada uno con su cuadradito de cartulina, así el
+   corte de línea en celular nunca deja un separador colgando. */
+.home-facts {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 8px 22px;
+  color: var(--eb-ink);
+  font-weight: 700;
+  font-size: 15px;
 }
 
-.home-hero-note {
-  margin-top: 20px;
-  color: var(--home-on-dark);
-  font-size: 0.85rem;
+.home-facts li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.home-facts li::before {
+  content: '';
+  width: 9px;
+  height: 9px;
+  background: var(--eb-accent-soft);
+  outline: 1.5px solid var(--eb-ink);
+}
+
+.home-hero-chat {
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 960px) {
+  .home-hero-grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 56px;
+  }
+
+  .home-hero-chat {
+    justify-content: flex-end;
+  }
+}
+
+/* Entrada de la portada, una sola vez: el cartel queda colgado y oscila hasta
+   asentarse; mientras, el título se escribe de izquierda a derecha y la línea de
+   tinta de abajo se traza. El resto del texto ya está quieto y visible. */
+@media (prefers-reduced-motion: no-preference) {
+  .home-hero-sign[data-enter] {
+    animation: eb-hang 1100ms var(--eb-ease-out) both;
+  }
+
+  /* El título se escribe enseguida (sin espera y con una curva que arranca rápido):
+     es lo primero que se lee, nunca lo último. */
+  .home-hero-sign[data-enter] .home-hero-title {
+    animation: eb-write 650ms var(--eb-ease-out) both;
+  }
+
+  .home-hero-sign[data-enter] .home-facts::before {
+    animation: eb-draw 640ms var(--eb-ease-pen) 700ms both;
+  }
+}
+
+/* ---------- Chat de ejemplo ----------
+   El chat es la cara del negocio: globos redondeados sobre papel. La respuesta
+   del bot cae como un cartel colgado (la idea de la página). */
+.home-chat {
+  width: 100%;
+  max-width: 400px;
+  margin: 0;
+  border: 2px solid var(--eb-ink);
+  border-radius: var(--eb-radius-lg);
+  background: var(--eb-paper);
+  box-shadow: var(--eb-shadow-pop);
+  overflow: visible;
+}
+
+.home-chat-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 2px solid var(--eb-ink);
+}
+
+.home-chat-header-text {
+  display: grid;
+  line-height: 1.25;
+}
+
+.home-chat-header-text strong {
+  font-size: 16px;
+}
+
+.home-chat-header-text span {
+  color: var(--eb-muted);
+  font-size: 13px;
+}
+
+.home-chat-replay {
+  min-height: 36px;
+  margin-left: auto;
+  padding: 0 12px;
+  border: 1.5px solid var(--eb-ink);
+  border-radius: var(--eb-radius-pill);
+  background: transparent;
+  color: var(--eb-ink);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.home-chat-replay:hover {
+  background: var(--eb-accent-soft);
+}
+
+.home-chat-body {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  min-height: 340px;
+  padding: 20px 16px 24px;
+  background: var(--eb-glass);
+}
+
+.home-chat-slot {
+  position: relative;
+}
+
+.home-chat-bubble {
+  width: fit-content;
+  max-width: 85%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--eb-ink);
+  border-radius: var(--eb-radius-bubble) var(--eb-radius-bubble) var(--eb-radius-bubble) 4px;
+  background: var(--eb-paper);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.home-chat-bubble-user {
+  justify-self: end;
+  border-color: var(--eb-accent);
+  border-radius: var(--eb-radius-bubble) var(--eb-radius-bubble) 4px var(--eb-radius-bubble);
+  background: var(--eb-accent);
+  color: var(--eb-paper);
+}
+
+.home-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.home-chip {
+  padding: 6px 12px;
+  border: 1.5px solid var(--eb-ink);
+  border-radius: var(--eb-radius-pill);
+  background: var(--eb-paper);
+  font-size: 14px;
+  font-weight: 600;
+  transition:
+    background-color 150ms ease,
+    transform var(--eb-press) var(--eb-ease-out);
+}
+
+.home-chip[data-pressed='true'] {
+  border-color: var(--eb-accent);
+  background: var(--eb-accent-soft);
+  color: var(--eb-accent-dark);
+  transform: scale(0.96);
+}
+
+/* La respuesta: un cartel pegado dentro del chat. */
+.home-chat-sign {
+  width: fit-content;
+  max-width: 90%;
+  margin-top: 12px;
+  padding: 16px 20px 14px;
+}
+
+.home-chat-sign-lead {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.home-chat-sign-fact {
+  font-size: 30px;
+  line-height: 1.05;
+}
+
+/* Revelado de cada mensaje: ocupa su lugar desde el principio (no hay saltos). */
+.home-reveal[data-shown='false'] {
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* Cada globo crece desde su punta (la esquina que apunta a quien habla), como en
+   los chats que ya usan los clientes; la respuesta, en cambio, queda colgada. */
+@media (prefers-reduced-motion: no-preference) {
+  .home-reveal[data-shown='true'] {
+    animation: home-bubble 300ms var(--eb-ease-out) both;
+    transform-origin: 0 100%;
+  }
+
+  .home-chat-bubble-user.home-reveal[data-shown='true'] {
+    transform-origin: 100% 100%;
+  }
+
+  .home-chat-sign[data-shown='true'] {
+    animation: eb-hang 1000ms var(--eb-ease-out) both;
+    transform-origin: 50% 0;
+  }
+}
+
+@keyframes home-bubble {
+  from {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+}
+
+.home-typing {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-flex;
+  gap: 4px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--eb-ink);
+  border-radius: var(--eb-radius-bubble) var(--eb-radius-bubble) var(--eb-radius-bubble) 4px;
+  background: var(--eb-paper);
+}
+
+.home-typing span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--eb-ink);
+  animation: home-typing 900ms ease-in-out infinite;
+}
+
+.home-typing span:nth-child(2) {
+  animation-delay: 150ms;
+}
+
+.home-typing span:nth-child(3) {
+  animation-delay: 300ms;
+}
+
+@keyframes home-typing {
+  0%,
+  60%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-typing span {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+
+/* Sello "de ejemplo": marca a la vista que el chat y el panel de la portada usan
+   datos inventados (Peluquería Lola), como un sello de goma en el papel. */
+.home-stamp {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  border: 1.5px solid var(--eb-ink);
+  border-radius: var(--eb-radius);
+  background: var(--eb-paper);
+  color: var(--eb-ink);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+/* En el chat, el sello va sobre el borde de arriba, sin apretar el encabezado. */
+.home-chat {
+  position: relative;
+}
+
+.home-chat-stamp {
+  position: absolute;
+  top: -13px;
+  left: 16px;
+  z-index: 1;
+  background: var(--eb-accent-soft);
+}
+
+/* Los datos duros, sellados dentro del cartel de la portada, debajo de una línea
+   de tinta (que se traza al entrar). */
+.home-hero-sign .home-facts {
+  position: relative;
+  margin-top: 22px;
+  padding-top: 18px;
+}
+
+.home-hero-sign .home-facts::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--eb-ink);
+  transform-origin: 0 50%;
+}
+
+.home-hero-sign .home-facts li::before {
+  background: var(--eb-ink);
+  outline: 0;
+}
+
+/* El horario del cartel, en dos renglones parejos (nunca una palabra colgando). */
+.home-chat-sign-fact span {
+  display: block;
 }

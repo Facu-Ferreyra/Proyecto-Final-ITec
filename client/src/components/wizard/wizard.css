@@ -1,4 +1,4 @@
-/* Estilos del asistente (prototipo, pantallas 5 a 8). Usa las variables de
+/* Estilos del asistente (pasos 1 a 4), mundo "Cartel de vidriera" (arena y azul tinta).
    pages/bots/theme.css. Primero celular; desde 768px, dos columnas. */
 
 /* ---- Stepper ---- */
@@ -21,20 +21,34 @@
 .stepper-number {
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--color-primary);
-  border-radius: 50%;
-  color: var(--color-label);
+  width: 42px;
+  height: 42px;
+  border: 2px dashed var(--eb-line-strong);
+  border-radius: var(--eb-radius);
+  color: var(--eb-ink-soft);
+  font-family: var(--eb-display);
+  font-weight: var(--eb-display-weight);
+  letter-spacing: -0.02em;
+  font-size: 1.35rem;
+  line-height: 1;
 }
 
+/* Paso actual: el cartel azul tinta. Hecho: borde y cifra verdes. Pendiente: punteado. */
 .stepper-current .stepper-number {
-  background: var(--color-primary);
-  color: var(--eb-white);
+  border: 2px solid var(--eb-accent);
+  background: var(--eb-accent);
+  color: var(--eb-paper);
+  box-shadow: var(--eb-shadow-paper);
 }
 
 .stepper-done .stepper-number {
-  background: var(--color-badge-published);
+  border: 2px solid var(--eb-green);
+  background: var(--eb-green-soft);
+  color: var(--eb-green);
+}
+
+.stepper-current .stepper-label {
+  font-weight: 800;
 }
 
 /* En celular solo se ve el número del paso; el nombre sigue para lectores de pantalla. */
@@ -81,7 +95,11 @@
 /* ---- Textos y botones de cada paso ---- */
 .step-title {
   margin: 0 0 16px;
-  font-size: 1.5rem;
+  font-family: var(--eb-display);
+  font-weight: var(--eb-display-weight);
+  letter-spacing: -0.02em;
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  line-height: 1.05;
 }
 
 /* El título recibe el foco por código (no con Tab): no hace falta el recuadro. */
@@ -131,12 +149,20 @@
 }
 
 .template-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: 24px;
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--eb-line-strong);
   border-radius: var(--radius);
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease;
+}
+
+.template-card:hover {
+  border-color: var(--eb-ink);
 }
 
 .template-card h3 {
@@ -145,15 +171,42 @@
 
 .template-card p {
   margin: 0 0 12px;
-  color: var(--color-muted);
+  color: var(--eb-ink-soft);
 }
 
 .template-card .btn {
   margin-top: auto;
 }
 
+/* Elegida: se vuelve el cartel de cartulina arena, pegado con cinta y colgado
+   (oscila al elegirla y se asienta). */
 .template-card-selected {
-  border: 2px solid var(--color-primary);
+  border: 2px solid var(--eb-accent);
+  background: var(--eb-sand);
+  box-shadow: var(--eb-shadow-paper);
+  transform-origin: 50% 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .template-card-selected {
+    animation: eb-hang 900ms var(--eb-ease-out);
+  }
+}
+
+.template-card-selected::before {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  width: 64px;
+  height: 18px;
+  translate: -50% 0;
+  background: rgb(255 255 255 / 0.6);
+  border: 1px solid rgb(20 23 31 / 0.1);
+}
+
+.template-card-selected p {
+  color: var(--eb-ink);
 }
 
 .template-ideal {

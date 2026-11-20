@@ -7,9 +7,9 @@
   align-items: center;
   gap: 8px 24px;
   padding: 12px 16px;
-  background: var(--eb-white);
-  border-bottom: 1px solid var(--eb-line);
-  color: var(--eb-navy);
+  background: var(--eb-paper);
+  border-bottom: 2px solid var(--eb-ink);
+  color: var(--eb-ink);
 }
 
 .app-bar a {
@@ -18,29 +18,39 @@
 }
 
 .app-bar-brand {
-  font-size: 1.25rem;
-  font-weight: 800;
+  font-size: 1.35rem;
 }
 
+/* Secciones: pestañas de navegador (mecánica en styles/tokens.css). La sección
+   actual es la pestaña abierta: del arena de la página y con borde de tinta, se
+   une con la pantalla de abajo. Al pasar el mouse por otra, se dibuja una
+   pestaña suave (azul muy claro), como en Opera. */
 .app-bar-nav {
+  --tab-bw: 2px;
+
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
+  align-self: stretch;
+  align-items: flex-end;
+  gap: 2px;
+  margin-block: -12px;
 }
 
 .app-bar-nav a {
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-weight: 600;
+  height: 52px;
+  font-weight: 700;
 }
 
 .app-bar-nav a:hover {
-  background: var(--eb-sky);
+  --tab-fill: var(--eb-accent-wash);
+  --tab-line: var(--eb-line-strong);
 }
 
 .app-bar-nav a.active {
-  background: var(--eb-blue-soft);
-  color: var(--eb-blue);
+  --tab-fill: var(--eb-glass);
+  --tab-line: var(--eb-ink);
+
+  z-index: 1;
+  color: var(--eb-ink);
 }
 
 .app-bar-user {

@@ -29,30 +29,33 @@
   max-width: 100%;
   margin-bottom: 20px;
   padding: 4px;
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--eb-ink);
   border-radius: var(--radius);
   background: var(--color-surface);
 }
 
 .tab {
   flex: 1 1 auto;
+  min-height: 40px;
   padding: 8px 14px;
-  border: none;
+  border: 1.5px solid transparent;
   border-radius: var(--radius-small);
   background: transparent;
   color: var(--color-text);
   font: inherit;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
 }
 
 .tab:hover {
-  background: var(--color-bg);
+  background: var(--eb-accent-wash);
 }
 
+/* Pestaña activa: azul suave con borde azul tinta. */
 .tab[aria-pressed='true'] {
-  background: var(--color-primary);
-  color: var(--eb-white);
+  border-color: var(--eb-accent);
+  background: var(--eb-accent-soft);
+  color: var(--eb-accent-dark);
 }
 
 .tab:focus-visible {
@@ -69,20 +72,31 @@
   color: var(--color-muted);
 }
 
-/* Etiqueta chica de estado o tipo (ej.: "Pendiente", "Turno"). */
+/* Etiqueta chica de estado o tipo (ej.: "Pendiente", "Turno"): cartulina con
+   borde firme. La apagada va sin relleno y con borde punteado. */
 .badge {
   display: inline-block;
   padding: 2px 10px;
-  border-radius: 999px;
-  background: var(--color-badge-published);
-  color: var(--color-label);
+  border: 1.5px solid var(--eb-ink);
+  border-radius: var(--eb-radius);
+  background: var(--eb-paper);
+  color: var(--eb-ink);
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 800;
+}
+
+/* Estado activo o publicado: el único que lleva el verde. */
+.badge-on {
+  border-color: var(--eb-green);
+  background: var(--eb-green-soft);
+  color: var(--eb-green);
 }
 
 .badge-muted {
+  border-style: dashed;
+  border-color: var(--eb-ink-soft);
   background: var(--color-badge-draft);
-  color: var(--color-muted);
+  color: var(--eb-ink-soft);
 }
 
 /* Lista de tarjetas (conversaciones, pedidos, plantillas, usuarios). */
@@ -98,8 +112,13 @@
 .data-item {
   padding: 16px 20px;
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--eb-line-strong);
   border-radius: var(--radius);
+  transition: border-color 150ms ease;
+}
+
+.data-item:hover {
+  border-color: var(--eb-ink);
 }
 
 .data-item-head {
@@ -139,8 +158,9 @@
 }
 
 .inline-select select {
+  min-height: 40px;
   padding: 6px 10px;
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--eb-ink);
   border-radius: var(--radius-small);
   background: var(--color-surface);
   color: var(--color-text);

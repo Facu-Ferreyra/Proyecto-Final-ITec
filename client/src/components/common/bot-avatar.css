@@ -1,5 +1,5 @@
-/* Logo de bot (BotAvatar.jsx): cuadrado de esquinas suaves con las iniciales en
-   Archivo ancha, como el resto de los títulos de la marca. */
+/* Logo de bot (BotAvatar.jsx): un cartelito de cartulina impresa con borde de
+   tinta y las iniciales en la letra de títulos, como los carteles de la marca. */
 
 .bot-avatar {
   position: relative;
@@ -8,14 +8,14 @@
   place-items: center;
   width: var(--avatar-size);
   height: var(--avatar-size);
-  border-radius: calc(var(--avatar-size) * 0.28);
+  border: 2px solid var(--eb-ink);
+  border-radius: var(--eb-radius);
   background: var(--avatar-bg);
-  color: #ffffff;
-  font-family: var(--eb-font);
-  font-size: calc(var(--avatar-size) * 0.4);
-  font-stretch: var(--eb-wide);
-  font-weight: 800;
+  color: var(--eb-ink);
+  font-family: var(--eb-display);
+  font-weight: var(--eb-display-weight);
   letter-spacing: -0.02em;
+  font-size: calc(var(--avatar-size) * 0.4);
   line-height: 1;
   user-select: none;
 }
@@ -28,31 +28,31 @@
 /* Insignia de la plantilla, abajo a la derecha. */
 .bot-avatar-badge {
   position: absolute;
-  right: -5px;
-  bottom: -5px;
+  right: -10px;
+  bottom: -10px;
   display: grid;
   place-items: center;
-  width: 22px;
-  height: 22px;
-  border: 2px solid var(--eb-white);
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--eb-ink);
   border-radius: 50%;
-  background: var(--eb-white);
-  color: var(--avatar-bg);
-  box-shadow: 0 1px 3px rgb(11 31 75 / 0.18);
+  background: var(--eb-paper);
+  color: var(--eb-ink);
 }
 
 .bot-avatar-badge svg {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
 }
 
-/* Borrador: el mismo logo, apagado (todavía no atiende a nadie). */
+/* Borrador: el cartel todavía no está pegado. Borde punteado y sin cartulina
+   (el estado se lee en la forma, no solo en el color). */
 .bot-avatar-draft {
-  filter: saturate(0.25);
-  opacity: 0.75;
+  border-style: dashed;
+  background: var(--eb-paper);
 }
 
-/* En el encabezado azul del chat: un borde claro lo separa si el color coincide. */
+/* En el encabezado negro del chat el borde de tinta no se ve: va en papel. */
 .chat-header .bot-avatar {
-  box-shadow: 0 0 0 2px rgb(255 255 255 / 0.55);
+  border-color: var(--eb-paper);
 }

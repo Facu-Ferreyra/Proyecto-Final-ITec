@@ -23,29 +23,46 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 16px 24px;
+  padding: 16px var(--error-edge);
   background: var(--eb-white);
-  border-bottom: 1px solid var(--eb-line);
+  border-bottom: 2px solid var(--eb-ink);
+}
+
+/* Un solo borde izquierdo para barra, contenido y pie: el mismo que usa el pie
+   (contenedor de 1120px, con 24px de aire en celular y 48px desde tablet). */
+.error-page {
+  --error-edge: 24px;
 }
 
 .error-page-brand {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: var(--eb-navy);
-  font-size: 1.2rem;
-  font-weight: 800;
-  font-stretch: var(--eb-wide);
+  color: var(--eb-ink);
+  font-family: var(--eb-display);
+  font-weight: var(--eb-display-weight);
+  letter-spacing: -0.02em;
+  font-size: 1.35rem;
   text-decoration: none;
 }
 
+/* Secundario con borde de tinta (como "Iniciar sesión" en la portada): el único
+   cartel lleno de la página es la acción principal, en azul tinta. */
 .error-page-bar-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   padding: 8px 18px;
+  border: 2px solid var(--eb-ink);
   border-radius: var(--eb-radius-pill);
-  background: var(--eb-navy);
-  color: var(--eb-white);
-  font-weight: 600;
+  background: transparent;
+  color: var(--eb-ink);
+  font-weight: 700;
   text-decoration: none;
+}
+
+.error-page-bar-link:hover {
+  background: var(--eb-accent-wash);
 }
 
 /* Contenido: centrado en el alto disponible, alineado a la izquierda. */
@@ -55,36 +72,57 @@
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 48px 24px 80px;
+  margin: 0;
+  padding: 48px var(--error-edge) 80px;
   box-sizing: border-box;
 }
 
-/* Número enorme, en itálica y fino, en el azul de la marca. */
+/* El código, grande, en un cartel de cartulina arena pegado con cinta. */
 .error-page-code {
-  margin: 0 0 8px;
-  color: var(--eb-blue);
-  font-size: clamp(72px, 14vw, 150px);
-  font-style: italic;
-  font-weight: 200;
+  position: relative;
+  display: block;
+  width: fit-content;
+  margin: 12px 0 28px;
+  padding: 12px 28px 4px;
+  border-radius: var(--eb-radius);
+  background: var(--eb-sand);
+  box-shadow: var(--eb-shadow-paper);
+  color: var(--eb-ink);
+  transform-origin: 50% 0;
+  font-family: var(--eb-display);
+  font-weight: var(--eb-display-weight);
+  letter-spacing: -0.02em;
+  font-size: clamp(72px, 13vw, 140px);
   line-height: 1;
+}
+
+.error-page-code::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 72px;
+  height: 20px;
+  translate: -50% 0;
+  background: rgb(255 255 255 / 0.65);
+  border: 1px solid rgb(20 23 31 / 0.12);
 }
 
 /* Título grande y fino. */
 .error-page-title {
   margin: 0 0 20px;
-  color: var(--eb-navy);
-  font-size: clamp(2.2rem, 6.5vw, 4.6rem);
-  font-weight: 300;
+  color: var(--eb-ink);
+  font-family: var(--eb-display);
+  font-weight: var(--eb-display-weight);
   letter-spacing: -0.02em;
+  font-size: clamp(2.2rem, 5.5vw, 4rem);
   line-height: 1.05;
 }
 
 .error-page-text {
   max-width: 36rem;
   margin: 0 0 36px;
-  color: var(--eb-muted);
+  color: var(--eb-ink-soft);
   font-size: 1.1rem;
   line-height: 1.6;
 }
@@ -95,29 +133,35 @@
   gap: 14px;
 }
 
-/* Botón principal oscuro y secundario con borde, como en el ejemplo. */
+/* Botón principal: el cartel negro; secundario: borde de tinta. */
 .error-page-btn {
-  padding: 14px 28px;
-  border: 1px solid var(--eb-navy);
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 12px 26px;
+  border: 2px solid var(--eb-accent);
   border-radius: var(--eb-radius-pill);
-  background: var(--eb-navy);
-  color: var(--eb-white);
-  font-weight: 600;
+  background: var(--eb-accent);
+  color: var(--eb-paper);
+  font-weight: 700;
   text-decoration: none;
+  transition: box-shadow 150ms ease, background-color 150ms ease;
 }
 
 .error-page-btn:hover {
-  background: var(--eb-navy-deep);
+  background: var(--eb-accent-dark);
+  border-color: var(--eb-accent-dark);
 }
 
 .error-page-btn-ghost {
-  border-color: var(--eb-line-strong);
+  border-color: var(--eb-ink);
   background: transparent;
-  color: var(--eb-navy);
+  color: var(--eb-ink);
 }
 
 .error-page-btn-ghost:hover {
-  background: var(--eb-white);
+  background: var(--eb-paper);
+  box-shadow: none;
 }
 
 .error-page-btn:focus-visible,
@@ -128,11 +172,22 @@
 }
 
 @media (min-width: 768px) {
+  .error-page {
+    --error-edge: max(48px, calc((100% - 1120px) / 2));
+  }
+
   .error-page-bar {
-    padding: 18px 48px;
+    padding-block: 18px;
   }
 
   .error-page-main {
-    padding: 64px 48px 96px;
+    padding-block: 64px 96px;
+  }
+}
+
+/* El cartel del código queda colgado: entra oscilando y se asienta. */
+@media (prefers-reduced-motion: no-preference) {
+  .error-page-code {
+    animation: eb-hang 1100ms var(--eb-ease-out) both;
   }
 }

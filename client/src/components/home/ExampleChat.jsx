@@ -30,6 +30,9 @@ const TIMELINE = [
   [3950, ANSWER],
 ]
 
+// Lo que tarda la entrada de la portada (cartel colgado + título escrito).
+const HERO_SETTLE_MS = 1000
+
 const prefersReducedMotion = () => globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false
 
 function Typing() {
@@ -51,7 +54,11 @@ export default function ExampleChat() {
   useEffect(() => {
     if (prefersReducedMotion()) return
     const timers = []
-    const start = () => TIMELINE.forEach(([ms, next]) => timers.push(setTimeout(() => setStage(next), ms)))
+    // La primera vez espera a que el cartel de la portada termine de asentarse
+    // (≈1,3 s): así no compiten dos animaciones a la vez. "Ver de nuevo" arranca ya.
+    const delay = run === 0 ? HERO_SETTLE_MS : 0
+    const start = () =>
+      TIMELINE.forEach(([ms, next]) => timers.push(setTimeout(() => setStage(next), ms + delay)))
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -77,6 +84,7 @@ export default function ExampleChat() {
 
   return (
     <figure ref={figureRef} className="home-chat" aria-label="Ejemplo de conversación con el bot de Peluquería Lola">
+      <span className="home-stamp home-chat-stamp">Chat de ejemplo</span>
       <div className="home-chat-header">
         <BotAvatar name="Peluquería Lola" size={36} />
         <div className="home-chat-header-text">
@@ -111,9 +119,13 @@ export default function ExampleChat() {
         </p>
 
         <div className="home-chat-slot">
-          <p className="home-chat-bubble home-reveal" data-shown={shown(ANSWER)}>
-            Atendemos de martes a sábado de 9 a 19 h.
-          </p>
+          {/* La respuesta cae como un cartel de la vidriera: colgado, con el dato grande. */}
+          <div className="home-chat-sign eb-sign eb-sign--sand eb-tape eb-hang home-reveal" data-shown={shown(ANSWER)}>
+            <p className="home-chat-sign-lead">Atendemos de martes a sábado</p>
+            <p className="home-chat-sign-fact eb-marker">
+              <span>De 9:00 AM</span> <span>a 7:00 PM</span>
+            </p>
+          </div>
           {stage === TYPING_2 && <Typing />}
         </div>
       </div>

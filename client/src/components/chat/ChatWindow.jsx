@@ -2,7 +2,7 @@
 // Solo muestra: la lógica está en useChat. Recibe lo que devuelve useChat
 // (se puede pasar con {...chat}) más un título y un subtítulo.
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import BotAvatar from '../common/BotAvatar.jsx'
 import ChatInput from './ChatInput.jsx'
 import './chat.css'
@@ -24,6 +24,7 @@ export default function ChatWindow({
   retry,
 }) {
   const bodyRef = useRef(null)
+  const [showTop, setShowTop] = useState(false)
   const busy = status === 'sending'
   const Heading = headingLevel
 
@@ -32,6 +33,18 @@ export default function ChatWindow({
     const body = bodyRef.current
     if (body) body.scrollTop = body.scrollHeight
   }, [messages, options, status])
+
+  // Botón "volver arriba": aparece cuando la conversación ya bajó más de una
+  // pantalla de mensajes, para no tener que scrollear todo a mano.
+  function handleScroll() {
+    const body = bodyRef.current
+    if (body) setShowTop(body.scrollTop > body.clientHeight)
+  }
+
+  function scrollToTop() {
+    const reduce = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    bodyRef.current?.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' })
+  }
 
   return (
     <section className={`chat ${className}`} aria-label={title || 'Chat'}>
@@ -56,8 +69,11 @@ export default function ChatWindow({
         )}
       </header>
 
+      {/* El área de mensajes scrollea por dentro; el botón circular queda fijo abajo
+          a la derecha de esa área (no se va con el scroll). */}
+      <div className="chat-body-wrap">
       {/* aria-live: el lector de pantalla anuncia los mensajes nuevos. */}
-      <div ref={bodyRef} className="chat-body" aria-live="polite">
+      <div ref={bodyRef} className="chat-body" aria-live="polite" onScroll={handleScroll}>
         {status === 'loading' && <ChatSkeleton />}
 
         {status === 'failed' && (
@@ -102,8 +118,16 @@ export default function ChatWindow({
           </div>
         )}
       </div>
+      {showTop && (
+        <button type="button" className="chat-to-top" onClick={scrollToTop} aria-label="Volver al inicio de la conversación">
+          <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true">
+            <path d="M10 16V4M4.5 9.5 10 4l5.5 5.5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      )}
+      </div>
 
-      {input && <ChatInput input={input} disabled={busy} onSend={sendText} />}
+      {input &&<ChatInput input={input} disabled={busy} onSend={sendText} />}
     </section>
   )
 }

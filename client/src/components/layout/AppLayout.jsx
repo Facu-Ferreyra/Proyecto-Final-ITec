@@ -58,7 +58,7 @@ export default function AppLayout() {
           <div className="mobile-menu-footer">
             <div className="mobile-menu-user">
               <strong>
-                Hola, {user?.name} <span aria-hidden="true">👋</span>
+                Hola, {user?.name}
               </strong>
               <span>{user?.email}</span>
               {isAdmin && <span>Administrador</span>}

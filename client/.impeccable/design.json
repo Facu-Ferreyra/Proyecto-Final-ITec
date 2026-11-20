@@ -1,0 +1,480 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-19T12:00:00Z",
+  "title": "Design System: EasyBot",
+  "extensions": {
+    "colorMeta": {
+      "glass": {
+        "role": "neutral",
+        "displayName": "Arena de vidriera",
+        "canonical": "#f3f1ec",
+        "tonalRamp": [
+          "#24221d",
+          "#3d3a33",
+          "#5e5a50",
+          "#857f72",
+          "#a7a194",
+          "#dcd7cc",
+          "#ebe5d8",
+          "#f3f1ec"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Papel",
+        "canonical": "#fffefb"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Tinta",
+        "canonical": "#14171f",
+        "tonalRamp": [
+          "#0c0e14",
+          "#14171f",
+          "#262a34",
+          "#383c47",
+          "#5a5e68",
+          "#81848c",
+          "#aeb0b6",
+          "#d4d6dc"
+        ]
+      },
+      "ink-deep": {
+        "role": "neutral",
+        "displayName": "Tinta profunda",
+        "canonical": "#0c0e14"
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Tinta suave",
+        "canonical": "#383c47"
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Gris de rótulo",
+        "canonical": "#5a5e68"
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Línea",
+        "canonical": "#dcd7cc"
+      },
+      "line-strong": {
+        "role": "neutral",
+        "displayName": "Línea firme",
+        "canonical": "#a7a194"
+      },
+      "on-dark": {
+        "role": "neutral",
+        "displayName": "Tinta clara",
+        "canonical": "#d4d6dc"
+      },
+      "sand": {
+        "role": "secondary",
+        "displayName": "Cartulina arena",
+        "canonical": "#e6dcc4",
+        "tonalRamp": [
+          "#2e281a",
+          "#4d4430",
+          "#706449",
+          "#978a6b",
+          "#bfb08c",
+          "#d8cbab",
+          "#e6dcc4",
+          "#f3eee2"
+        ]
+      },
+      "sand-deep": {
+        "role": "secondary",
+        "displayName": "Arena profunda",
+        "canonical": "#d8cbab"
+      },
+      "sand-wash": {
+        "role": "neutral",
+        "displayName": "Arena lavada",
+        "canonical": "#ebe5d8"
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Azul tinta",
+        "canonical": "#23408e",
+        "tonalRamp": [
+          "#0e1a3d",
+          "#192f6b",
+          "#23408e",
+          "#3a58a8",
+          "#6a81c0",
+          "#a3b2db",
+          "#e2e7f3",
+          "#f0f2f8"
+        ]
+      },
+      "accent-dark": {
+        "role": "primary",
+        "displayName": "Azul tinta oscuro",
+        "canonical": "#192f6b"
+      },
+      "accent-soft": {
+        "role": "primary",
+        "displayName": "Azul suave (selección)",
+        "canonical": "#e2e7f3"
+      },
+      "accent-wash": {
+        "role": "primary",
+        "displayName": "Azul lavado (hover)",
+        "canonical": "#f0f2f8"
+      },
+      "green": {
+        "role": "tertiary",
+        "displayName": "Verde publicado",
+        "canonical": "#2f6b45",
+        "tonalRamp": [
+          "#0f2416",
+          "#1c3f28",
+          "#2f6b45",
+          "#4a8a60",
+          "#79ad89",
+          "#a9cdb3",
+          "#dfeae1",
+          "#f0f6f1"
+        ]
+      },
+      "green-soft": {
+        "role": "tertiary",
+        "displayName": "Verde suave",
+        "canonical": "#dfeae1"
+      },
+      "error": {
+        "role": "neutral",
+        "displayName": "Error",
+        "canonical": "#a8261b"
+      },
+      "error-dark": {
+        "role": "neutral",
+        "displayName": "Error oscuro",
+        "canonical": "#82190f"
+      },
+      "error-soft": {
+        "role": "neutral",
+        "displayName": "Error suave",
+        "canonical": "#f8e8e5"
+      },
+      "warning-ink": {
+        "role": "neutral",
+        "displayName": "Tinta de advertencia",
+        "canonical": "#7a4a07"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Título del cartel de la portada, cierre y código de error. Bricolage 720 con tamaño óptico."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Títulos de sección de la portada y respuestas de la vidriera."
+      },
+      "page-title": {
+        "displayName": "Título de página",
+        "purpose": "h1 de cada pantalla de trabajo, con la línea azul tinta trazada debajo."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Títulos de paso y de tarjeta; h2/h3 de la app en 800."
+      },
+      "body": {
+        "displayName": "Body (portada)",
+        "purpose": "Texto corrido de la portada, 17px, cifras tabulares."
+      },
+      "body-app": {
+        "displayName": "Body (app)",
+        "purpose": "Texto de las pantallas de trabajo, 16px."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Etiquetas de estado y sellos."
+      }
+    },
+    "shadows": [
+      {
+        "name": "paper",
+        "value": "0 1px 0 rgb(20 23 31 / 0.05), 0 10px 22px -12px rgb(20 23 31 / 0.3)",
+        "purpose": "Papel apoyado: carteles, tarjetas, bot publicado, paso actual, plantilla elegida, botón principal de la portada."
+      },
+      {
+        "name": "pop",
+        "value": "0 22px 46px -16px rgb(20 23 31 / 0.34)",
+        "purpose": "Despegado: chat y panel de ejemplo, tarjeta de login, menús, diálogos."
+      },
+      {
+        "name": "focus-halo",
+        "value": "0 0 0 6px var(--eb-accent-soft)",
+        "purpose": "Aura que acompaña al contorno de foco de 3px; 4px en campos."
+      },
+      {
+        "name": "cloth",
+        "value": "filter: drop-shadow(0 10px 12px rgb(20 23 31 / 0.16))",
+        "purpose": "Tela colgada: solo el toldo de la portada; sigue las ondas del borde."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "purpose": "Respuesta de interfaz: press, entradas, globos."
+      },
+      {
+        "name": "ease-in-out",
+        "value": "cubic-bezier(0.77, 0, 0.175, 1)",
+        "purpose": "Movimientos de ida y vuelta."
+      },
+      {
+        "name": "ease-drawer",
+        "value": "cubic-bezier(0.32, 0.72, 0, 1)",
+        "purpose": "Menú lateral."
+      },
+      {
+        "name": "ease-pen",
+        "value": "cubic-bezier(0.65, 0, 0.35, 1)",
+        "purpose": "El trazo: reglas, subrayados, relleno del botón, escribir."
+      },
+      {
+        "name": "press",
+        "value": "160ms",
+        "purpose": "scale(0.97) al presionar."
+      },
+      {
+        "name": "enter",
+        "value": "220ms",
+        "purpose": "Entradas de interfaz (avisos, globos)."
+      },
+      {
+        "name": "eb-hang",
+        "value": "rotate -4.5deg → 3deg → -1.6deg → 0.7deg → -0.25deg → 0deg; cada tramo cubic-bezier(0.37, 0, 0.63, 1); 900–1100ms; transform-origin 50% 0",
+        "purpose": "Colgar: cartel de la portada, respuesta del chat de ejemplo, 404, plantilla elegida."
+      },
+      {
+        "name": "eb-draw",
+        "value": "scaleX(0 → 1), transform-origin 0 50%, 640–720ms ease-pen",
+        "purpose": "Trazar: regla del cartel, reglas de los pasos, línea bajo el h1."
+      },
+      {
+        "name": "roll",
+        "value": "translateY(calc(var(--n) * -100%)), 900ms cubic-bezier(0.34, 1.32, 0.64, 1), de a 140ms",
+        "purpose": "Girar: números de paso como contador de turnos."
+      },
+      {
+        "name": "eb-write",
+        "value": "clip-path inset(0 100% 0 0) → inset(0); 520–650ms",
+        "purpose": "Escribir: título de la portada, filas del panel, opciones del chat."
+      },
+      {
+        "name": "bubble-grow",
+        "value": "scale(0.82) → 1 desde la esquina de la punta, 300ms ease-out",
+        "purpose": "Globos del chat: bot abajo a la izquierda, cliente abajo a la derecha."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "prefers-reduced-motion: reduce",
+        "purpose": "Todo en su estado final; sin achicar al presionar; puntos de escribiendo quietos."
+      },
+      {
+        "name": "awning-unroll",
+        "value": "clip-path inset(0 0 100% 0) → inset(0 0 -40px 0); 720ms ease-pen; una vez al cargar",
+        "purpose": "Bajar el toldo de la portada."
+      },
+      {
+        "name": "tab",
+        "value": "160ms ease (background-color, border-color, color; opacidad de los pies)",
+        "purpose": "Pestañas de navegador de las barras."
+      },
+      {
+        "name": "to-top-in",
+        "value": "scale(0.6) → 1, 220ms ease-out, origen abajo a la derecha",
+        "purpose": "Aparición del botón de volver arriba del chat."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "home-sm",
+        "value": "640px"
+      },
+      {
+        "name": "app-md",
+        "value": "768px"
+      },
+      {
+        "name": "templates",
+        "value": "900px"
+      },
+      {
+        "name": "home-md",
+        "value": "960px"
+      },
+      {
+        "name": "home-lg",
+        "value": "1024px"
+      }
+    ],
+    "textures": [
+      {
+        "name": "grain",
+        "value": "var(--eb-grain): SVG feTurbulence fractalNoise baseFrequency .85, 3 octavas, tinta a ~7% de opacidad, mosaico de 180px",
+        "purpose": "Grano de papel debajo del color en el suelo de la portada, la franja del problema y la banda del panel."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón principal",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "El cartel azul tinta: una sola acción principal por zona; en hover el azul oscuro lo cubre de izquierda a derecha.",
+      "html": "<button class=\"ds-btn-primary\">Crear mi bot</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 20px; border: 2px solid var(--eb-accent, #23408e); border-radius: 4px; background: linear-gradient(#192f6b, #192f6b) no-repeat 0 0 / 0 100% #23408e; color: #fffefb; font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; font-weight: 700; cursor: pointer; transition: background-size 320ms cubic-bezier(0.65, 0, 0.35, 1), transform 160ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-btn-primary:hover { background-size: 100% 100%; } .ds-btn-primary:focus-visible { outline: 3px solid #23408e; outline-offset: 2px; box-shadow: 0 0 0 6px #e2e7f3; } .ds-btn-primary:active { transform: scale(0.97); }"
+    },
+    {
+      "name": "Botón secundario",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Papel con borde y texto azul tinta; hover en azul lavado.",
+      "html": "<button class=\"ds-btn-secondary\">Editar</button>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 20px; border: 2px solid #23408e; border-radius: 4px; background: #fffefb; color: #23408e; font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; font-weight: 700; cursor: pointer; transition: background-color 150ms ease, transform 160ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-btn-secondary:hover { background: #f0f2f8; } .ds-btn-secondary:focus-visible { outline: 3px solid #23408e; outline-offset: 2px; box-shadow: 0 0 0 6px #e2e7f3; } .ds-btn-secondary:active { transform: scale(0.97); }"
+    },
+    {
+      "name": "Campo de texto",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Papel, borde de línea firme; al escribir, borde de tinta y aura azul suave.",
+      "html": "<label class=\"ds-field\"><span>Nombre del negocio</span><input class=\"ds-input\" placeholder=\"Peluquería Lola\"></label>",
+      "css": ".ds-field { display: grid; gap: 6px; font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; font-weight: 800; color: #14171f; } .ds-input { min-height: 44px; padding: 10px 14px; border: 1.5px solid #a7a194; border-radius: 4px; background: #fffefb; color: #14171f; font: inherit; font-weight: 400; transition: border-color 150ms ease, box-shadow 150ms ease; } .ds-input:hover { border-color: #383c47; } .ds-input:focus-visible { border-color: #14171f; outline: none; box-shadow: 0 0 0 4px #e2e7f3; }"
+    },
+    {
+      "name": "Navegación de la app (pestañas)",
+      "kind": "nav",
+      "refersTo": "nav-tab-active",
+      "description": "Pestañas de navegador sobre la barra de papel: la sección actual es la pestaña abierta (arena de la página, borde de tinta) y el hover dibuja una pestaña en azul lavado.",
+      "html": "<nav class=\"ds-tabs\"><a class=\"ds-tab is-active\" href=\"#\">Mis bots</a><a class=\"ds-tab\" href=\"#\">Panel</a><a class=\"ds-tab\" href=\"#\">Cuenta</a></nav><div class=\"ds-tabs-page\"></div>",
+      "css": ".ds-tabs { --tab-bw: 2px; display: flex; align-items: flex-end; gap: 2px; padding: 12px 24px 0; background: #fffefb; border-bottom: 2px solid #14171f; font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; } .ds-tabs-page { height: 40px; background: #f3f1ec; } .ds-tab { --tab-fill: transparent; --tab-line: transparent; position: relative; display: inline-flex; align-items: center; height: 52px; margin-bottom: calc(var(--tab-bw) * -1); padding: 0 16px; border: var(--tab-bw) solid var(--tab-line); border-bottom: 0; border-radius: 10px 10px 0 0; background: var(--tab-fill); color: #14171f; font-weight: 700; text-decoration: none; transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease; } .ds-tab::before, .ds-tab::after { content: ''; position: absolute; bottom: 0; width: 10px; height: 10px; opacity: 0; pointer-events: none; transition: opacity 160ms ease; } .ds-tab::before { left: -10px; background: radial-gradient(circle at 0 0, transparent calc(10px - var(--tab-bw)), var(--tab-line) calc(10px - var(--tab-bw)) 10px, var(--tab-fill) 10px); } .ds-tab::after { right: -10px; background: radial-gradient(circle at 100% 0, transparent calc(10px - var(--tab-bw)), var(--tab-line) calc(10px - var(--tab-bw)) 10px, var(--tab-fill) 10px); } .ds-tab:hover { --tab-fill: #f0f2f8; --tab-line: #a7a194; } .ds-tab.is-active { --tab-fill: #f3f1ec; --tab-line: #14171f; z-index: 1; } .ds-tab:hover::before, .ds-tab:hover::after, .ds-tab.is-active::before, .ds-tab.is-active::after { opacity: 1; } .ds-tab:focus-visible { outline: 3px solid #23408e; outline-offset: 2px; }"
+    },
+    {
+      "name": "Etiquetas de estado",
+      "kind": "chip",
+      "refersTo": "badge-published",
+      "description": "Publicado = verde suave con borde firme; borrador = punteado sin relleno.",
+      "html": "<span class=\"ds-badge ds-badge-pub\">Publicado</span> <span class=\"ds-badge ds-badge-draft\">Borrador</span>",
+      "css": ".ds-badge { display: inline-flex; padding: 2px 10px; border-radius: 4px; font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; font-size: 0.8rem; font-weight: 800; } .ds-badge-pub { border: 1.5px solid #2f6b45; background: #dfeae1; color: #2f6b45; } .ds-badge-draft { border: 1.5px dashed #383c47; background: transparent; color: #383c47; }"
+    },
+    {
+      "name": "Tarjeta de bot",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Hoja de papel; publicada con borde verde firme, sombra de papel y cinta arena; borrador punteado.",
+      "html": "<article class=\"ds-bot-card\"><h3>Peluquería Lola</h3><p>Turnos simples</p></article>",
+      "css": ".ds-bot-card { position: relative; padding: 22px 20px 20px; background: #fffefb; border: 1.5px solid #2f6b45; border-radius: 4px; box-shadow: 0 1px 0 rgb(20 23 31 / 0.05), 0 10px 22px -12px rgb(20 23 31 / 0.3); font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; color: #14171f; transition: border-color 150ms ease, transform 200ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-bot-card::before { content: ''; position: absolute; top: -9px; left: 50%; width: 64px; height: 18px; translate: -50% 0; rotate: -2deg; background: #e6dcc4; opacity: 0.9; border-inline: 1px dashed rgb(20 23 31 / 0.15); } .ds-bot-card h3 { margin: 0; font-size: 1.15rem; font-weight: 800; } .ds-bot-card p { margin: 2px 0 0; color: #5a5e68; font-size: 0.9rem; } .ds-bot-card:hover { border-color: #14171f; transform: translateY(-2px); }"
+    },
+    {
+      "name": "Cartel colgado",
+      "kind": "custom",
+      "refersTo": "sign-sand",
+      "description": "La pieza del mundo: cartulina arena con cinta, un dato concreto en la letra de títulos; cuelga y oscila al entrar.",
+      "html": "<div class=\"ds-sign\"><p class=\"ds-sign-lead\">Atendemos de martes a sábado</p><p class=\"ds-sign-fact\">De 9:00 AM a 7:00 PM</p></div>",
+      "css": ".ds-sign { position: relative; width: fit-content; padding: 16px 20px 14px; background: #e6dcc4; color: #14171f; border-radius: 4px; box-shadow: 0 1px 0 rgb(20 23 31 / 0.05), 0 10px 22px -12px rgb(20 23 31 / 0.3); font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; transform-origin: 50% 0; animation: ds-hang 1000ms both; } .ds-sign::before { content: ''; position: absolute; top: -10px; left: 50%; width: 70px; height: 20px; translate: -50% 0; rotate: -2deg; background: rgb(255 254 251 / 0.62); border-inline: 1px dashed rgb(20 23 31 / 0.12); box-shadow: 0 1px 2px rgb(20 23 31 / 0.1); } .ds-sign p { margin: 0; } .ds-sign-lead { font-size: 14px; font-weight: 700; } .ds-sign-fact { font-size: 30px; font-weight: 720; letter-spacing: -0.025em; line-height: 1.05; font-variant-numeric: tabular-nums; } @keyframes ds-hang { 0% { rotate: -4.5deg; animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1); } 28% { rotate: 3deg; animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1); } 50% { rotate: -1.6deg; animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1); } 70% { rotate: 0.7deg; animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1); } 86% { rotate: -0.25deg; animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1); } 100% { rotate: 0deg; } } @media (prefers-reduced-motion: reduce) { .ds-sign { animation: none; } }"
+    },
+    {
+      "name": "Globos del chat",
+      "kind": "custom",
+      "refersTo": "chat-bubble-bot",
+      "description": "Globos de 14px con la esquina pegada del lado de quien habla; crecen desde su punta.",
+      "html": "<div class=\"ds-chat\"><p class=\"ds-bubble ds-bubble-bot\">¡Hola! ¿En qué te puedo ayudar?</p><p class=\"ds-bubble ds-bubble-visitor\">Horarios</p></div>",
+      "css": ".ds-chat { display: flex; flex-direction: column; gap: 10px; padding: 20px; background: #f3f1ec; border: 2px solid #14171f; border-radius: 6px; font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; } .ds-bubble { max-width: 85%; margin: 0; padding: 10px 14px; border-radius: 14px; animation: ds-bubble 300ms cubic-bezier(0.23, 1, 0.32, 1) both; } .ds-bubble-bot { align-self: flex-start; border: 1.5px solid #14171f; background: #fffefb; color: #14171f; border-bottom-left-radius: 4px; transform-origin: bottom left; } .ds-bubble-visitor { align-self: flex-end; background: #23408e; color: #fffefb; border-bottom-right-radius: 4px; transform-origin: bottom right; } @keyframes ds-bubble { from { opacity: 0; transform: scale(0.82); } } @media (prefers-reduced-motion: reduce) { .ds-bubble { animation: none; } }"
+    },
+    {
+      "name": "Volver arriba (chat)",
+      "kind": "button",
+      "refersTo": "chat-to-top",
+      "description": "El único control redondo del chat: círculo azul tinta de 48px abajo a la derecha, aparece tras bajar más de una pantalla y crece desde su rincón.",
+      "html": "<div class=\"ds-chatwrap\"><button class=\"ds-to-top\" aria-label=\"Volver al inicio de la conversación\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 19V5M5 12l7-7 7 7\"/></svg></button></div>",
+      "css": ".ds-chatwrap { position: relative; height: 160px; background: #f3f1ec; border: 2px solid #14171f; border-radius: 6px; } .ds-to-top { position: absolute; right: 16px; bottom: 16px; display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 2px solid #fffefb; border-radius: 50%; background: #23408e; color: #fffefb; box-shadow: 0 22px 46px -16px rgb(20 23 31 / 0.34); cursor: pointer; transform-origin: 100% 100%; animation: ds-to-top-in 220ms cubic-bezier(0.23, 1, 0.32, 1); transition: background-color 150ms ease, transform 160ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-to-top:hover { background: #192f6b; } .ds-to-top:active { transform: scale(0.94); } .ds-to-top:focus-visible { outline: 3px solid #23408e; outline-offset: 2px; } @keyframes ds-to-top-in { from { opacity: 0; transform: scale(0.6); } } @media (prefers-reduced-motion: reduce) { .ds-to-top { animation: none; } }"
+    },
+    {
+      "name": "Toldo de la portada",
+      "kind": "custom",
+      "refersTo": "awning",
+      "description": "Frente del local bajo la barra: rayas azul tinta y papel, caño de tinta, borde en ondas y sombra de tela; se baja una vez al cargar.",
+      "html": "<div class=\"ds-awning\" aria-hidden=\"true\"></div>",
+      "css": ".ds-awning { --stripe: 44px; position: relative; height: calc(var(--stripe) + 24px); border-top: 5px solid #14171f; filter: drop-shadow(0 10px 12px rgb(20 23 31 / 0.16)); animation: ds-awning 720ms cubic-bezier(0.65, 0, 0.35, 1) both; } .ds-awning::before { content: ''; position: absolute; inset: 0 0 calc(var(--stripe) / 2) 0; background: linear-gradient(rgb(20 23 31 / 0.18), transparent 45%), repeating-linear-gradient(90deg, #23408e 0 var(--stripe), #fffefb var(--stripe) calc(var(--stripe) * 2)); } .ds-awning::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: calc(var(--stripe) / 2 + 1px); background: radial-gradient(circle at calc(var(--stripe) / 2) 0, #23408e calc(var(--stripe) / 2 - 0.5px), transparent calc(var(--stripe) / 2)) 0 0 / calc(var(--stripe) * 2) 100% repeat-x, radial-gradient(circle at calc(var(--stripe) / 2) 0, #fffefb calc(var(--stripe) / 2 - 0.5px), transparent calc(var(--stripe) / 2)) var(--stripe) 0 / calc(var(--stripe) * 2) 100% repeat-x; } @keyframes ds-awning { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 -40px 0); } } @media (max-width: 639px) { .ds-awning { --stripe: 30px; } } @media (prefers-reduced-motion: reduce) { .ds-awning { animation: none; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Cartel de vidriera",
+    "overview": "EasyBot es la vidriera de un comercio de barrio con sus carteles de cartulina impresa: fondo arena, carteles en arena y en azul tinta, letra de imprenta grande, pegados con una tira de cinta de papel. Cada respuesta del bot es uno de esos carteles: concreto (una hora, un precio, un turno), grande y legible desde la vereda. La portada lo dice en voz alta (el título en un cartel arena enorme, la vidriera de preguntas con su cartel principal y los demás desfasados, las tres plantillas como tres carteles) y el local tiene frente: un toldo a rayas azul tinta y papel bajo la barra y un suelo de arena con grano de papel; las pantallas de trabajo (Mis bots, asistente, panel, admin) bajan el volumen: arena, papel y tinta, con el azul tinta para la acción y lo seleccionado, y la letra de títulos reservada al h1 de cada página.\n\nLa densidad es baja y los toques son grandes (mínimo 44px): el dueño trabaja desde el celular. La forma es casi recta (4px), los bordes son de tinta (1.5px a 2px) y la profundidad es la de una hoja apoyada en el vidrio, con sombra suave, nunca un bloque duro. El estado se lee en la forma y no solo en el color: publicado es borde firme verde con relleno suave; borrador es borde punteado sin relleno.\n\nEl chat es la excepción deliberada: es la cara del negocio ante su cliente, así que sus globos son redondeados (14px) como en los chats que la gente ya usa, con la esquina \"pegada\" del lado de quien habla, y el cliente escribe en azul tinta. En la portada la respuesta del bot cae como cartel arena colgado dentro de ese chat; ahí se juntan los dos idiomas.\n\nEl movimiento no usa fundidos genéricos: tiene tres gestos del mundo (colgar, trazar, girar), más escribir, bajar el toldo y el globo que crece desde su punta. Los gestos se miran (1 s aprox.); la interfaz responde rápido (≤ 300ms). Con movimiento reducido todo queda quieto en su estado final.",
+    "keyCharacteristics": [
+      "Fondo arena cálido, superficies de papel, tinta casi negra; nada flúo.",
+      "Azul tinta como única voz de acción y de selección; verde solo para \"publicado\".",
+      "Una sola familia, Bricolage Grotesque Variable: los títulos se distinguen por peso (720) y tamaño óptico, no por otra fuente.",
+      "Cartel = cartulina con 4px, sombra de papel y cinta arriba, con un dato concreto adentro.",
+      "Estado por forma: firme y lleno = publicado / activo; punteado y vacío = borrador / pendiente.",
+      "Cifras tabulares en todo el sitio (horarios, precios, turnos).",
+      "La portada es un local con frente: toldo a rayas bajo la barra, grano de papel en el suelo y los links como pestañas de navegador.",
+      "Tres gestos de movimiento (colgar, trazar, girar); con movimiento reducido, todo en reposo."
+    ],
+    "rules": [
+      {
+        "name": "The Una Sola Voz Rule",
+        "body": "El azul tinta lleno es la acción principal de su zona; el resto de los botones son de borde (azul o tinta) sobre papel o transparentes. Sobre un cartel azul, el botón principal se invierte: papel con letra azul tinta.",
+        "section": "colors"
+      },
+      {
+        "name": "The Selección Azul Rule",
+        "body": "En las pantallas de trabajo lo seleccionado o activo se marca con azul suave (y borde azul tinta o tinta): pestaña de un grupo, opción elegida, foco. Nada más usa ese fondo. La única excepción es la navegación principal: la sección actual es la pestaña de navegador abierta, en el arena de la página con borde de tinta.",
+        "section": "colors"
+      },
+      {
+        "name": "The Grano De Papel Rule",
+        "body": "El suelo de la portada (arena), la franja del problema (arena lavada) y la banda del panel (papel) llevan el grano --eb-grain (ruido SVG feTurbulence de tinta a ~7%, en mosaico de 180px) debajo del color: background: var(--eb-grain) <color>. Es textura de material, no dibujo; no va sobre carteles, tarjetas ni el chat.",
+        "section": "colors"
+      },
+      {
+        "name": "The Verde Es Publicado Rule",
+        "body": "El verde aparece solo para publicado / activo / hecho, siempre con borde firme además del color.",
+        "section": "colors"
+      },
+      {
+        "name": "The Una Familia Rule",
+        "body": "Una sola familia en todo el sitio. Los títulos se distinguen por peso 720, tamaño óptico y tracking negativo (-0.02em a -0.025em), nunca por una segunda fuente.",
+        "section": "typography"
+      },
+      {
+        "name": "The Cifra Fija Rule",
+        "body": "font-variant-numeric: tabular-nums está en :root: horarios, precios y turnos se alinean en columnas fijas.",
+        "section": "typography"
+      },
+      {
+        "name": "The Hoja Apoyada Rule",
+        "body": "Solo dos sombras para superficies: papel y despegado. Lo que no está publicado o pegado (borradores, tarjetas de datos en reposo) va sin sombra. La sombra de tela es del toldo y de nada más.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do tomar todo color, radio, sombra y curva de src/styles/tokens.css; las variables de cada pantalla (--color-*, --home-*, --chat-*) apuntan ahí.",
+      "Do usar el azul tinta lleno para una sola acción principal por zona, y el azul suave solo para lo seleccionado o activo.",
+      "Do expresar el estado por forma además de color: borde firme + relleno suave para publicado / activo, punteado sin relleno para borrador / pendiente.",
+      "Do mantener los toques en 44px como mínimo y los radios en 4px (6px contenedores grandes, 14px solo globos de chat, 10px arriba solo en las pestañas de navegador, círculo solo en el volver arriba del chat).",
+      "Do dibujar los links de sección de una barra como pestañas de navegador con la mecánica compartida de tokens.css, coloreándolas solo con --tab-fill, --tab-line y --tab-bw.",
+      "Do poner el grano de papel debajo del color de los fondos de banda de la portada (var(--eb-grain) <color>), nunca sobre carteles o tarjetas.",
+      "Do animar con los gestos del mundo (colgar, trazar, girar, escribir, globo desde su punta) y dejar todo en su estado final con prefers-reduced-motion: reduce.",
+      "Do marcar con un sello visible (\"Chat de ejemplo\") cualquier dato inventado de demostración."
+    ],
+    "donts": [
+      "Don't volver a los colores flúo ni a la letra de fibrón: amarillo, rosa, verde y naranja flúo y Permanent Marker quedaron afuera.",
+      "Don't usar una segunda familia tipográfica; los títulos son Bricolage a 720.",
+      "Don't usar más de un botón azul tinta lleno por zona.",
+      "Don't usar fundidos genéricos (aparecer con opacidad sola) como entrada de contenido.",
+      "Don't usar sombras de bloque duro desplazado ni sombras fuera de las dos del vocabulario (la de tela es solo del toldo).",
+      "Don't agregar otros controles redondos al chat: el círculo es la marca del volver arriba.",
+      "Don't usar en código nuevo los alias heredados (--eb-yellow, --eb-pink, --eb-orange, --eb-marker, --eb-navy, --eb-blue, --eb-sun, --eb-wide); usar arena, papel, tinta, accent y green.",
+      "Don't usar barras de color al costado en avisos: los avisos llevan borde completo y fondo suave."
+    ]
+  }
+}

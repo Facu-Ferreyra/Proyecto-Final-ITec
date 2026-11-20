@@ -1,4 +1,4 @@
-/* Estilos de "Mis bots" (prototipo, pantalla 4). */
+/* Estilos de "Mis bots": cada bot es un cartel (ver styles/tokens.css). */
 
 .my-bots-header {
   display: flex;
@@ -22,33 +22,52 @@
   gap: 20px;
 }
 
-/* Tarjeta: franja a la izquierda. Naranja = publicado (está atendiendo clientes);
-   gris = borrador. Es el único lugar fijo de la pantalla donde aparece el naranja. */
+/* Tarjeta: una hoja de papel. Publicado = cartel pegado (borde de tinta firme y
+   cinta arriba); borrador = borde punteado, todavía sin pegar. El estado se lee
+   en la forma y en la etiqueta, no solo en el color. */
 .bot-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 20px;
+  padding: 22px 20px 20px;
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-left: 5px solid var(--color-badge-draft);
+  border: 1.5px dashed var(--eb-line-strong);
   border-radius: var(--radius);
 }
 
 .bot-card-published {
-  border-left-color: var(--eb-sun);
+  border: 1.5px solid var(--eb-green);
+  box-shadow: var(--eb-shadow-paper);
 }
 
-/* Hover solo con mouse: en celular el hover queda "pegado" después de tocar. */
+/* La cinta del cartel publicado. */
+.bot-card-published::before {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  width: 64px;
+  height: 18px;
+  translate: -50% 0;
+  rotate: -2deg;
+  background: var(--eb-sand);
+  opacity: 0.9;
+  border-inline: 1px dashed rgb(20 23 31 / 0.15);
+  box-shadow: 0 1px 2px rgb(20 23 31 / 0.1);
+}
+
+/* Hover solo con mouse: en celular el hover queda pegado después de tocar. */
 @media (hover: hover) and (pointer: fine) {
   .bot-card {
-    transition: border-color 150ms ease;
+    transition:
+      border-color 150ms ease,
+      transform 200ms var(--eb-ease-out);
   }
 
   .bot-card:hover {
-    border-top-color: var(--eb-line-strong);
-    border-right-color: var(--eb-line-strong);
-    border-bottom-color: var(--eb-line-strong);
+    border-color: var(--eb-ink);
+    transform: translateY(-2px);
   }
 }
 
@@ -64,7 +83,7 @@
   place-items: center;
   width: 44px;
   height: 44px;
-  border-radius: 10px;
+  border-radius: var(--eb-radius);
   background: var(--color-badge-published);
   color: var(--color-primary);
 }
@@ -96,36 +115,30 @@
   font-size: 0.9rem;
 }
 
-/* Estado: punto de color + texto, debajo del nombre y la plantilla. */
+/* Estado: etiqueta de cartulina. Publicado = verde lleno con borde firme;
+   borrador = sin relleno, borde punteado. */
 .status-badge {
   display: inline-flex;
   flex-shrink: 0;
   align-items: center;
   margin-top: 8px;
-  gap: 6px;
-  padding: 3px 10px;
-  border-radius: 999px;
+  padding: 2px 10px;
+  border-radius: var(--eb-radius);
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 800;
   white-space: nowrap;
 }
 
-.status-badge::before {
-  content: '';
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: currentColor;
-}
-
 .status-published {
-  background: var(--eb-sun-soft);
-  color: var(--eb-sun-ink);
+  border: 1.5px solid var(--eb-green);
+  background: var(--eb-green-soft);
+  color: var(--eb-green);
 }
 
 .status-draft {
-  background: var(--color-badge-draft);
-  color: var(--color-muted);
+  border: 1.5px dashed var(--eb-ink-soft);
+  background: transparent;
+  color: var(--eb-ink-soft);
 }
 
 .bots-area .bot-card-summary {
@@ -143,6 +156,9 @@
 }
 
 .bot-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   align-self: flex-start;
   color: var(--color-primary);
   font-size: 0.9rem;

@@ -50,7 +50,10 @@ export default function BotCard({ bot, busy, onEdit, onDelete, onPublish, onUnpu
       {isPublished && bot.publicPath && (
         // Se abre en otra pestaña para no salir del panel.
         <a className="bot-card-link" href={bot.publicPath} target="_blank" rel="noopener noreferrer">
-          Ver chat <span aria-hidden="true">↗</span>
+          Ver chat
+          <svg className="bot-card-link-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+            <path d="M6 3h7v7M13 3 4 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
           <span className="visually-hidden"> de {bot.name} (se abre en otra pestaña)</span>
         </a>
       )}

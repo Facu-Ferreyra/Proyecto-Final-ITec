@@ -10,7 +10,7 @@
   display: block;
   margin-bottom: 6px;
   padding: 0;
-  font-weight: 600;
+  font-weight: 800;
   color: var(--color-label);
 }
 
@@ -25,14 +25,34 @@
 .link-row input {
   box-sizing: border-box;
   width: 100%;
+  min-height: 44px;
   padding: 10px 14px;
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--eb-line-strong);
   border-radius: var(--radius-small);
+  background: var(--eb-paper);
+  color: var(--eb-ink);
   font: inherit;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.field input:not([type='checkbox']):hover,
+.field textarea:hover,
+.link-row input:hover {
+  border-color: var(--eb-ink-soft);
+}
+
+/* Al escribir, el campo se marca con un aura azul suave. */
+.field input:not([type='checkbox']):focus-visible,
+.field textarea:focus-visible,
+.link-row input:focus-visible {
+  border-color: var(--eb-ink);
+  outline: none;
+  box-shadow: 0 0 0 4px var(--eb-accent-soft);
 }
 
 .field [aria-invalid='true'] {
   border-color: var(--color-error);
+  border-width: 2px;
 }
 
 .field-error {
@@ -85,7 +105,7 @@
 
 .items-row {
   padding: 12px;
-  border: 1px solid var(--color-border);
+  border: 1.5px dashed var(--eb-line-strong);
   border-radius: var(--radius-small);
   box-sizing: border-box;
 }

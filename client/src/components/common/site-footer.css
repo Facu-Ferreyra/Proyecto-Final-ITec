@@ -31,8 +31,10 @@
   align-items: center;
   gap: 8px;
   color: var(--eb-white);
-  font-weight: 700;
-  font-stretch: var(--eb-wide);
+  font-family: var(--eb-display);
+  font-weight: var(--eb-display-weight);
+  letter-spacing: -0.02em;
+  font-size: 1.1rem;
 }
 
 .site-footer-link {

@@ -18,7 +18,7 @@
   flex-shrink: 0;
   max-width: 100%;
   border-radius: 6px;
-  background: linear-gradient(90deg, #e6eaf2 0%, #e6eaf2 40%, #f3f5fa 50%, #e6eaf2 60%, #e6eaf2 100%);
+  background: linear-gradient(90deg, #e6e0d3 0%, #e6e0d3 40%, #efeae0 50%, #e6e0d3 60%, #e6e0d3 100%);
   background-size: 300% 100%;
   animation: sk-shine 1.4s linear infinite;
 }
@@ -92,6 +92,6 @@
 @media (prefers-reduced-motion: reduce) {
   .sk-bone {
     animation: none;
-    background: #e6eaf2;
+    background: #e6e0d3;
   }
 }

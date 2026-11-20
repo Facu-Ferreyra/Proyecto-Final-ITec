@@ -10,7 +10,7 @@
   align-items: center;
   gap: 10px;
   padding: 4px 12px 4px 4px;
-  border: 1px solid var(--eb-line);
+  border: 1.5px solid var(--eb-ink);
   border-radius: var(--eb-radius-pill);
   background: var(--eb-white);
   color: var(--eb-navy);
@@ -21,7 +21,7 @@
 
 .user-menu-button:hover,
 .user-menu-button[aria-expanded='true'] {
-  background: var(--eb-sky);
+  background: var(--eb-accent-wash);
 }
 
 .user-menu-button:focus-visible {
@@ -52,15 +52,18 @@
   place-items: center;
   width: 34px;
   height: 34px;
-  border-radius: 50%;
-  background: var(--eb-blue);
-  color: var(--eb-white);
-  font-weight: 700;
+  border: 1.5px solid var(--eb-ink);
+  border-radius: var(--eb-radius);
+  background: var(--eb-accent-soft);
+  color: var(--eb-ink);
+  font-family: var(--eb-display);
+  font-weight: var(--eb-display-weight);
+  letter-spacing: -0.02em;
 }
 
+/* El admin lleva el cartel rosa (y la etiqueta "Administrador"). */
 .user-menu-admin .user-menu-avatar {
-  background: var(--eb-navy);
-  box-shadow: 0 0 0 2px var(--eb-white), 0 0 0 4px var(--eb-blue);
+  background: var(--eb-sand);
 }
 
 .user-menu-greeting {
@@ -137,7 +140,7 @@
    parecería que es la página actual. */
 .user-menu-list [role='menuitem']:hover,
 .user-menu-list [role='menuitem']:focus-visible {
-  background: var(--eb-sky);
+  background: var(--eb-accent-wash);
 }
 
 /* Página en la que estás (NavLink pone aria-current="page"): azul, en negrita y con un punto. */
@@ -166,10 +169,8 @@
 .user-menu-section {
   padding: 4px 12px;
   color: var(--eb-muted);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-size: 0.85rem;
+  font-weight: 800;
 }
 
 .user-menu-list .user-menu-logout {

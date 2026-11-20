@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100svh;
-  background: var(--eb-navy);
+  background: var(--eb-glass);
 }
 
 /* .bots-area (theme.css) ocupa toda la pantalla: acá solo el espacio que deja el pie. */

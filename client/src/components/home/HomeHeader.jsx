@@ -1,22 +1,22 @@
 // Barra superior: logo, links a las secciones de la página y botones de cuenta.
+// La acción principal ("Crear mi bot") dice lo mismo acá, en la portada y al cierre.
 
 import MobileMenu from '../layout/MobileMenu.jsx'
-import { UserIcon } from './icons.jsx'
 
 const LINKS = [
   { href: '#como-funciona', label: 'Cómo funciona' },
-  { href: '#beneficios', label: 'Beneficios' },
+  { href: '#panel', label: 'Panel' },
   { href: '#plantillas', label: 'Plantillas' },
 ]
 
 export default function HomeHeader({ onLogin, onRegister }) {
   return (
-    <header className="home-header home-dark">
+    <header className="home-header">
       <div className="home-container home-header-inner">
-        <span className="home-logo">
-          <img src="/favicon.svg" alt="" width="28" height="28" className="brand-mark" />
+        <a className="home-logo" href="#top" aria-label="EasyBot, ir al inicio">
+          <img src="/favicon.svg" alt="" width="30" height="30" className="brand-mark" />
           EasyBot
-        </span>
+        </a>
         <nav className="home-nav" aria-label="Secciones de la página">
           {LINKS.map((link) => (
             <a key={link.href} href={link.href}>
@@ -25,12 +25,11 @@ export default function HomeHeader({ onLogin, onRegister }) {
           ))}
         </nav>
         <div className="home-header-actions">
-          <button type="button" className="home-btn home-btn-outline home-btn-small home-header-login" onClick={onLogin}>
-            <UserIcon />
+          <button type="button" className="home-btn home-btn-ghost home-btn-small home-header-login" onClick={onLogin}>
             Iniciar sesión
           </button>
-          <button type="button" className="home-btn home-btn-light home-btn-small" onClick={onRegister}>
-            Crear cuenta
+          <button type="button" className="home-btn home-btn-primary home-btn-small" onClick={onRegister}>
+            Crear mi bot
           </button>
           {/* Celular y tablet: las secciones (y en celular chico, "Iniciar sesión") van en el menú lateral. */}
           <MobileMenu title="EasyBot" buttonClassName="home-menu-toggle">
@@ -48,7 +47,7 @@ export default function HomeHeader({ onLogin, onRegister }) {
                 Iniciar sesión
               </button>
               <button type="button" className="mobile-menu-btn mobile-menu-btn-primary" data-close-menu onClick={onRegister}>
-                Crear cuenta
+                Crear mi bot
               </button>
             </div>
           </MobileMenu>

@@ -57,7 +57,7 @@ export default function TemplatesAdmin() {
             <li key={template.id} className="data-item">
               <div className="data-item-head">
                 <h3 className="data-item-title">{template.name}</h3>
-                <span className={template.isActive ? 'badge' : 'badge badge-muted'}>{template.isActive ? 'Activa' : 'Inactiva'}</span>
+                <span className={template.isActive ? 'badge badge-on' : 'badge badge-muted'}>{template.isActive ? 'Activa' : 'Inactiva'}</span>
               </div>
               <p className="data-item-meta">
                 Clave: {template.key} · {template.botCount === 1 ? '1 bot la usa' : `${template.botCount} bots la usan`}

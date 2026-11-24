@@ -1,9 +1,9 @@
 // Iniciales y color del logo de un bot (los usa BotAvatar.jsx).
 // Separado del componente para que la recarga en caliente de Vite funcione.
 
-// Colores con contraste ≥ 4.5:1 contra texto blanco, en la familia de la marca.
-// Sin naranja: ese color está reservado para "publicado".
-const PALETTE = ['#1D4ED8', '#0B1F4B', '#0F766E', '#7C3AED', '#BE123C', '#4338CA', '#166534', '#1E40AF']
+// Cartulinas impresas (arenas, azul y verde suaves) con iniciales en tinta (contraste ≥ 10:1).
+// El color no indica estado: el estado de un bot se lee en su etiqueta.
+const PALETTE = ['#E6DCC4', '#D8CBAB', '#E2E7F3', '#DFEAE1', '#EFE2D6', '#FFFEFB']
 
 // Palabras que no aportan inicial ("Viandas de Don Pepe" → VD, no VDD).
 const SKIP = new Set(['de', 'del', 'la', 'las', 'el', 'los', 'y', 'e', 'en', 'the', 'a'])

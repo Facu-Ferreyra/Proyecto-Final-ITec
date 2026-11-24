@@ -1,17 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#2563eb"/>
-      <stop offset="1" stop-color="#0b1f4b"/>
-    </linearGradient>
-  </defs>
-  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
-  <!-- antena -->
-  <path d="M32 18v-6" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
-  <circle cx="32" cy="10" r="3.5" fill="#93c5fd"/>
-  <!-- globo de chat -->
-  <path d="M20 18h24a8 8 0 0 1 8 8v11a8 8 0 0 1-8 8H29l-9 7v-7.2A8 8 0 0 1 12 37V26a8 8 0 0 1 8-8z" fill="#fff"/>
-  <!-- ojos -->
-  <circle cx="25.5" cy="31.5" r="3.5" fill="#1d4ed8"/>
-  <circle cx="38.5" cy="31.5" r="3.5" fill="#1d4ed8"/>
+  <!-- Sello de EasyBot: un cartel azul tinta con un globo de chat de cartulina
+       arena y dos ojos. Formas gruesas: se lee igual a 16 px, en un QR o en un calco. -->
+  <rect x="2" y="2" width="60" height="60" rx="7" fill="#23408e"/>
+  <path d="M17 16h30a6 6 0 0 1 6 6v14a6 6 0 0 1-6 6H30l-10 8v-8h-3a6 6 0 0 1-6-6V22a6 6 0 0 1 6-6z" fill="#e6dcc4"/>
+  <circle cx="25" cy="29" r="4" fill="#23408e"/>
+  <circle cx="39" cy="29" r="4" fill="#23408e"/>
 </svg>

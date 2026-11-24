@@ -1,6 +1,6 @@
 /* Pantallas de login y registro (Brandon). Usa los colores y botones de
-   pages/bots/theme.css (.bots-area, .btn, .notice). El fondo azul oscuro y la
-   tarjeta blanca siguen el diseño de la home. */
+   pages/bots/theme.css (.bots-area, .btn, .notice). Fondo arena y una hoja
+   de papel pegada con cinta, como los carteles de la home. */
 
 .auth-page {
   display: flex;
@@ -8,7 +8,7 @@
   align-items: center;
   gap: 32px;
   padding: 0 16px 48px;
-  background: var(--color-navy);
+  background: var(--color-bg);
 }
 
 /* Barra superior, como la de la home. */
@@ -19,25 +19,25 @@
   width: 100%;
   max-width: 1120px;
   padding: 16px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid var(--eb-line);
 }
 
 .auth-brand {
-  color: var(--eb-white);
-  font-size: 1.25rem;
-  font-weight: 700;
+  color: var(--eb-ink);
+  font-size: 1.4rem;
   text-decoration: none;
 }
 
 .auth-back {
-  color: var(--eb-on-dark);
+  color: var(--eb-ink);
   font-size: 0.95rem;
-  text-decoration: none;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
 }
 
 .auth-back:hover {
-  color: var(--eb-white);
-  text-decoration: underline;
+  background: var(--eb-accent-soft);
 }
 
 .auth-brand:focus-visible,
@@ -47,18 +47,34 @@
 }
 
 .auth-card {
+  position: relative;
   width: 100%;
   max-width: 460px;
   margin-top: 24px;
-  padding: 32px 24px;
+  padding: 36px 24px 32px;
   background: var(--color-surface);
+  border: 2px solid var(--eb-ink);
   border-radius: var(--radius);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--eb-shadow-pop);
+}
+
+/* La cinta que pega la hoja a la vidriera. */
+.auth-card::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 72px;
+  height: 20px;
+  translate: -50% 0;
+  background: var(--eb-sand);
+  opacity: 0.85;
+  border: 1px solid rgb(20 23 31 / 0.15);
 }
 
 .auth-card h1 {
   margin: 0 0 6px;
-  font-size: 1.6rem;
+  font-size: 2.2rem;
 }
 
 .auth-subtitle {
@@ -87,7 +103,7 @@
   display: block;
   margin-bottom: 6px;
   color: var(--color-label);
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .auth-input-wrap {
@@ -96,8 +112,9 @@
 
 .auth-field input {
   width: 100%;
+  min-height: 46px;
   padding: 10px 12px;
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--eb-line-strong);
   border-radius: var(--radius-small);
   background: var(--color-surface);
   color: var(--color-text);
@@ -112,17 +129,18 @@
 
 /* Ejemplo en gris dentro del campo (placeholder). */
 .auth-field input::placeholder {
-  color: #94a3b8;
+  color: var(--eb-muted);
   opacity: 1; /* Firefox lo aclara de más por defecto */
 }
 
 .auth-field input:focus-visible {
-  outline: 3px solid var(--eb-focus);
-  outline-offset: 1px;
-  border-color: var(--color-primary);
+  outline: none;
+  border-color: var(--eb-ink);
+  box-shadow: 0 0 0 4px var(--eb-accent-soft);
 }
 
 .auth-field input[aria-invalid='true'] {
+  border-width: 2px;
   border-color: var(--color-error);
 }
 
@@ -133,9 +151,11 @@
   transform: translateY(-50%);
   display: grid;
   place-items: center;
+  min-width: 40px;
+  min-height: 40px;
   padding: 6px;
   border: none;
-  border-radius: 6px;
+  border-radius: var(--eb-radius);
   background: transparent;
   color: var(--color-primary);
   font: inherit;
@@ -145,7 +165,7 @@
 }
 
 .auth-toggle:hover {
-  background: var(--color-bg);
+  background: var(--eb-accent-wash);
 }
 
 .auth-toggle:focus-visible {
@@ -195,7 +215,7 @@
 
 .auth-footer a {
   color: var(--color-primary);
-  font-weight: 600;
+  font-weight: 800;
   text-decoration: underline;
 }
 

@@ -1,4 +1,4 @@
-// Menú del usuario en la barra: círculo con la inicial + "Hola, José 👋".
+// Menú del usuario en la barra: círculo con la inicial + "Hola, José".
 // Al tocarlo se despliega un menú distinto según el rol (el admin ve su sección).
 //
 // Sigue el patrón "menu button" de la W3C (WAI-ARIA APG):
@@ -102,7 +102,7 @@ export default function UserMenu({ user, isAdmin, onLogout }) {
           {initial}
         </span>
         <span className="user-menu-greeting">
-          Hola, {firstName(user?.name)} <span aria-hidden="true">👋</span>
+          Hola, {firstName(user?.name)}
         </span>
         <span className="user-menu-sr-only"> (menú de la cuenta)</span>
       </button>

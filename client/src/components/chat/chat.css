@@ -1,4 +1,6 @@
 /* Chat compartido (chat público y vista previa del asistente).
+   Es la cara del negocio ante su cliente: globos redondeados de papel con borde
+   de tinta sobre arena; el cliente escribe en azul tinta.
    Las variables viven en .chat para no depender de otras pantallas.
    Valores de styles/tokens.css. */
 
@@ -6,18 +8,18 @@
   --chat-navy: var(--eb-navy);
   --chat-primary: var(--eb-blue);
   --chat-primary-dark: var(--eb-blue-dark);
-  --chat-bg: var(--eb-white);
-  --chat-tint: var(--eb-sky);
-  --chat-border: var(--eb-line);
+  --chat-bg: var(--eb-glass);
+  --chat-tint: var(--eb-paper);
+  --chat-border: var(--eb-ink);
   --chat-muted: var(--eb-muted);
   --chat-error: var(--eb-error);
-  --chat-radius: 14px;
+  --chat-radius: var(--eb-radius-bubble);
 
   display: flex;
   flex-direction: column;
   overflow: hidden;
   background: var(--eb-white);
-  border: 1px solid var(--chat-border);
+  border: 2px solid var(--chat-border);
   border-radius: var(--eb-radius-lg);
   color: var(--chat-navy);
   font-family: var(--eb-font);
@@ -45,7 +47,6 @@
   color: var(--eb-white);
   font-size: 1.1rem;
   font-weight: 800;
-  font-stretch: var(--eb-semi-wide);
 }
 
 .chat-subtitle {
@@ -77,6 +78,7 @@
 /* La esquina "pegada" indica quién habla, como en los chats que ya usan los clientes. */
 .chat-bubble-bot {
   align-self: flex-start;
+  border: 1.5px solid var(--eb-ink);
   background: var(--chat-tint);
   border-bottom-left-radius: 4px;
 }
@@ -94,14 +96,19 @@
   gap: 8px;
 }
 
-/* Mensajes nuevos: suben 6px desde abajo, cada uno desde su lado (el bot desde la
-   izquierda, el visitante desde la derecha). Se ve qué es nuevo y quién lo mandó. */
+/* Mensajes nuevos: cada globo crece desde su punta (la esquina que apunta a quien
+   habla: el bot abajo a la izquierda, el visitante abajo a la derecha). Se ve qué es
+   nuevo y quién lo mandó. Las opciones se escriben de izquierda a derecha. */
 .chat-bubble,
-.chat-options,
 .chat-typing {
   transition:
     opacity var(--eb-enter) var(--eb-ease-out),
-    transform var(--eb-enter) var(--eb-ease-out);
+    transform 300ms var(--eb-ease-out);
+}
+
+.chat-options {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 420ms var(--eb-ease-pen);
 }
 
 .chat-bubble-bot,
@@ -117,12 +124,11 @@
   .chat-bubble,
   .chat-typing {
     opacity: 0;
-    transform: translateY(6px) scale(0.98);
+    transform: scale(0.82);
   }
 
   .chat-options {
-    opacity: 0;
-    transform: translateY(4px);
+    clip-path: inset(0 100% 0 0);
   }
 }
 
@@ -133,6 +139,7 @@
   gap: 5px;
   margin: 0;
   padding: 14px 16px;
+  border: 1.5px solid var(--eb-ink);
   border-radius: var(--chat-radius);
   border-bottom-left-radius: 4px;
   background: var(--chat-tint);
@@ -184,6 +191,14 @@
     .chat-options {
       transform: none;
     }
+
+    .chat-options {
+      clip-path: inset(0);
+    }
+  }
+
+  .chat-options {
+    transition: none;
   }
 
   .chat-typing span[aria-hidden] {
@@ -194,6 +209,7 @@
 
 .chat-option,
 .chat-send {
+  min-height: 44px;
   padding: 8px 14px;
   border: 1.5px solid var(--chat-primary);
   border-radius: var(--eb-radius-pill);
@@ -206,7 +222,7 @@
 }
 
 .chat-option:hover:not(:disabled) {
-  background: var(--chat-tint);
+  background: var(--eb-accent-soft);
 }
 
 .chat-send {
@@ -255,8 +271,77 @@
 .chat-input input {
   flex: 1;
   min-width: 0;
+  min-height: 44px;
   padding: 10px 12px;
-  border: 1px solid var(--chat-border);
-  border-radius: 8px;
+  border: 1.5px solid var(--eb-line-strong);
+  border-radius: var(--eb-radius-sm);
+  background: var(--eb-paper);
   font: inherit;
+}
+
+.chat-input input:focus-visible {
+  border-color: var(--eb-ink);
+  outline: none;
+  box-shadow: 0 0 0 4px var(--eb-accent-soft);
+}
+
+/* ---------- Área de mensajes + botón "volver arriba" ----------
+   El contenedor ocupa el alto que queda entre el encabezado y el campo de texto;
+   los mensajes scrollean por dentro y el botón queda fijo abajo a la derecha. */
+.chat-body-wrap {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.chat-body-wrap > .chat-body {
+  flex: 1;
+  min-height: 0;
+}
+
+/* Botón circular: la única pieza redonda del chat, para que se distinga de los
+   carteles (rectos) y de los globos. Azul tinta, como toda acción. */
+.chat-to-top {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 2px solid var(--eb-paper);
+  border-radius: 50%;
+  background: var(--eb-accent);
+  color: var(--eb-paper);
+  box-shadow: var(--eb-shadow-pop);
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    transform var(--eb-press) var(--eb-ease-out);
+}
+
+.chat-to-top:hover {
+  background: var(--eb-accent-dark);
+}
+
+.chat-to-top:active {
+  transform: scale(0.94);
+}
+
+/* Aparece creciendo desde abajo a la derecha (su rincón). */
+@media (prefers-reduced-motion: no-preference) {
+  .chat-to-top {
+    transform-origin: 100% 100%;
+    animation: chat-to-top-in 220ms var(--eb-ease-out);
+  }
+}
+
+@keyframes chat-to-top-in {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
 }

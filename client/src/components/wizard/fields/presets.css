@@ -182,7 +182,7 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-small);
   background: var(--color-surface);
-  box-shadow: 0 12px 28px rgb(11 31 75 / 0.16);
+  box-shadow: 0 12px 28px rgb(20 23 31 / 0.16);
 }
 
 .time-select-list-up {
@@ -243,9 +243,10 @@
 
 .time-slot {
   position: relative;
+  min-height: 40px;
   padding: 6px 12px;
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
+  border: 1.5px solid var(--eb-line-strong);
+  border-radius: var(--eb-radius);
   background: var(--color-surface);
   font-size: 0.9rem;
   cursor: pointer;
@@ -259,9 +260,10 @@
 }
 
 .time-slot-checked {
-  border-color: var(--color-primary);
-  background: var(--color-primary);
-  color: var(--eb-white);
+  border-color: var(--eb-ink);
+  background: var(--eb-accent-soft);
+  color: var(--eb-ink);
+  font-weight: 800;
 }
 
 .time-slot:has(input:focus-visible) {
